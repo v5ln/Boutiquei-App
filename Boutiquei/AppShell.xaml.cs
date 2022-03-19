@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Boutiquei.ViewModels;
+// using Boutiquei.ViewModels;
 using Boutiquei.Views;
 using Xamarin.Forms;
 

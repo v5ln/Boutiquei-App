@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Boutiquei.Services;
+// using Boutiquei.Services;
 using Boutiquei.Views;
 
 namespace Boutiquei
