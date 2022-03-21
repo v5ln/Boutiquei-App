@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Boutiquei.Models;
 using Boutiquei.Services;
+using Boutiquei.Views;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
