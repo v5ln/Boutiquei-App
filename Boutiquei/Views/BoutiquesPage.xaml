@@ -3,9 +3,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.BoutiquesPage"
-    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels" xmlns:views="clr-namespace:Boutiquei.Views"
 
-    Title="lll">
+    Title="Boutiquei">
     <ContentPage.BindingContext>
         <viewmodels:BotiquesViewModel/>
     </ContentPage.BindingContext>
@@ -15,7 +15,6 @@
             <RefreshView
                 Command="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}">
-                
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
@@ -23,9 +22,7 @@
                     RemainingItemsThreshold="1"
                     RemainingItemsThresholdReachedCommand="{Binding DelayLoadMoreCommand}"
                     SelectedItem="{Binding SelectedBoutique, Mode=TwoWay}"
-    
                     SelectionMode="Single">
-
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
                             <Label HorizontalOptions="Center" Text="There Is No Boutiques" />
@@ -34,31 +31,16 @@
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                          Span="2"></GridItemsLayout>
-                        
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid >
-                                <Frame HasShadow="False" BackgroundColor="Transparent">
-                                    <StackLayout>
-
-                                        <Frame CornerRadius="10" HasShadow="False" Padding="0" IsClippedToBounds="True">
-                                            <Image WidthRequest="148"
-                                                   HeightRequest="195"
-                                                   Source="{Binding BMainPic}"
-                                                   Aspect="AspectFit"
-                                                   HorizontalOptions="Center"
-                                                   />
-                                        </Frame>
-                                        <Label Text="{Binding BName}" HorizontalOptions="Center" FontFamily="NSR" FontSize="14" TextColor="#808080"/>
-                                    </StackLayout>
-                                </Frame>
-
-                            </Grid>
+                            <views:StoreCard/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+                
             </RefreshView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
