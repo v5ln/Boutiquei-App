@@ -12,5 +12,9 @@ namespace Boutiquei.Models
 
         public string PPrice { set; get; }
 
+        public string StoreID { get; set; }
+
+        public string ProductImage { set; get; }
+
     }
 }
