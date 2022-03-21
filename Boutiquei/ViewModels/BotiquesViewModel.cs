@@ -16,7 +16,6 @@ namespace Boutiquei.ViewModels
         BoutiquesServices boutiquesServices = new BoutiquesServices();
         public ObservableRangeCollection<StoreModel> Boutique { get; set; }
         public AsyncCommand RefreshCommand { get; }
-        public AsyncCommand<object> SelectedCommand { get; }
         public Command LoadMoreCommand { get; }
         public Command DelayLoadMoreCommand { get; }
 
@@ -27,30 +26,48 @@ namespace Boutiquei.ViewModels
             LoadMore();
 
             RefreshCommand = new AsyncCommand(Refresh);
-            SelectedCommand = new AsyncCommand<object>(Selected);
+
             LoadMoreCommand = new Command(LoadMore);
             DelayLoadMoreCommand = new Command(DelayLoadMore);
         }
 
         StoreModel selectedBoutique;
+        StoreModel previousSelected;
         public StoreModel SelectedBoutique
         {
             get => selectedBoutique;
-            set => SetProperty(ref selectedBoutique, value);
-        }
-
-        async Task Selected(object arg)
-        {
-            var boutique = arg as StoreModel;
-            if(boutique == null)
+            set
             {
-                return;
+                if (value != null)
+                {
+                    Application.Current.MainPage.DisplayAlert("Selected", value.BName, "OK");
+                    previousSelected = value;
+                    value = null;
+                }
+                selectedBoutique = value;
+                OnPropertyChanged();
             }
-            SelectedBoutique = null;
-
-            //await AppShell.Current.GoToAsync(nameof(Page));
-            await Application.Current.MainPage.DisplayAlert("Selected", boutique.BName, "OK");
         }
+        //public StoreModel SelectedBoutique
+        //{
+        //    get => selectedBoutique;
+        //    set => SetProperty(ref selectedBoutique, value);
+        //}
+
+        //async Task Selected(object arg)
+        //{
+        //    var boutique = arg as StoreModel;
+        //    if(boutique == null)
+        //    {
+        //        return;
+        //    }
+        //    SelectedBoutique = null;
+
+        //    //await AppShell.Current.GoToAsync(nameof(Page));
+        //    await Application.Current.MainPage.DisplayAlert("Selected", boutique.BName, "OK");
+        //}
+
+
 
         async Task Refresh()
         {
