@@ -5,19 +5,19 @@
     x:Class="Boutiquei.Views.BoutiquesPage"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels" xmlns:views="clr-namespace:Boutiquei.Views"
 
-    Title="lll">
+    Title="Boutiquei">
     <ContentPage.BindingContext>
         <viewmodels:BotiquesViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <StackLayout>
-            <!--<RefreshView
+            <RefreshView
                 Command="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}">
                 
                 
-            </RefreshView>-->
+            </RefreshView>
             <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
@@ -25,9 +25,7 @@
                     RemainingItemsThreshold="1"
                     RemainingItemsThresholdReachedCommand="{Binding DelayLoadMoreCommand}"
                     SelectedItem="{Binding SelectedBoutique, Mode=TwoWay}"
-    
                     SelectionMode="Single">
-
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
                             <Label HorizontalOptions="Center" Text="There Is No Boutiques" />
@@ -36,7 +34,6 @@
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                          Span="2"></GridItemsLayout>
-                        
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
