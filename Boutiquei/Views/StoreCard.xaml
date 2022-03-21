@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentView
+<Grid
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.StoreCard"
     xmlns:models="clr-namespace:Boutiquei.Models"
     x:DataType="models:StoreModel">
     
-    <ContentView.Content>
-        <StackLayout>
-            <Grid >
+    
                 <Frame HasShadow="False" BackgroundColor="Transparent">
                     <StackLayout>
                             <Frame CornerRadius="10" HasShadow="False" Padding="0" IsClippedToBounds="True">
@@ -21,7 +19,5 @@
                             <Label Text="{Binding BName}" HorizontalOptions="Center" FontFamily="NSR" FontSize="14" TextColor="#808080"/>
                      </StackLayout>
                   </Frame>
-             </Grid>
-        </StackLayout>
-    </ContentView.Content>
-</ContentView>
+            
+</Grid>

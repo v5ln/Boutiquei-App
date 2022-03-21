@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Boutiquei.Views
 {
-    public partial class StoreCard : ContentView
+    public partial class StoreCard : Grid
     {
         public StoreCard()
         {
