@@ -13,7 +13,7 @@ namespace Boutiquei.ViewModels
     {
 
         BoutiquesServices boutiquesServices = new BoutiquesServices();
-        public List<StoreModel> Boutique { get; set; }
+        public ObservableRangeCollection<StoreModel> Boutique { get; set; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand<object> SelectedCommand { get; }
         public Command LoadMoreCommand { get; }
@@ -21,7 +21,7 @@ namespace Boutiquei.ViewModels
 
         public BotiquesViewModel()
         {
-            Boutique = new List<StoreModel>();
+            Boutique = new ObservableRangeCollection<StoreModel>();
 
             LoadMore();
 
@@ -65,7 +65,7 @@ namespace Boutiquei.ViewModels
 
         void LoadMore()
         {
-            /*    var image1 = "https://cdn.discordapp.com/attachments/924024471755567124/955258823843676170/275766656_391237242376590_1553927296572176900_n.png";
+                var image1 = "https://cdn.discordapp.com/attachments/924024471755567124/955258823843676170/275766656_391237242376590_1553927296572176900_n.png";
                 var image2 = "https://cdn.discordapp.com/attachments/924024471755567124/955258843556880394/275379707_540699471027454_4428530398476858160_n.png";
                 var image3 = "https://cdn.discordapp.com/attachments/924024471755567124/955258857976901712/275955822_4840494826067082_1042685898013086821_n.png";
                 var image4 = "https://cdn.discordapp.com/attachments/924024471755567124/955258872136871986/275073208_537716854362551_8018523921874305659_n.png";
@@ -80,9 +80,10 @@ namespace Boutiquei.ViewModels
                 Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image3, BName = "Wessam Qutob", Id = "id", Type = "Boutique" });
                 Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image4, BName = "Hussam Silawy", Id = "id", Type = "Boutique" });
                 Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image1, BName = "Lana Line", Id = "id", Type = "Boutique" });
-                Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image2, BName = "Nagham Zalabieh", Id = "id", Type = "Boutique" });*/
+                Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image2, BName = "Nagham Zalabieh", Id = "id", Type = "Boutique" });
 
-            Boutique = boutiquesServices.GetAllBoutiques().Result;
+            //Boutique.AddRange(boutiquesServices.GetAllBoutiques().GetAwaiter().GetResult());
+
 
         }
 
