@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Boutiquei.Models
 {
-    class StoreModel
+    public class StoreModel
     {
 
         public string Id { set; get; }

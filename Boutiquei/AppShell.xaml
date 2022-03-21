@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Boutiquei.Views"
+       xmlns:fontAwesome="clr-namespace:FontAwesome"
        Title="Boutiquei"
        x:Class="Boutiquei.AppShell">
 
@@ -14,15 +15,16 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.BackgroundColor" Value="White" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.TitleColor" Value="White" />
-                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
-                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.TitleColor" Value="Black" />
+                <Setter Property="Shell.DisabledColor" Value="Gray" />
+                <Setter Property="Shell.UnselectedColor" Value="Gray" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="White" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="Gray"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="Gray"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="Black"/>
+                <!--<Setter Property="Shell.NavBarIsVisible" Value="True"/>-->
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
@@ -78,8 +80,38 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
-    <FlyoutItem Title="Boutiques" Icon="icon_about.png">
+    <TabBar>
+
+        <Tab Title="Boutiques">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAS"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Store}"
+                                 />
+            </Tab.Icon>
+            <ShellContent Route="BoutiquesPage" ContentTemplate="{DataTemplate local:BoutiquesPage}" />
+        </Tab>
+
+        <Tab Title="Test" Icon="icon_about.png">
+             <ShellContent Route="SplashScreenPage" ContentTemplate="{DataTemplate local:SplashScreenPage}" />
+        </Tab>
+
+        <Tab Title="Brands">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAS"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Tag}"/>
+            </Tab.Icon>
+            <ShellContent Route="BrandsPage" ContentTemplate="{DataTemplate local:BrandsPage}" />
+        </Tab>
+        <Tab Title="Cart">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAS"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShoppingCart}"/>
+            </Tab.Icon>
+            <ShellContent Route="CartPage" ContentTemplate="{DataTemplate local:CartPage}" />
+        </Tab>
+    </TabBar>
+    <!--<FlyoutItem Title="Boutiques" Icon="icon_about.png" >
         <ShellContent Route="BoutiquesPage" ContentTemplate="{DataTemplate local:BoutiquesPage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
 </Shell>

@@ -2,8 +2,63 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.BoutiquesPage">
+    x:Class="Boutiquei.Views.BoutiquesPage"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+
+    Title="lll">
+    <ContentPage.BindingContext>
+        <viewmodels:BotiquesViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
-        
+        <StackLayout>
+            <RefreshView
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+                
+                <CollectionView
+                    BackgroundColor="Transparent"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Boutique}"
+                    RemainingItemsThreshold="1"
+                    RemainingItemsThresholdReachedCommand="{Binding DelayLoadMoreCommand}"
+                    SelectedItem="{Binding SelectedBoutique, Mode=TwoWay}"
+    
+                    SelectionMode="Single">
+
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="12">
+                            <Label HorizontalOptions="Center" Text="There Is No Boutiques" />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2"></GridItemsLayout>
+                        
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid >
+                                <Frame HasShadow="False" BackgroundColor="Transparent">
+                                    <StackLayout>
+
+                                        <Frame CornerRadius="10" HasShadow="False" Padding="0" IsClippedToBounds="True">
+                                            <Image WidthRequest="148"
+                                                   HeightRequest="195"
+                                                   Source="{Binding BMainPic}"
+                                                   Aspect="AspectFit"
+                                                   HorizontalOptions="Center"
+                                                   />
+                                        </Frame>
+                                        <Label Text="{Binding BName}" HorizontalOptions="Center" FontFamily="NSR" FontSize="14" TextColor="#808080"/>
+                                    </StackLayout>
+                                </Frame>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
