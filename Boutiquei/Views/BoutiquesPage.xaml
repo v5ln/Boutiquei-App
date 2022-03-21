@@ -12,11 +12,13 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <RefreshView
+            <!--<RefreshView
                 Command="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}">
                 
-                <CollectionView
+                
+            </RefreshView>-->
+            <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Boutique}"
@@ -58,7 +60,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
