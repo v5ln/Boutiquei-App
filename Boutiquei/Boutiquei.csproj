@@ -8,15 +8,36 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Services\" />
     <None Remove="ViewModels\" />
+    <None Remove="Resources\Fonts\fa-brands-400.ttf" />
+    <None Remove="Resources\Fonts\fa-regular-400.ttf" />
+    <None Remove="Resources\Fonts\fa-solid-900.ttf" />
+    <None Remove="Resources\Fonts\Merriweather-Bold.ttf" />
+    <None Remove="Resources\Fonts\Merriweather-Light.ttf" />
+    <None Remove="Resources\Fonts\Merriweather-Regular.ttf" />
+    <None Remove="Resources\Fonts\NunitoSans-Bold.ttf" />
+    <None Remove="Resources\Fonts\NunitoSans-Regular.ttf" />
+    <None Remove="Resources\Fonts\NunitoSans-SemiBold.ttf" />
+    <None Remove="Refractored.MvvmHelpers" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\fa-solid-900.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Merriweather-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Merriweather-Light.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Merriweather-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\NunitoSans-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\NunitoSans-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\NunitoSans-SemiBold.ttf" />
   </ItemGroup>
 </Project>

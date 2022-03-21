@@ -12,9 +12,7 @@ namespace Boutiquei
         public App()
         {
             InitializeComponent();
-
-            
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new SplashScreenPage());
         }
 
         protected override void OnStart()

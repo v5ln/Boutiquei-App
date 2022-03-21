@@ -2,8 +2,18 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.SplashScreenPage">
+    x:Class="Boutiquei.Views.SplashScreenPage"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels">
+    <ContentPage.BindingContext>
+        <viewmodels:SplashScreenViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        
+        <AbsoluteLayout HorizontalOptions="Center">
+            <Image Source="{Binding SplashImage}"
+                   WidthRequest="200"
+                   HeightRequest="200"
+                   x:Name="SplashImage"
+                   Margin="0,200,0,0"></Image>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
