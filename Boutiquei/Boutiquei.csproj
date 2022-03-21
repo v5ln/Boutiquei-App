@@ -6,9 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
@@ -24,6 +25,7 @@
     <None Remove="Resources\Fonts\NunitoSans-Regular.ttf" />
     <None Remove="Resources\Fonts\NunitoSans-SemiBold.ttf" />
     <None Remove="Refractored.MvvmHelpers" />
+    <None Remove="Xamarin.CommunityToolkit" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

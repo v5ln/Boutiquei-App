@@ -26,6 +26,7 @@ external-cache-path;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.And
 external-path;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/44/jl/res/xml/xamarin_essentials_fileprovider_file_paths.xml
 foreground;obj/Debug/res/mipmap-anydpi-v26/icon.xml
 foreground;obj/Debug/res/mipmap-anydpi-v26/icon_round.xml
+FrameLayout;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/104/jl/res/layout/camerafragment.xml
 FrameLayout;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/45/jl/res/layout/bottomtablayout.xml
 item;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/45/jl/res/values/styles.xml
 LinearLayout;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/45/jl/res/layout/bottomtablayout.xml
@@ -46,5 +47,6 @@ translate;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/D
 translate;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/45/jl/res/anim/enterfromright.xml
 translate;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/45/jl/res/anim/exittoleft.xml
 translate;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/45/jl/res/anim/exittoright.xml
+xamarin.communitytoolkit.ui.views.AutoFitTextureView;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/104/jl/res/layout/camerafragment.xml
 xamarin.forms.platform.android.appcompat.FormsViewPager;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/45/jl/res/layout/rootlayout.xml
 xamarin.forms.platform.android.ShellFlyoutLayout;/Users/OMAR/Desktop/GitHub/Boutiquei/Boutiquei/Boutiquei.Android/obj/Debug/lp/45/jl/res/layout/flyoutcontent.xml

@@ -4,12 +4,32 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.BoutiquesPage"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
 
     Title="lll">
     <ContentPage.BindingContext>
         <viewmodels:BotiquesViewModel/>
     </ContentPage.BindingContext>
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+        </ResourceDictionary>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <RefreshView
@@ -23,8 +43,8 @@
                     RemainingItemsThreshold="1"
                     RemainingItemsThresholdReachedCommand="{Binding DelayLoadMoreCommand}"
                     SelectedItem="{Binding SelectedBoutique, Mode=TwoWay}"
-    
                     SelectionMode="Single">
+                    
 
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
@@ -53,7 +73,6 @@
                                         <Label Text="{Binding BName}" HorizontalOptions="Center" FontFamily="NSR" FontSize="14" TextColor="#808080"/>
                                     </StackLayout>
                                 </Frame>
-
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
