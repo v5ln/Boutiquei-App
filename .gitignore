@@ -405,3 +405,7 @@ ASALocalRun/
 .localhistory/
 *.cache
 *.props
+Boutiquei.Android/obj/Debug/designtime/build.props
+Boutiquei.Android/obj/Debug/designtime/Resource.designer.cs
+Boutiquei.Android/Resources/Resource.designer.cs
+Boutiquei.iOS/obj/iPhoneSimulator/Debug/Boutiquei.iOS.csproj.AssemblyReference.cache
