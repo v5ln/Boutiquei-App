@@ -49,4 +49,9 @@
     <EmbeddedResource Include="Resources\Fonts\NunitoSans-Regular.ttf" />
     <EmbeddedResource Include="Resources\Fonts\NunitoSans-SemiBold.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\ProductCard.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

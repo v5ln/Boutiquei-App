@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Boutiquei.Views.ProductCard">
+    
+        <Frame HasShadow="False" BackgroundColor="Transparent">
+            <StackLayout>
+                <Frame  CornerRadius="10" HasShadow="False" Padding="0" IsClippedToBounds="True">
+                    <Image  WidthRequest="148"
+                                         HeightRequest="195"
+                                        Source="xx"
+                                        Aspect="AspectFit"
+                                        HorizontalOptions="Center"/>
+                </Frame>
+                <Label Text="name" HorizontalOptions="Start" FontFamily="NSR" FontSize="14" TextColor="#808080"/>
+                <Label Text="price" HorizontalOptions="Start" FontFamily="NSB" FontSize="14" TextColor="#303030"/>
+
+
+            </StackLayout>
+        </Frame>
+    
+</Grid>
