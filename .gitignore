@@ -405,3 +405,4 @@ ASALocalRun/
 .localhistory/
 *.cache
 *.props
+Boutiquei.iOS/obj/iPhoneSimulator/Debug/Boutiquei.iOS.csproj.AssemblyReference.cache
