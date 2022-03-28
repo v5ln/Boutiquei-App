@@ -2,8 +2,44 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    xmlns:views="clr-namespace:Boutiquei.Views"
     x:Class="Boutiquei.Views.BrandsPage">
+    <ContentPage.BindingContext>
+        <viewmodels:BrandsViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
-        
+        <StackLayout>
+            <RefreshView
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+
+                <CollectionView
+                    BackgroundColor="Transparent"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Brand}"
+                    SelectedItem="{Binding SelectedBrand, Mode=TwoWay}"
+                    
+                    SelectionMode="Single">
+
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="12">
+                            <Label HorizontalOptions="Center" Text="There Is No Brands" />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2"></GridItemsLayout>
+
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <views:StoreCard/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
