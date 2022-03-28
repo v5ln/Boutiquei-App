@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Boutiquei.Models;
+using System.Collections.Generic;
+using Boutiquei.Services;
 using Boutiquei.Views;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
@@ -12,9 +14,11 @@ namespace Boutiquei.ViewModels
     public class BotiquesViewModel : BaseViewModel
     {
 
+
         public ObservableCollection<Store> Boutique { get; set; }
+        Services services = new Services();
+
         public AsyncCommand RefreshCommand { get; }
-        public AsyncCommand<object> SelectedCommand { get; }
         public Command LoadMoreCommand { get; }
         public Command DelayLoadMoreCommand { get; }
 
@@ -25,31 +29,51 @@ namespace Boutiquei.ViewModels
             LoadMore();
 
             RefreshCommand = new AsyncCommand(Refresh);
+
             //SelectedCommand = new AsyncCommand<object>(Selected);
+
             LoadMoreCommand = new Command(LoadMore);
             DelayLoadMoreCommand = new Command(DelayLoadMore);
         }
         private Store previousSelected;
-
         Store selectedBoutique;
-        public Store SelectedBoutique
-        {
+        public Store SelectedBoutique{
             get => selectedBoutique;
             set
             {
                 if (value != null)
                 {
-
-
                     Application.Current.MainPage.Navigation.PushAsync(new SingleBoutiquePage(value));
                     previousSelected = value;
 
                     value = null;
                 }
+                
                 selectedBoutique = value;
+                OnPropertyChanged();
 
             }
         }
+        //public StoreModel SelectedBoutique
+        //{
+        //    get => selectedBoutique;
+        //    set => SetProperty(ref selectedBoutique, value);
+        //}
+
+        //async Task Selected(object arg)
+        //{
+        //    var boutique = arg as StoreModel;
+        //    if(boutique == null)
+        //    {
+        //        return;
+        //    }
+        //    SelectedBoutique = null;
+
+        //    //await AppShell.Current.GoToAsync(nameof(Page));
+        //    await Application.Current.MainPage.DisplayAlert("Selected", boutique.BName, "OK");
+        //}
+
+
 
         async Task Refresh()
         {
@@ -65,6 +89,7 @@ namespace Boutiquei.ViewModels
 
         void LoadMore()
         {
+
             /*
             var image1 = "https://cdn.discordapp.com/attachments/924024471755567124/955258823843676170/275766656_391237242376590_1553927296572176900_n.png";
             var image2 = "https://cdn.discordapp.com/attachments/924024471755567124/955258843556880394/275379707_540699471027454_4428530398476858160_n.png";
@@ -83,7 +108,9 @@ namespace Boutiquei.ViewModels
             Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image1, BName = "Lana Line", Id = "id", Type = "Boutique" });
             Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image2, BName = "Nagham Zalabieh", Id = "id", Type = "Boutique" });*/
 
-
+            //Boutique.AddRange(boutiquesServices.GetAllBoutiques().GetAwaiter().GetResult());
+            Boutique = services.GetAllBoutiques();
+            
         }
 
         void DelayLoadMore()

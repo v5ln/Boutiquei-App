@@ -11,7 +11,11 @@ namespace Boutiquei
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(SingleBoutiquePage),
+                typeof(SingleBoutiquePage));
+
         }
 
     }
 }
+    

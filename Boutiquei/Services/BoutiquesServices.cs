@@ -17,6 +17,18 @@ namespace Boutiquei.Services
 
         public async Task<List<StoreModel>> GetAllBoutiques()
         {
+            // var mylist = (await firebaseClient
+            //.Child("Stores").OnceAsync<StoreModel>()).Select(item => new StoreModel
+            //{
+
+            //    Id = item.Key,
+            //    BName = item.Object.BName,
+            //    BMainPic = item.Object.BMainPic,
+            //    Type = item.Object.Type,
+            //    BCoverPic = item.Object.BCoverPic,
+
+
+            //}).Where(s => s.Type == "Boutique").ToList();
 
             return (await firebaseClient
            .Child("Stores").OnceAsync<StoreModel>()).Select(item => new StoreModel
@@ -27,7 +39,7 @@ namespace Boutiquei.Services
                BMainPic = item.Object.BMainPic,
                Type = item.Object.Type,
                BCoverPic = item.Object.BCoverPic,
-              
+
 
            }).Where(s => s.Type == "Boutique").ToList();
 
