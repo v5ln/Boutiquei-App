@@ -16,7 +16,7 @@ namespace Boutiquei.ViewModels
 
 
         public ObservableCollection<Store> Boutique { get; set; }
-        Services services = new Services();
+        public AppServices Services { get; set; }
 
         public AsyncCommand RefreshCommand { get; }
         public Command LoadMoreCommand { get; }
@@ -25,6 +25,7 @@ namespace Boutiquei.ViewModels
         public BotiquesViewModel()
         {
             Boutique = new ObservableCollection<Store>();
+            Services = new AppServices();
 
             LoadMore();
 
@@ -109,7 +110,7 @@ namespace Boutiquei.ViewModels
             Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image2, BName = "Nagham Zalabieh", Id = "id", Type = "Boutique" });*/
 
             //Boutique.AddRange(boutiquesServices.GetAllBoutiques().GetAwaiter().GetResult());
-            Boutique = services.GetAllBoutiques();
+            Boutique = Services.GetAllBoutiques();
             
         }
 

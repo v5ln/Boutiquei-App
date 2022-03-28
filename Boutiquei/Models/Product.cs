@@ -12,10 +12,10 @@ namespace Boutiquei.Models
 
         public string Price { set; get; }
 
-        public List<string> PImgs { get; set; }
+        public string PImgs { get; set; }
 
-        public List<string> Sizes { set; get; }
+        public string Sizes { set; get; }
 
-        public List<string> Colors { set; get; }
+        public string Colors { set; get; }
     }
 }

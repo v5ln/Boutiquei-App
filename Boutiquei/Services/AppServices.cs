@@ -1,14 +1,12 @@
-﻿using Boutiquei.Models;
+﻿using System;
+using System.Collections.ObjectModel;
+using Boutiquei.Models;
 using Firebase.Database;
 using Firebase.Database.Query;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Boutiquei.Services
 {
-    class Services
+    public class AppServices
     {
         FirebaseClient firebaseClient = new FirebaseClient("https://boutiquei-54faf-default-rtdb.firebaseio.com/");
 

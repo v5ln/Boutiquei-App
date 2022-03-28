@@ -11,39 +11,21 @@
     <ContentPage.BindingContext>
         <viewmodels:BotiquesViewModel/>
     </ContentPage.BindingContext>
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
-        </ResourceDictionary>
-        <Style TargetType="Grid">
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal" />
-                        <VisualState x:Name="Selected">
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor"
-                                        Value="White" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
-        </Style>
-    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
             <RefreshView
                 Command="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
-                    ItemsSource="{Binding Boutique}"
-                    RemainingItemsThreshold="1"
-                    RemainingItemsThresholdReachedCommand="{Binding DelayLoadMoreCommand}"
+                    ItemsSource="{Binding Boutique[0].Products}"
                     SelectedItem="{Binding SelectedBoutique, Mode=TwoWay}"
+                    
                     SelectionMode="Single">
+
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
                             <Label HorizontalOptions="Center" Text="There Is No Boutiques" />
@@ -52,16 +34,26 @@
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                          Span="2"></GridItemsLayout>
+
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <views:StoreCard/>
+                            <Grid >
+                                <Frame HasShadow="False" BackgroundColor="Transparent">
+                                    <StackLayout>
+
+                                  
+                                     
+                                        <Label Text="{Binding PName}" HorizontalOptions="Center" FontFamily="NSR" FontSize="14" TextColor="#808080"/>
+                                    </StackLayout>
+                                </Frame>
+
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                
             </RefreshView>
-            
         </StackLayout>
     </ContentPage.Content>
+  
 </ContentPage>
