@@ -21,7 +21,7 @@
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
-                    ItemsSource="{Binding Boutique[0].Products}"
+                    ItemsSource="{Binding Boutique}"
                     SelectedItem="{Binding SelectedBoutique, Mode=TwoWay}"
                     
                     SelectionMode="Single">
@@ -38,17 +38,7 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid >
-                                <Frame HasShadow="False" BackgroundColor="Transparent">
-                                    <StackLayout>
-
-                                  
-                                     
-                                        <Label Text="{Binding PName}" HorizontalOptions="Center" FontFamily="NSR" FontSize="14" TextColor="#808080"/>
-                                    </StackLayout>
-                                </Frame>
-
-                            </Grid>
+                            <views:StoreCard/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

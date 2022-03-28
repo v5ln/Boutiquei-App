@@ -4,15 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.SingleBoutiquePage"
     xmlns:views="clr-namespace:Boutiquei.Views"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     Title="NAME">
+    <ContentPage.BindingContext>
+        <viewmodels:SingleBoutiqueViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Image Aspect="AspectFill" Source="xxx" WidthRequest="375" HeightRequest="119"/>
+            <Label Text="{Binding Boutique.Name}"/>
+            <Image Aspect="AspectFill" Source="{Binding Boutique.CoverImg}" WidthRequest="375" HeightRequest="119"/>
             <RefreshView>
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
-                    ItemsSource="{Binding Boutique}">
+                    ItemsSource="{Binding Products}">
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
                             <Label HorizontalOptions="Center" Text="There Is No products" />

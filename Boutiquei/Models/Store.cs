@@ -15,6 +15,6 @@ namespace Boutiquei.Models
 
         public string Name { set; get; }
 
-        public Product Products { set; get; }
+        //public Product Products { set; get; }
     }
 }
