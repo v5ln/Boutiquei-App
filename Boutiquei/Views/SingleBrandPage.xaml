@@ -2,8 +2,36 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.SingleBrandPage">
+    x:Class="Boutiquei.Views.SingleBrandPage"
+    xmlns:views="clr-namespace:Boutiquei.Views">
+    
     <ContentPage.Content>
-        
+        <StackLayout>
+            <Image Aspect="AspectFill" Source="xxx" WidthRequest="375" HeightRequest="119"/>
+            <RefreshView>
+                <CollectionView
+                    BackgroundColor="Transparent"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Brand}">
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="12">
+                            <Label HorizontalOptions="Center" Text="There Is No products" />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2"></GridItemsLayout>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <views:ProductCard></views:ProductCard>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </RefreshView>
+
+        </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

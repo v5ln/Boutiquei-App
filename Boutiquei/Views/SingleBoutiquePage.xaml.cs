@@ -13,12 +13,19 @@ namespace Boutiquei.Views
         {
             InitializeComponent();
         }
-
+        /*
         protected override void OnAppearing()
         {
             SingleBoutiqueViewModel s = new SingleBoutiqueViewModel();
             base.OnAppearing();
             BindingContext = s.GetStore(boutiqueID);
+        }*/
+        public Store boutique;
+
+        public SingleBoutiquePage(Store boutique)
+        {
+            this.boutique = boutique;
         }
+
     }
 }

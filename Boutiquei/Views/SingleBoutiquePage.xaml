@@ -3,6 +3,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.SingleBoutiquePage"
+<<<<<<< Updated upstream
+=======
+    xmlns:views="clr-namespace:Boutiquei.Views"
+>>>>>>> Stashed changes
     Title="NAME">
     <ContentPage.Content>
         <StackLayout>
@@ -23,7 +27,11 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
+<<<<<<< Updated upstream
                             
+=======
+                            <views:ProductCard></views:ProductCard>
+>>>>>>> Stashed changes
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
