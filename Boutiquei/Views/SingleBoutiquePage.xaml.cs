@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Boutiquei.Models;
 using Boutiquei.ViewModels;
 using Xamarin.Forms;
 
 namespace Boutiquei.Views
 {
-    [QueryProperty(nameof(boutiqueID), nameof(boutiqueID))]
+
     public partial class SingleBoutiquePage : ContentPage
     {
-        public string boutiqueID { get; set; }
-        public SingleBoutiquePage()
-        {
-            InitializeComponent();
-        }
+
         /*
         protected override void OnAppearing()
         {
@@ -20,11 +17,13 @@ namespace Boutiquei.Views
             base.OnAppearing();
             BindingContext = s.GetStore(boutiqueID);
         }*/
-        public Store boutique;
+
 
         public SingleBoutiquePage(Store boutique)
         {
-            this.boutique = boutique;
+            InitializeComponent();
+            SingleBoutiqueViewModel singleBoutiqueViewModel = new SingleBoutiqueViewModel();
+            singleBoutiqueViewModel.Boutique = boutique;
         }
 
     }

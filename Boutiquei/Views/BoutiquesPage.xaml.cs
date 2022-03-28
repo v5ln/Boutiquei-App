@@ -7,7 +7,6 @@ namespace Boutiquei.Views
 {
     public partial class BoutiquesPage : ContentPage
     {
-        BoutiquesServices boutiquesServices = new BoutiquesServices();
         public BoutiquesPage()
         {
             InitializeComponent();
