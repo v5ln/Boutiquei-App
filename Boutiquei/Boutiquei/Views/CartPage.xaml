@@ -2,8 +2,67 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.CartPage">
+    x:Class="Boutiquei.Views.CartPage" 
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    >
+    <ContentPage.BindingContext>
+        <viewmodels:CartViewModel>
+            
+        </viewmodels:CartViewModel>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center">
+            <CollectionView
+                    BackgroundColor="Transparent"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Cart}"
+                  >
+
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="12">
+                        <Label HorizontalOptions="Center" Text="There Is No product incart " />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Margin="0,0,0,20">
+                            <Image Source="{Binding ProductImage}">
+
+                            </Image>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060">
+                                    
+
+                                </Label>
+                                <Label Text="{Binding Price }  " FontSize="16" FontFamily="NSB" TextColor="#303030" >
+
+                                </Label>
+                                <StackLayout Orientation="Horizontal">
+                                    <Button>
+
+                                    </Button>
+                                    <Label Text="{Binding Quantity}">
+
+                                    </Label>
+                                    <Button>
+
+                                    </Button>
+                                </StackLayout>
+                            </StackLayout>
+                            <Button>
+
+                            </Button>
+                        </StackLayout>
+                        <!--<views:StoreCard/>-->
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="total" FontFamily="NBS" FontSize="20"></Label>
+                <Label Text="55"  FontFamily="NBS" FontSize="20"></Label>
+            </StackLayout>
+            <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
+        </StackLayout >
         
     </ContentPage.Content>
 </ContentPage>
