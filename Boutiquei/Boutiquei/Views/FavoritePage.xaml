@@ -16,7 +16,7 @@
 
         <ToolbarItem Clicked="ToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="FAR"
+                <FontImageSource FontFamily="FAS"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShoppingCart}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>

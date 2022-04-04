@@ -4,11 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     xmlns:views="clr-namespace:Boutiquei.Views"
+        xmlns:fontAwesome="clr-namespace:FontAwesome"
     x:Class="Boutiquei.Views.BrandsPage">
     <ContentPage.BindingContext>
         <viewmodels:BrandsViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
 
+        <ToolbarItem Clicked="ToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAR"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+
+
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <RefreshView
