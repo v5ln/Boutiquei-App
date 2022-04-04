@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.FavoritePage"
       xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    Shell.TabBarIsVisible="False"
     Title="Favorite"
     >
     <ContentPage.BindingContext>
@@ -13,7 +14,7 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Orientation="Vertical">
             <CollectionView
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#FBFBFC"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Favorite}"
                   >
@@ -24,16 +25,27 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Margin="0,0,0,20">
+                        <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                    BackgroundColor="Red"
+                                    IsDestructive="True"
+                                    Text="Delete" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <StackLayout  Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
                             <Image Source="{Binding ProductImage}" WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0" >
                             </Image>
                             <StackLayout Orientation="Vertical" Margin="20,10,0,0">
                                 <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060" Margin="0,0,0,5">
                                 </Label>
-                                <Label Text="{Binding Price }  " FontSize="16" FontFamily="NSB" TextColor="#303030" >
+                                    <Label Text="{Binding Price, StringFormat=₪ {0}}" FontSize="16" FontFamily="NSB" TextColor="#303030" >
                                 </Label>
+                                
                             </StackLayout>
                         </StackLayout>
+                    </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

@@ -14,8 +14,7 @@ namespace Boutiquei.Views
 
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new FavoritePage());
-
+            await Shell.Current.Navigation.PushAsync(new FavoritePage());
         }
     }
 }
