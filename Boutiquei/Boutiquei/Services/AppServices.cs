@@ -74,8 +74,6 @@ namespace Boutiquei.Services
         }
 
 
-        //المفضلة 
-
         public ObservableCollection<Product> GetFavouriteProductsByUserID(string UserID)
         {
             return firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").AsObservable<Product>().AsObservableCollection();
@@ -88,16 +86,18 @@ namespace Boutiquei.Services
 
         }
 
-        public async Task<bool> Save(Product product, string UserID)
+        public async Task AddToFavourites(Product product, string UserID)
         {
-            var data = await firebaseClient.Child($"Users/User1/Cart").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
+            await firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
 
-            if (!string.IsNullOrEmpty(data.Key))
-            {
-                return true;
-            }
 
-            return false;
+        }
+
+        public async Task AddToCart(Product product, string UserID)
+        {
+            await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
+
+
         }
 
     }
