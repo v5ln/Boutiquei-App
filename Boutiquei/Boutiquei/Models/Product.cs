@@ -13,6 +13,8 @@ namespace Boutiquei.Models
         public string Price { set; get; }
 
         public string BID { set; get; }
+
+        public string PImgCover { set; get; }
     }
 
 
