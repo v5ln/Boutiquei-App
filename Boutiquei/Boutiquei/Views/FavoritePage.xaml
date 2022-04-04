@@ -29,18 +29,19 @@
                         <SwipeView.RightItems>
                             <SwipeItems>
                                 <SwipeItem
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BotiquesViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
                                     BackgroundColor="Red"
-                                    IsDestructive="True"
                                     Text="Delete" />
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <StackLayout  Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
                             <Image Source="{Binding ProductImage}" WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0" >
                             </Image>
-                            <StackLayout Orientation="Vertical" Margin="20,10,0,0">
+                            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" Margin="20,10,0,0">
                                 <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060" Margin="0,0,0,5">
                                 </Label>
-                                    <Label Text="{Binding Price, StringFormat=₪ {0}}" FontSize="16" FontFamily="NSB" TextColor="#303030" >
+                                    <Label Text="{Binding Price, StringFormat=$ {0}}" FontSize="16" FontFamily="NSB" TextColor="#303030" >
                                 </Label>
                                 
                             </StackLayout>
