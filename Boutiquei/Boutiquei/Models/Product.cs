@@ -12,10 +12,20 @@ namespace Boutiquei.Models
 
         public string Price { set; get; }
 
-        //public string PImgs { get; set; }
+       
+    }
 
-        //public string Sizes { set; get; }
+    public class PImgs
+    {
+        public string Pimg { set; get; }
+    }
 
-        //public string Colors { set; get; }
+    public class Colors
+    {
+        public string PColor { set; get; }
+    }
+    public class Sizes
+    {
+        public string PSize { set; get; }
     }
 }
