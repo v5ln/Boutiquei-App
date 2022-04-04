@@ -80,9 +80,15 @@ namespace Boutiquei.Services
 
         }
 
-        public ObservableCollection<Product> GetCartProductsByUserID(string UserID)
+        public ObservableCollection<CartProduct> GetCartProductsByUserID(string UserID)
         {
-            return firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").AsObservable<Product>().AsObservableCollection();
+            return firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").AsObservable<CartProduct>().AsObservableCollection();
+
+        }
+
+        public int GetCartTotalByUserID(string UserID)
+        {
+            return Convert.ToInt32(firebaseClient.Child($"Users/{UserID}/Cart").Child("Total"));
 
         }
 

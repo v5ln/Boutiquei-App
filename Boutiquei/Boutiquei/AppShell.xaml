@@ -42,10 +42,6 @@
             <ShellContent Route="BoutiquesPage" ContentTemplate="{DataTemplate local:BoutiquesPage}" />
         </Tab>
 
-        <Tab Title="Test" Icon="icon_about.png">
-             <ShellContent Route="SplashScreenPage" ContentTemplate="{DataTemplate local:SplashScreenPage}" />
-        </Tab>
-
         <Tab Title="Brands">
             <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
