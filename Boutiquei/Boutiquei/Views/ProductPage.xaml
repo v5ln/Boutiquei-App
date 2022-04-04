@@ -2,8 +2,78 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.ProductPage">
+    x:Class="Boutiquei.Views.ProductPage"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels">
+
+    
     <ContentPage.Content>
-        
+        <StackLayout>
+            <CarouselView ItemsSource="{Binding ProductImages}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Image
+                                Source="xxxx"
+                                WidthRequest="375"
+                                HeightRequest="350"
+                                Aspect="AspectFit"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <Label Text="{Binding Product.PName}" Margin="25,25,0,10"/>
+            <StackLayout Orientation="Horizontal" Margin="25,0,0,10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <Label Text="₪" FontSize="30" FontFamily="NSB" TextColor="#303030"/>
+                <Label Text="{Binding Product.Price}" FontSize="30" FontFamily="NSB" TextColor="#303030"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Button CornerRadius="5"
+                            Text="+"
+                            FontFamily="NSB"
+                            BackgroundColor="#E0E0E0"
+                            FontSize="18"
+                            TextColor="#808080"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            HorizontalOptions="Start"/>
+                    <Label Text="1"
+                           FontFamily="NSB"
+                           TextColor="#242424"
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="18"/>
+                    <Button CornerRadius="5"
+                            Text="-"
+                            FontFamily="NSB"
+                            BackgroundColor="#E0E0E0"
+                            FontSize="18"
+                            TextColor="#808080"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            HorizontalOptions="Start"/>
+                </StackLayout>
+            </StackLayout>
+            <CollectionView Margin="25,0,0,5"
+                            ItemsSource="{Binding ProductColores}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="False"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               CornerRadius="12"
+                               BackgroundColor="{Binding PColor}"
+                               Margin="0,0,30,0"/>
+                    </DataTemplate> 
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Picker Title="Size"
+                    TitleColor="Black"
+                    FontSize="13"
+                    FontFamily="NSR"
+                    ItemsSource="{Binding ProductSizes}"
+                    VerticalOptions="StartAndExpand">
+            </Picker>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

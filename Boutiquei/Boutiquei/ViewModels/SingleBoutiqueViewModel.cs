@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Boutiquei.Models;
 using Boutiquei.Services;
 using Boutiquei.ViewModels;
+using Boutiquei.Views;
 using MvvmHelpers;
 using Xamarin.Forms;
 [assembly: Xamarin.Forms.Dependency(typeof(SingleBoutiqueViewModel))]
@@ -62,6 +63,27 @@ namespace Boutiquei.ViewModels
 
 
 
+        }
+
+        private Product previousSelected;
+        Product selectedProduct;
+        public Product SelectedProduct
+        {
+            get => selectedProduct;
+            set
+            {
+                if (value != null)
+                {
+
+
+                    Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value));
+                    previousSelected = value;
+
+                    value = null;
+                }
+                selectedProduct = value;
+
+            }
         }
         //public StoreModel GetStore(string ID)
         //{
