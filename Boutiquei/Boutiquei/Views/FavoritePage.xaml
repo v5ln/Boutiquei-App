@@ -2,8 +2,42 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.FavoritePage">
+    x:Class="Boutiquei.Views.FavoritePage"
+      xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    Title="Favorite"
+    >
+    <ContentPage.BindingContext>
+        <viewmodels:FavoriteViewModel>
+        </viewmodels:FavoriteViewModel>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        
+        <StackLayout HorizontalOptions="Center" Orientation="Vertical">
+            <CollectionView
+                    BackgroundColor="Transparent"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Favorite}"
+                  >
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="12">
+                        <Label HorizontalOptions="Center" Text="There Is No product in favorite " />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Margin="0,0,0,20">
+                            <Image Source="{Binding ProductImage}">
+                            </Image>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060">
+                                </Label>
+                                <Label Text="{Binding Price }  " FontSize="16" FontFamily="NSB" TextColor="#303030" >
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout >
+
     </ContentPage.Content>
 </ContentPage>
