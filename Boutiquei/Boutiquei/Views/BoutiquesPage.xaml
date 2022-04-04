@@ -6,12 +6,22 @@
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     xmlns:views="clr-namespace:Boutiquei.Views"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-
+    xmlns:fontAwesome="clr-namespace:FontAwesome"
     Title="Boutiquei">
     <ContentPage.BindingContext>
         <viewmodels:BotiquesViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
 
+        <ToolbarItem Clicked="ToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAR"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+
+        
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <RefreshView
