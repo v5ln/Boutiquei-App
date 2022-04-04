@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.CartPage" 
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    Title="Cart" 
     >
     <ContentPage.BindingContext>
         <viewmodels:CartViewModel>
@@ -11,7 +12,8 @@
         </viewmodels:CartViewModel>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center">
+        <StackLayout HorizontalOptions="Center" BackgroundColor="#FBFBFC"
+>
             <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
@@ -20,46 +22,48 @@
 
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
-                        <Label HorizontalOptions="Center" Text="There Is No product incart " />
+                        <Label HorizontalOptions="Center" Text="There Is No Product In Cart " />
                     </StackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Margin="0,0,0,20">
-                            <Image Source="{Binding ProductImage}">
+                        <SwipeView>                            <SwipeView.RightItems>                                <SwipeItems>                                    <SwipeItem                                    BackgroundColor="Red"                                    Text="Delete" />                                </SwipeItems>                            </SwipeView.RightItems>
 
-                            </Image>
-                            <StackLayout Orientation="Vertical">
-                                <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060">
-                                    
+                            <StackLayout Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
+                                <Image Source="{Binding ProductImage} " WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0"
+>
 
-                                </Label>
-                                <Label Text="{Binding Price }  " FontSize="16" FontFamily="NSB" TextColor="#303030" >
+                                </Image>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" Margin="20,10,0,0"
+>
+                                    <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060">
 
-                                </Label>
-                                <StackLayout Orientation="Horizontal">
-                                    <Button>
-
-                                    </Button>
-                                    <Label Text="{Binding Quantity}">
 
                                     </Label>
-                                    <Button>
+                                    <StackLayout Orientation="Horizontal">                                        <Label Text="₪" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>                                        <Label Text="{Binding Price}" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>                                    </StackLayout>
 
-                                    </Button>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Button>
+
+                                        </Button>
+                                        <Label Text="{Binding Quantity}">
+
+                                        </Label>
+                                        <Button>
+
+                                        </Button>
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                            <Button>
 
-                            </Button>
-                        </StackLayout>
-                        <!--<views:StoreCard/>-->
+                            </StackLayout>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="total" FontFamily="NBS" FontSize="20"></Label>
-                <Label Text="55"  FontFamily="NBS" FontSize="20"></Label>
+                <Label Text="Total" FontFamily="NBS" FontSize="20" TextColor="#808080"></Label>
+                <StackLayout Orientation="Horizontal">                    <Label Text="₪" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>                    <Label Text="55" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>                </StackLayout>
+
             </StackLayout>
             <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
         </StackLayout >
