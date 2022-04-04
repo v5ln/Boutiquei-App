@@ -21,9 +21,16 @@ namespace Boutiquei.Services
             return firebaseClient.Child("Stores").Child("Prands").AsObservable<Store>().AsObservableCollection();
         }
 
-        public ObservableCollection<Product> GetProductsForBoutiques(string id)
+
+
+        public ObservableCollection<Product> GetAllBoutiqueProducts(string BId_)
         {
-            return firebaseClient.Child("Stores").Child($"Boutiques/{id}/").AsObservable<Product>().AsObservableCollection();
+            return firebaseClient.Child($"Stores/Boutiques/{BId_}/").Child("Products").AsObservable<Product>().AsObservableCollection();
+        }
+
+        public ObservableCollection<Product> GetAllBrandProducts(string BId_)
+        {
+            return firebaseClient.Child($"Stores/Prands/{BId_}/").Child("Products").AsObservable<Product>().AsObservableCollection();
         }
 
         //public ObservableCollection<Product> GetAllProduct(string BId_)

@@ -20,12 +20,14 @@ namespace Boutiquei.ViewModels
 
 
 
-        public SingleBoutiqueViewModel()
+        public SingleBoutiqueViewModel(Store boutique)
         {
+            
             Products = new ObservableCollection<Product>();
             Boutique = new Store();
+            this.Boutique = boutique;
             Services = new AppServices();
-            Products = Services.GetProductsForBoutiques(Boutique.ID);
+            Products = Services.GetAllBoutiqueProducts(Boutique.ID);
             //Boutiques = new List<StoreModel>();
             //var image1 = "https://cdn.discordapp.com/attachments/924024471755567124/955258823843676170/275766656_391237242376590_1553927296572176900_n.png";
             //var image2 = "https://cdn.discordapp.com/attachments/924024471755567124/955258843556880394/275379707_540699471027454_4428530398476858160_n.png";
