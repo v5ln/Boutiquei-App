@@ -27,7 +27,14 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <SwipeView>                            <SwipeView.RightItems>                                <SwipeItems>                                    <SwipeItem                                    BackgroundColor="Red"                                    Text="Delete" />                                </SwipeItems>                            </SwipeView.RightItems>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                    BackgroundColor="Red"
+                                    Text="Delete" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
 
                             <StackLayout Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
                                 <Image Source="{Binding ProductImage} " WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0">
@@ -35,7 +42,10 @@
                                 <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" Margin="20,10,0,0">
                                     <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060">
                                     </Label>
-                                    <StackLayout Orientation="Horizontal">                                        <Label Text="₪" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>                                        <Label Text="{Binding Price}" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="₪" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
+                                        <Label Text="{Binding Price}" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
+                                    </StackLayout>
                                     <StackLayout Orientation="Horizontal">
                                         <Button CornerRadius="5"
                                                 Text="+"
@@ -69,7 +79,10 @@
             </CollectionView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Label Text="Total" FontFamily="NBS" FontSize="20" TextColor="#808080"></Label>
-                <StackLayout Orientation="Horizontal">                    <Label Text="₪" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>                    <Label Text="55" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="₪" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>
+                    <Label Text="55" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>
+                </StackLayout>
 
             </StackLayout>
             <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>

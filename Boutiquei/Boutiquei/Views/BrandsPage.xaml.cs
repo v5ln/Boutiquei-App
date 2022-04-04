@@ -11,5 +11,9 @@ namespace Boutiquei.Views
         {
             InitializeComponent();
         }
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.Navigation.PushAsync(new FavoritePage());
+        }
     }
 }
