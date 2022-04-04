@@ -5,6 +5,7 @@
     x:Class="Boutiquei.Views.CartPage" 
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     >
+    
     <ContentPage.BindingContext>
         <viewmodels:CartViewModel>
             
