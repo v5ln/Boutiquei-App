@@ -25,7 +25,7 @@ namespace Boutiquei.ViewModels
             
             Products = new ObservableCollection<Product>();
             Boutique = new Store();
-            this.Boutique = boutique;
+            this.Boutique = boutique ?? throw new ArgumentNullException(nameof(boutique));
             Services = new AppServices();
             Products = Services.GetAllBoutiqueProducts(Boutique.ID);
             //Boutiques = new List<StoreModel>();
