@@ -30,31 +30,38 @@
                         <SwipeView>                            <SwipeView.RightItems>                                <SwipeItems>                                    <SwipeItem                                    BackgroundColor="Red"                                    Text="Delete" />                                </SwipeItems>                            </SwipeView.RightItems>
 
                             <StackLayout Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
-                                <Image Source="{Binding ProductImage} " WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0"
->
-
+                                <Image Source="{Binding ProductImage} " WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0">
                                 </Image>
-                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" Margin="20,10,0,0"
->
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" Margin="20,10,0,0">
                                     <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060">
-
-
                                     </Label>
                                     <StackLayout Orientation="Horizontal">                                        <Label Text="₪" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>                                        <Label Text="{Binding Price}" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>                                    </StackLayout>
-
                                     <StackLayout Orientation="Horizontal">
-                                        <Button>
-
-                                        </Button>
-                                        <Label Text="{Binding Quantity}">
-
-                                        </Label>
-                                        <Button>
-
-                                        </Button>
+                                        <Button CornerRadius="5"
+                                                Text="+"
+                                                FontFamily="NSB"
+                                                BackgroundColor="#E0E0E0"
+                                                FontSize="18"
+                                                TextColor="#808080"
+                                                WidthRequest="30"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Start"/>
+                                        <Label Text="{Binding Quantity}"
+                                               FontFamily="NSB"
+                                               TextColor="#242424"
+                                               HorizontalOptions="CenterAndExpand"
+                                               FontSize="18"/>
+                                        <Button CornerRadius="5"
+                                                Text="-"
+                                                FontFamily="NSB"
+                                                BackgroundColor="#E0E0E0"
+                                                FontSize="18"
+                                                TextColor="#808080"
+                                                WidthRequest="30"
+                                                HeightRequest="30"
+                                                HorizontalOptions="Start"/>
                                     </StackLayout>
                                 </StackLayout>
-
                             </StackLayout>
                         </SwipeView>
                     </DataTemplate>
