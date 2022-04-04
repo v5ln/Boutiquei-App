@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Boutiquei.Models;
+using Boutiquei.Services;
 
 namespace Boutiquei.ViewModels
 {
     public class ProductViewModel
     {
-        public Products Product { get; set; }
+        public Product Product { get; set; }
         public ObservableCollection<PImgs> ProductImages { get; set; }
         public ObservableCollection<Sizes> ProductSizes { get; set; }
         public ObservableCollection<Colors> ProductColores { get; set; }
-        AppServicess services = new AppServicess();
+        AppServices services = new AppServices();
 
 
-        public ProductViewModel(Products product)
+        public ProductViewModel(Product product)
         {
-            Product = new Products();
+            Product = new Product();
             Product = product;
             ProductImages = new ObservableCollection<PImgs>();
             ProductSizes = new ObservableCollection<Sizes>();

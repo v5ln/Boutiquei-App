@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Boutiquei.Models;
 using Firebase.Database;
 using Firebase.Database.Query;
+using Newtonsoft.Json;
 
 namespace Boutiquei.Services
 {
@@ -67,19 +69,19 @@ namespace Boutiquei.Services
 
         //المفضلة 
 
-        public ObservableCollection<Products> GetFavouriteProductsByUserID(string UserID)
+        public ObservableCollection<Product> GetFavouriteProductsByUserID(string UserID)
         {
-            return firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").AsObservable<Products>().AsObservableCollection();
+            return firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").AsObservable<Product>().AsObservableCollection();
 
         }
 
-        public ObservableCollection<Products> GetCartProductsByUserID(string UserID)
+        public ObservableCollection<Product> GetCartProductsByUserID(string UserID)
         {
-            return firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").AsObservable<Products>().AsObservableCollection();
+            return firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").AsObservable<Product>().AsObservableCollection();
 
         }
 
-        public async Task<bool> Save(Products product, string UserID)
+        public async Task<bool> Save(Product product, string UserID)
         {
             var data = await firebaseClient.Child($"Users/User1/Cart").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
 
