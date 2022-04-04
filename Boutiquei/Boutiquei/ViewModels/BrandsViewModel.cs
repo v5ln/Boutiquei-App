@@ -44,7 +44,7 @@ namespace Boutiquei.ViewModels
             {
                 if (value != null)
                 {
-                    //Application.Current.MainPage.Navigation.PushAsync(new SingleBrandPage(value));
+                    Application.Current.MainPage.Navigation.PushAsync(new SingleBrandPage(value));
                     previousSelected = value;
 
                     value = null;
