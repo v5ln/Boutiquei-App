@@ -6,67 +6,58 @@
       xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     Shell.TabBarIsVisible="False"
     Title="Favorite"
-    xmlns:fontAwesome="clr-namespace:FontAwesome"
-    >
+    xmlns:fontAwesome="clr-namespace:FontAwesome">
     <ContentPage.BindingContext>
         <viewmodels:FavoriteViewModel>
         </viewmodels:FavoriteViewModel>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-
         <ToolbarItem Clicked="ToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAS"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShoppingCart}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-
-
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Orientation="Vertical">
             <CollectionView
                     BackgroundColor="#FBFBFC"
                     ItemSizingStrategy="MeasureAllItems"
-                    ItemsSource="{Binding Favorite}"
-                  >
+                    ItemsSource="{Binding Favorite}">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
-                        <Label HorizontalOptions="Center" Text="There Is No product in favorite " />
+                        <Label HorizontalOptions="Center" Text="There Is No Product In Favorite " />
                     </StackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
-                        <SwipeView.RightItems>
-                            <SwipeItems>
-                                <SwipeItem
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BotiquesViewModel}}, Path=DeleteCommand}"
                                     CommandParameter="{Binding .}"
                                     BackgroundColor="Red"
                                     Text="Delete" />
-                            </SwipeItems>
-                        </SwipeView.RightItems>
-                        <StackLayout  Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
-                            <Image Source="{Binding ProductImage}" WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0" >
-                            </Image>
-                            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" Margin="20,10,0,0">
-                                <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060" Margin="0,0,0,5">
-                                </Label>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <StackLayout  Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
+                                <Image Source="{Binding ProductImage}" WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0" >
+                                </Image>
+                                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" Margin="20,10,0,0">
+                                    <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060" Margin="0,0,0,5">
+                                    </Label>
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="₪" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
-                                        <Label Text="{Binding Price}" FontSize="16" FontFamily="NSB" TextColor="#303030" > </Label>
+                                        <Label Text="{Binding Price}" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
                                     </StackLayout>
-                                    
-                               
-                                
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
-                    </SwipeView>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout >
-
     </ContentPage.Content>
 </ContentPage>
