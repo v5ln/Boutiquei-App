@@ -7,15 +7,19 @@
     
         <Frame HasShadow="False" BackgroundColor="Transparent">
             <StackLayout>
-                <!--<Frame  CornerRadius="10" HasShadow="False" Padding="0" IsClippedToBounds="True">
+                <Frame  CornerRadius="10" HasShadow="False" Padding="0" IsClippedToBounds="True">
                     <Image  WidthRequest="148"
                                          HeightRequest="195"
-                                        Source="{Binding PImgs}"
+                                        Source="{Binding PImgCover}"
                                         Aspect="AspectFit"
                                         HorizontalOptions="Center"/>
-                </Frame>-->
+                </Frame>
                 <Label Text="{Binding PName}" HorizontalOptions="Start" FontFamily="NSR" FontSize="14" TextColor="#808080"/>
-                <Label Text="{Binding Price}" HorizontalOptions="Start" FontFamily="NSB" FontSize="14" TextColor="#303030"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="$" HorizontalOptions="Start" FontFamily="NSB" FontSize="14" TextColor="#303030"/>
+                    <Label Text="{Binding Price}" HorizontalOptions="Start" FontFamily="NSB" FontSize="14" TextColor="#303030"/>
+                </StackLayout>
+                
 
 
             </StackLayout>

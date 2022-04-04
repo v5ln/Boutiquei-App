@@ -9,14 +9,11 @@ namespace Boutiquei.Views
 
     public partial class SingleBoutiquePage : ContentPage
     {
-
-       
-
         public SingleBoutiquePage(Store boutique)
         {
             InitializeComponent();
             SingleBoutiqueViewModel singleBoutiqueViewModel = new SingleBoutiqueViewModel(boutique);
-            singleBoutiqueViewModel.Boutique = boutique;
+            BindingContext = singleBoutiqueViewModel;
         }
 
     }
