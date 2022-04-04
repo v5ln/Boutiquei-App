@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +14,7 @@ namespace Boutiquei.Models
 
         public string BID { set; get; }
     }
+
 
     public class PImgs
     {
