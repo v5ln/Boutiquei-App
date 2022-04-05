@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Boutiquei.Models;
 using Firebase.Database;
@@ -104,6 +106,70 @@ namespace Boutiquei.Services
             await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
 
 
+        }
+
+
+        public async Task DeleteFromCart(string UserID, string PID)
+        {
+            var toDeletePerson = (await firebaseClient
+             .Child($"Users/{UserID}/Cart").Child("Products")
+             .OnceAsync<CartProduct>()).Where(a => a.Object.PID == PID).FirstOrDefault();
+
+            await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").Child(toDeletePerson.Key).DeleteAsync();
+
+        }
+
+        public async Task DeleteFromFavourites(string UserID, string PID)
+        {
+            var toDeletePerson = (await firebaseClient
+             .Child($"Users/{UserID}/Favourite").Child("Products")
+             .OnceAsync<Product>()).Where(a => a.Object.PID == PID).FirstOrDefault();
+
+            await firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").Child(toDeletePerson.Key).DeleteAsync();
+        }
+
+
+
+        public async Task UpdateIncreaseQuantity(string UserID, string PID)
+        {
+
+            var toUpdate = (await firebaseClient
+          .Child($"Users/{UserID}/Cart").Child("Products")
+             .OnceAsync<CartProduct>()).Where(a => a.Object.PID == PID).FirstOrDefault();
+            // modify your data (toUpdate is your old object value)
+            toUpdate.Object.Quantity = Convert.ToInt32(toUpdate.Object.Quantity) + 1;
+
+            //update the new value
+            await firebaseClient
+                    .Child($"Users/{UserID}/Cart").Child("Products")
+                    .Child(toUpdate.Key)
+                     .PutAsync(toUpdate.Object);
+        }
+
+        public async Task UpdateDecreaseQuantity(string UserID, string PID)
+        {
+
+            var toUpdate = (await firebaseClient
+          .Child($"Users/{UserID}/Cart").Child("Products")
+             .OnceAsync<CartProduct>()).Where(a => a.Object.PID == PID).FirstOrDefault();
+            // modify your data (toUpdate is your old object value)
+            toUpdate.Object.Quantity = Convert.ToInt32(toUpdate.Object.Quantity) - 1;
+
+            //update the new value
+            await firebaseClient
+                  .Child($"Users/{UserID}/Cart").Child("Products")
+                  .Child(toUpdate.Key)
+                  .PutAsync(toUpdate.Object);
+        }
+
+        public async Task<String> TotalProductsPrice()
+        {
+            var d = await firebaseClient.Child($"Users/User1/Cart").Child("Products").OnceAsync<CartProduct>();
+
+
+            var total = d.Sum(x => decimal.Parse(x.Object.Price, NumberStyles.Currency) * decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency));
+            d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
+            return total.ToString();
         }
 
     }

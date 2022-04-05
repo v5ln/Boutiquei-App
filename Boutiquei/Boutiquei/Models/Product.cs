@@ -10,7 +10,8 @@ namespace Boutiquei.Models
 
         public string PName { set; get; }
 
-        public int Price { set; get; }
+        // public int Price { set; get; }
+        public string Price { set; get; }
 
         public string BID { set; get; }
 
@@ -31,21 +32,33 @@ namespace Boutiquei.Models
     {
         public string PSize { set; get; }
     }
-    public class CartProduct
+
+    public class CartProduct : Product
     {
-        public string PName { set; get; }
-
-        public string PID { set; get; }
-
-        public int Price { set; get; }
-
-        public string PImgCover { set; get; }
-
         public int Quantity { set; get; }
 
         public string PColor { set; get; }
 
         public string PSize { set; get; }
 
+        public int Total = 0;
+
     }
+    /*  public class CartProduct
+      {
+          public string PName { set; get; }
+
+          public string PID { set; get; }
+
+          public int Price { set; get; }
+
+          public string PImgCover { set; get; }
+
+          public int Quantity { set; get; }
+
+          public string PColor { set; get; }
+
+          public string PSize { set; get; }
+
+      }*/
 }
