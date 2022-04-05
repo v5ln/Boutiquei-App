@@ -67,6 +67,7 @@ namespace Boutiquei.ViewModels
 
         }
 
+
         private Product previousSelected;
         Product selectedProduct;
         public Product SelectedProduct
@@ -84,6 +85,7 @@ namespace Boutiquei.ViewModels
                     value = null;
                 }
                 selectedProduct = value;
+                OnPropertyChanged();
 
             }
         }

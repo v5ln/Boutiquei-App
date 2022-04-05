@@ -10,7 +10,6 @@ namespace Boutiquei.Models
 
         public string PName { set; get; }
 
-        // public int Price { set; get; }
         public string Price { set; get; }
 
         public string BID { set; get; }
@@ -35,7 +34,8 @@ namespace Boutiquei.Models
 
     public class CartProduct : Product
     {
-        public int Quantity { set; get; }
+
+        public string Quantity { set; get; }
 
         public string PColor { set; get; }
 
