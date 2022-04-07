@@ -49,10 +49,8 @@ namespace Boutiquei.ViewModels
 
                     value = null;
                 }
-                
                 selectedBoutique = value;
                 OnPropertyChanged();
-
             }
         }
         //public StoreModel SelectedBoutique

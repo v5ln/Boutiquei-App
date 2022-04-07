@@ -5,19 +5,18 @@
     x:Class="Boutiquei.Views.SingleBoutiquePage"
     xmlns:views="clr-namespace:Boutiquei.Views"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
-    Title="NAME">
-    <ContentPage.BindingContext>
-        <viewmodels:SingleBoutiqueViewModel/>
-    </ContentPage.BindingContext>
+    Title="{Binding Boutique.Name}">
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding Boutique.Name}"/>
             <Image Aspect="AspectFill" Source="{Binding Boutique.CoverImg}" WidthRequest="375" HeightRequest="119"/>
             <RefreshView>
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
-                    ItemsSource="{Binding Products}">
+                    ItemsSource="{Binding Products}"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                    SelectionMode="Single">
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
                             <Label HorizontalOptions="Center" Text="There Is No products" />
