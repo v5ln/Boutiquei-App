@@ -48,9 +48,6 @@
     <Compile Update="Views\BrandsPage.xaml.cs">
       <DependentUpon>BrandsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CartPage.xaml.cs">
-      <DependentUpon>CartPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\FavoritePage.xaml.cs">
       <DependentUpon>FavoritePage.xaml</DependentUpon>
     </Compile>

@@ -4,25 +4,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     xmlns:views="clr-namespace:Boutiquei.Views"
+        xmlns:fontAwesome="clr-namespace:FontAwesome"
     x:Class="Boutiquei.Views.BrandsPage">
     <ContentPage.BindingContext>
         <viewmodels:BrandsViewModel/>
     </ContentPage.BindingContext>
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAR"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <RefreshView
                 Command="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}">
-
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Brand}"
                     SelectedItem="{Binding SelectedBrand, Mode=TwoWay}"
-                    
                     SelectionMode="Single">
-
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
                             <Label HorizontalOptions="Center" Text="There Is No Brands" />
@@ -31,7 +36,6 @@
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                          Span="2"></GridItemsLayout>
-
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>

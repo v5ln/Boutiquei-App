@@ -2,8 +2,120 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.ProductPage">
+    x:Class="Boutiquei.Views.ProductPage"
+    BackgroundColor="Transparent"
+    xmlns:fontAwesome="clr-namespace:FontAwesome"
+    Shell.TabBarIsVisible="False">
+
+    
     <ContentPage.Content>
-        
+        <Grid>
+            <ScrollView Orientation="Vertical">
+                <StackLayout >
+                    <CarouselView ItemsSource="{Binding ProductImages}"
+                                  HeightRequest="380"
+                                  IsBounceEnabled="False"
+                                  Loop="False"
+                                  IsTabStop="True"
+                                  IsScrollAnimated="True">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image
+                                        Aspect="Fill"
+                                        Source="{Binding Pimg}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <Label Text="{Binding Product.PName}"
+                           Margin="25,25,0,10"
+                           FontFamily="MWR"
+                           FontSize="24"
+                           LineBreakMode="WordWrap"/>
+                    <StackLayout Orientation="Horizontal" Margin="25,0,0,10">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                        <Label Text="₪" FontSize="30" FontFamily="NSB" TextColor="#303030"/>
+                        <Label Text="{Binding Product.Price}" FontSize="30" FontFamily="NSB" TextColor="#303030"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,17,0">
+                            <Button CornerRadius="5"
+                                    Text="+"
+                                    FontFamily="NSB"
+                                    BackgroundColor="#E0E0E0"
+                                    FontSize="18"
+                                    TextColor="#808080"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    HorizontalOptions="Start"/>
+                            <Label Text="1"
+                                   FontFamily="NSB"
+                                   TextColor="#242424"
+                                   Margin="15,0"
+                                   FontSize="18"/>
+                            <Button CornerRadius="5"
+                                    Text="-"
+                                    FontFamily="NSB"
+                                    BackgroundColor="#E0E0E0"
+                                    FontSize="18"
+                                    TextColor="#808080"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    HorizontalOptions="End"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <CollectionView Margin="25,0,0,5"
+                                    HeightRequest="34"
+                                    ItemsSource="{Binding ProductColores}"
+                                    >
+                        <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    Margin="0,0,30,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="34"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="34"/>
+                                    </Grid.ColumnDefinitions>
+                                   
+                                            <StackLayout Margin="0,0,0,1">
+                                            <Frame HasShadow="False"
+                                               BorderColor="Black"
+                                               CornerRadius="17"
+                                               HeightRequest="34"
+                                               WidthRequest="34"
+                                               Padding="0"
+                                               BackgroundColor="{Binding PColor}"/>
+                                        </StackLayout>
+                                       
+                                    
+                                </Grid>
+                            </DataTemplate> 
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Picker Title="Size"
+                            TitleColor="Black"
+                            FontSize="18"
+                            FontFamily="NSR"
+                            ItemsSource="{Binding ProductSizes}"
+                            ItemDisplayBinding="{Binding PSize}"
+                            VerticalOptions="StartAndExpand">
+                    </Picker>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" Margin="25,30" VerticalOptions="End">
+                <Button  BackgroundColor="#F0F0F0" CornerRadius="8" WidthRequest="60" HeightRequest="60" Margin="0,0,15,0">
+                    <Button.ImageSource>
+                        <FontImageSource FontFamily="FAR"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
+                    </Button.ImageSource>
+                </Button>
+                <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"/>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

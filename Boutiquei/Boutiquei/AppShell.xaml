@@ -3,6 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Boutiquei.Views"
        Title="Boutiquei"
+       xmlns:fontAwesome="clr-namespace:FontAwesome"
        x:Class="Boutiquei.AppShell">
 
     <!--
@@ -15,7 +16,7 @@
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="White" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.ForegroundColor" Value="Black" />
                 <Setter Property="Shell.TitleColor" Value="Black" />
                 <Setter Property="Shell.DisabledColor" Value="Gray" />
                 <Setter Property="Shell.UnselectedColor" Value="Gray" />
@@ -33,30 +34,26 @@
     <TabBar>
 
         <Tab Title="Boutiques">
-            <!--<Tab.Icon>
+            <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Store}"
                                  />
-            </Tab.Icon>-->
+            </Tab.Icon>
             <ShellContent Route="BoutiquesPage" ContentTemplate="{DataTemplate local:BoutiquesPage}" />
         </Tab>
 
-        <Tab Title="Test" Icon="icon_about.png">
-             <ShellContent Route="SplashScreenPage" ContentTemplate="{DataTemplate local:SplashScreenPage}" />
-        </Tab>
-
         <Tab Title="Brands">
-            <!--<Tab.Icon>
+            <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Tag}"/>
-            </Tab.Icon>-->
+            </Tab.Icon>
             <ShellContent Route="BrandsPage" ContentTemplate="{DataTemplate local:BrandsPage}" />
         </Tab>
         <Tab Title="Cart">
-            <!--<Tab.Icon>
+            <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShoppingCart}"/>
-            </Tab.Icon>-->
+            </Tab.Icon>
             <ShellContent Route="CartPage" ContentTemplate="{DataTemplate local:CartPage}" />
         </Tab>
     </TabBar>
