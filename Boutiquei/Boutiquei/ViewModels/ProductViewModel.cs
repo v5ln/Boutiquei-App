@@ -17,6 +17,10 @@ namespace Boutiquei.ViewModels
         public ObservableCollection<PImgs> ProductImages { get; set; }
         public ObservableCollection<Sizes> ProductSizes { get; set; }
         public ObservableCollection<Colors> ProductColores { get; set; }
+        public CartProduct cartProduct { set; get; }
+
+        public string Quantity { set; get; }
+
         AppServices services = new AppServices();
         
 
@@ -28,10 +32,19 @@ namespace Boutiquei.ViewModels
             ProductSizes = new ObservableCollection<Sizes>();
             ProductColores = new ObservableCollection<Colors>();
 
+            Quantity = "1";
             ProductImages = services.GetAllBoutiqueProductImgs(Product.BID, Product.PID);
             ProductSizes = services.GetAllBoutiqueProductSizes(Product.BID, Product.PID);
             ProductColores = services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
         }
+
+
+        // when add to cart btn 
+        //public void AddToCart()
+        //{
+        //    cartProduct = new CartProduct({Quantity = Quantity  })
+        //    services.AddToCart(cartProduct)
+        //}
         
 
     }

@@ -48,7 +48,7 @@
                                     WidthRequest="30"
                                     HeightRequest="30"
                                     HorizontalOptions="Start"/>
-                            <Label Text="1"
+                            <Label Text="{Binding Quantity}"
                                    FontFamily="NSB"
                                    TextColor="#242424"
                                    Margin="15,0"
@@ -66,8 +66,7 @@
                     </StackLayout>
                     <CollectionView Margin="25,0,0,5"
                                     HeightRequest="34"
-                                    ItemsSource="{Binding ProductColores}"
-                                    >
+                                    ItemsSource="{Binding ProductColores}">
                         <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
@@ -81,7 +80,6 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="34"/>
                                     </Grid.ColumnDefinitions>
-                                   
                                             <StackLayout Margin="0,0,0,1">
                                             <Frame HasShadow="False"
                                                BorderColor="Black"
@@ -91,8 +89,6 @@
                                                Padding="0"
                                                BackgroundColor="{Binding PColor}"/>
                                         </StackLayout>
-                                       
-                                    
                                 </Grid>
                             </DataTemplate> 
                         </CollectionView.ItemTemplate>
