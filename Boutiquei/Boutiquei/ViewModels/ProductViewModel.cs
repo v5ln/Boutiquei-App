@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Boutiquei.Models;
+using System.Collections.Generic;
 using Boutiquei.Services;
-
+using Boutiquei.Views;
+using MvvmHelpers;
+using MvvmHelpers.Commands;
+using Xamarin.Forms;
+using Command = MvvmHelpers.Commands.Command;
 namespace Boutiquei.ViewModels
 {
-    public class ProductViewModel
+    public class ProductViewModel : BaseViewModel
     {
         public Product Product { get; set; }
         public ObservableCollection<PImgs> ProductImages { get; set; }
         public ObservableCollection<Sizes> ProductSizes { get; set; }
         public ObservableCollection<Colors> ProductColores { get; set; }
         AppServices services = new AppServices();
-
+        
 
         public ProductViewModel(Product product)
         {
@@ -26,5 +32,7 @@ namespace Boutiquei.ViewModels
             ProductSizes = services.GetAllBoutiqueProductSizes(Product.BID, Product.PID);
             ProductColores = services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
         }
+        
+
     }
 }
