@@ -9,6 +9,8 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
+using System.Windows.Input;
+
 namespace Boutiquei.ViewModels
 {
     public class ProductViewModel : BaseViewModel
@@ -18,11 +20,25 @@ namespace Boutiquei.ViewModels
         public ObservableCollection<Sizes> ProductSizes { get; set; }
         public ObservableCollection<Colors> ProductColores { get; set; }
         public CartProduct cartProduct { set; get; }
+        private string _quantity;
+        public string Quantity
+        {
+            get
+            {
+                return _quantity;
+            }
+            set
+            {
+                _quantity = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Quantity { set; get; }
+        AppServices Services = new AppServices();
 
-        AppServices services = new AppServices();
-        
+        public ICommand IncreaseCommand { get; }
+        public ICommand DecreaseCommand { get; }
+
 
         public ProductViewModel(Product product)
         {
@@ -33,9 +49,27 @@ namespace Boutiquei.ViewModels
             ProductColores = new ObservableCollection<Colors>();
 
             Quantity = "1";
-            ProductImages = services.GetAllBoutiqueProductImgs(Product.BID, Product.PID);
-            ProductSizes = services.GetAllBoutiqueProductSizes(Product.BID, Product.PID);
-            ProductColores = services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
+            ProductImages = Services.GetAllBoutiqueProductImgs(Product.BID, Product.PID);
+            ProductSizes = Services.GetAllBoutiqueProductSizes(Product.BID, Product.PID);
+            ProductColores = Services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
+
+            IncreaseCommand = new Xamarin.Forms.Command(onIncreaseTapped);
+            DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
+        }
+
+        public void onIncreaseTapped(object _product)
+        {
+            Quantity = (Convert.ToInt32(Quantity)+1).ToString();
+        }
+
+        public async void onDecreaseTapped(object _product)
+        {
+            if (Quantity.Equals("1"))
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "The product's quantity must be higher than 1", "Ok");
+                return;
+            }
+            Quantity = (Convert.ToInt32(Quantity) - 1).ToString();
         }
 
 
@@ -45,7 +79,7 @@ namespace Boutiquei.ViewModels
         //    cartProduct = new CartProduct({Quantity = Quantity  })
         //    services.AddToCart(cartProduct)
         //}
-        
+
 
     }
 }
