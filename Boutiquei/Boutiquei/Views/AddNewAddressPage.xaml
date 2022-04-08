@@ -30,6 +30,14 @@
                         <Label Text="District" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
                         <Entry Placeholder=" Select District" FontSize="16" x:Name="EntryDistrict"/>
                     </StackLayout>
+                    
+                </Frame>
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="City" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Placeholder=" EX:Nablus" FontSize="16" x:Name="EntryPhone"/>
+                    </StackLayout>
                 </Frame>
                 <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
                     <StackLayout>
