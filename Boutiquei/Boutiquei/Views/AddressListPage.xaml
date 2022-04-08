@@ -3,12 +3,68 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
-    x:Class="Boutiquei.Views.AddressListPage">
+    x:Class="Boutiquei.Views.AddressListPage"
+    Title="Shipping address">
     <ContentPage.BindingContext>
         <viewmodels:AddressListViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
+            <CollectionView ItemsSource="{Binding Addresses}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame BackgroundColor="#F5F5F5" Margin="10,10,20,20">
+                            <StackLayout>
+                                    <Label Text="{Binding Name}" FontSize="18" TextColor="#242424" FontFamily="NSB"></Label>
+                                <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding City}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
+                                        <Label Text="{Binding AddressDetails}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding District}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
+                                        <Label Text="{Binding Phone}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                            
+                        </Frame>
+                        
+                        <Frame BackgroundColor="#F5F5F5" Margin="10,10,20,20">
+                            <StackLayout>
+                                    <Label Text="{Binding Name} " FontSize="18" TextColor="#242424" FontFamily="NSB"></Label>
+                                <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding City}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
+                                        <Label Text="{Binding AddressDetails}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding District}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
+                                        <Label Text="{Binding Phone}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
+                                </StackLayout>
+                            </StackLayout>
+
+                        </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <StackLayout  Margin="0,0,20,30" BackgroundColor="Transparent">
+                <Grid HorizontalOptions="End">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="52"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="52"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout >
+                        <Button  BorderColor="Black" CornerRadius="26" HeightRequest="52" WidthRequest="52" Padding="0" BackgroundColor="#f0f0f0"
+                                               Text="+" FontFamily="NSR" FontSize="24" TextColor="Black" >
+                        </Button>
+                    </StackLayout>
+
+
+                </Grid>
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>
