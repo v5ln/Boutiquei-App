@@ -41,8 +41,6 @@ namespace Boutiquei.Models
 
         public string PSize { set; get; }
 
-        public int Total = 0;
-
     }
     /*  public class CartProduct
       {

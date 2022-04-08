@@ -4,24 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.CartPage" 
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
-    Title="Cart"
-
-    >
+    Title="Cart">
     <ContentPage.BindingContext>
         <viewmodels:CartViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" BackgroundColor="#FBFBFC"
->
+        <StackLayout HorizontalOptions="Center" BackgroundColor="#FBFBFC">
             <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Cart}"
-                  >
-
+                    x:Name="ProductsCollection">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
-                        <Label HorizontalOptions="Center" Text="There Is No Product In Cart " />
+                        <Label HorizontalOptions="Center" Text="There Is No Product In Cart"/>
                     </StackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
@@ -30,11 +26,12 @@
                             <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding Source={x:Reference ProductsCollection},Path=BindingContext.DeleteCommand}"
                                     BackgroundColor="Red"
                                     Text="Delete" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-
                             <StackLayout Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
                                 <Image Source="{Binding PImgCover} " WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0">
                                 </Image>
@@ -54,7 +51,9 @@
                                                 TextColor="#808080"
                                                 WidthRequest="30"
                                                 HeightRequest="30"
-                                                HorizontalOptions="Start"/>
+                                                HorizontalOptions="Start"
+                                                Command="{Binding Source={x:Reference ProductsCollection}, Path=BindingContext.IncreaseCommand}"
+                                                CommandParameter="{Binding .}"/>
                                         <Label Text="{Binding Quantity}"
                                                FontFamily="NSB"
                                                TextColor="#242424"
@@ -68,7 +67,9 @@
                                                 TextColor="#808080"
                                                 WidthRequest="30"
                                                 HeightRequest="30"
-                                                HorizontalOptions="End"/>
+                                                HorizontalOptions="End"
+                                                Command="{Binding Source={x:Reference ProductsCollection}, Path=BindingContext.DecreaseCommand}"
+                                                CommandParameter="{Binding .}"/>
                                     </StackLayout>
                                 </StackLayout>
                             </StackLayout>
@@ -82,10 +83,8 @@
                     <Label Text="₪" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>
                     <Label Text="{Binding Total}" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>
                 </StackLayout>
-
             </StackLayout>
             <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
-        </StackLayout >
-        
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

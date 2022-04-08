@@ -80,10 +80,7 @@ namespace Boutiquei.Services
             return firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").AsObservable<CartProduct>().AsObservableCollection();
         }
         //
-        //public string GetCartTotalByUserID(string UserID)
-        //{
-        //    return firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
-        //}
+        
 
         public async Task AddToFavourites(Product product, string UserID)
         {
@@ -131,6 +128,12 @@ namespace Boutiquei.Services
                     .Child($"Users/{UserID}/Cart").Child("Products")
                     .Child(toUpdate.Key)
                      .PutAsync(toUpdate.Object);
+
+            string total = firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
+            string newTotal = (Convert.ToInt32(total) + Convert.ToInt32(toUpdate.Object.Price)).ToString();
+            await firebaseClient
+                    .Child($"Users/{UserID}/Cart").Child("Total")
+                     .PutAsync(newTotal);
         }
 
         public async Task UpdateDecreaseQuantity(string UserID, string PID)
@@ -151,6 +154,11 @@ namespace Boutiquei.Services
                       .Child($"Users/{UserID}/Cart").Child("Products")
                       .Child(toUpdate.Key)
                       .PutAsync(toUpdate.Object);
+                string total = firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
+                string newTotal = (Convert.ToInt32(total) - Convert.ToInt32(toUpdate.Object.Price)).ToString();
+                await firebaseClient
+                        .Child($"Users/{UserID}/Cart").Child("Total")
+                         .PutAsync(newTotal);
             }
 
             else
@@ -160,14 +168,39 @@ namespace Boutiquei.Services
             
         }
 
-        public async Task<string> GetTotalProductsPrice(string UserID)
+        //public async Task<string> GetTotalProductsPrice(string UserID)
+        //{
+        //    var _products = await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").OnceAsync<CartProduct>();
+
+
+        //    string total = _products.Sum(x => decimal.Parse(x.Object.Price, NumberStyles.Currency) * decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency)).ToString();
+        //    //d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
+        //    return total;
+        //}
+
+        //public async Task<string> GetTotalProductsPrice(string UserID)
+        //{
+        //    string total = "2";
+        //    await Task.Run(() =>
+        //    {
+        //        var _products = GetCartProductsByUserID(UserID);
+
+        //        //string total = _products.Sum(product => Convert.ToInt32(product.Price) * Convert.ToInt32(product.Quantity)).ToString();
+
+        //        foreach (var product in _products)
+        //        {
+        //            total = (Convert.ToInt32(total) + (Convert.ToInt32(product.Price) * Convert.ToInt32(product.Quantity))).ToString();
+        //        }
+        //        Console.WriteLine(total);
+        //        //d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
+        //        return total;
+        //    });
+        //    return total;
+
+        //}
+        public string GetTotalProductsPrice(string UserID)
         {
-            var _products = await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").OnceAsync<CartProduct>();
-
-
-            string total = _products.Sum(x => decimal.Parse(x.Object.Price, NumberStyles.Currency) * decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency)).ToString();
-            //d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
-            return total;
+            return firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
         }
 
     }
