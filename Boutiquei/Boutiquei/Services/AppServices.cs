@@ -95,11 +95,17 @@ namespace Boutiquei.Services
 
         public async Task DeleteFromCart(string UserID, string PID)
         {
-            var toDeletePerson = (await firebaseClient
+            var toUpdate = (await firebaseClient
              .Child($"Users/{UserID}/Cart").Child("Products")
              .OnceAsync<CartProduct>()).Where(a => a.Object.PID == PID).FirstOrDefault();
 
-            await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").Child(toDeletePerson.Key).DeleteAsync();
+            await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").Child(toUpdate.Key).DeleteAsync();
+
+            string total = firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
+            string newTotal = (Convert.ToInt32(total) - ( Convert.ToInt32(toUpdate.Object.Price) * Convert.ToInt32(toUpdate.Object.Quantity)) ).ToString();
+            await firebaseClient
+                    .Child($"Users/{UserID}/Cart").Child("Total")
+                     .PutAsync(newTotal);
 
         }
 
