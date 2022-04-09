@@ -61,6 +61,7 @@ namespace Boutiquei.ViewModels
         {
             var product = _product as Product;
             await Services.DeleteFromCart("User1", product.PID);
+            Total = Services.GetTotalProductsPrice("User1");
         }
     }
 }
