@@ -9,8 +9,14 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="SUCCSESS" HorizontalOptions="CenterAndExpand"/>
-            <Image Source="{Binding ImageSource}"/>
+            <Label Text="SUCCSESS!" HorizontalOptions="CenterAndExpand" TextColor="#303030" FontSize="36" FontFamily="MWB"/>
+            <Image Source="{Binding ImageSource}" HeightRequest="200" WidthRequest="200"/>
+            <Label Text="Your order will be delivered soon." HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="NSR" TextColor="#606060"/>
+            <Label Text="Thank you for choosing our app!" HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="NSR" TextColor="#606060"/>
+            <Button Text="Track Your Orders" BackgroundColor="#242424" CornerRadius="8" Padding="0,17,0,17"  Margin="30,5,30,0"
+                    FontFamily="NSS" FontSize="16" TextColor="#ffffff"/>
+            <Button Text="Back To Home" BackgroundColor="#ffffff" CornerRadius="8" Padding="0,17,0,17"  Margin="30,10,30,0"
+                    FontFamily="NSS" FontSize="16" TextColor="Black" BorderColor="Black" BorderWidth="1"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
