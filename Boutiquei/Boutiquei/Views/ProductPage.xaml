@@ -40,6 +40,7 @@
                         <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,17,0">
                             <Button CornerRadius="5"
                                     Text="+"
+                                    Command="{Binding IncreaseCommand}"
                                     FontFamily="NSB"
                                     BackgroundColor="#E0E0E0"
                                     FontSize="18"
@@ -54,6 +55,7 @@
                                    FontSize="18"/>
                             <Button CornerRadius="5"
                                     Text="-"
+                                    Command="{Binding DecreaseCommand}"
                                     FontFamily="NSB"
                                     BackgroundColor="#E0E0E0"
                                     FontSize="18"
@@ -103,9 +105,15 @@
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" Margin="25,30" VerticalOptions="End">
-                <Button  BackgroundColor="#F0F0F0" CornerRadius="8" WidthRequest="60" HeightRequest="60" Margin="0,0,15,0">
+                <Button  BackgroundColor="#F0F0F0"
+                         CornerRadius="8"
+                         WidthRequest="60"
+                         HeightRequest="60"
+                         Margin="0,0,15,0"
+                         x:Name="FavBtn"
+                         Command="{Binding FavouriteCommand}">
                     <Button.ImageSource>
-                        <FontImageSource FontFamily="FAR"
+                        <FontImageSource FontFamily="{Binding FavBtn}"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
                     </Button.ImageSource>
                 </Button>

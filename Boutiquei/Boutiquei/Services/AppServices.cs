@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -80,7 +81,45 @@ namespace Boutiquei.Services
             return firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").AsObservable<CartProduct>().AsObservableCollection();
         }
         //
-        
+
+        //public bool IsInFavourite(string UserID, string PID)
+        //{
+        //    ObservableCollection<Product> _products = GetFavouriteProductsByUserID(UserID);
+
+        //    _products.CollectionChanged += isInFavouriteListChanged;
+
+        //    foreach (var _product in _products)
+        //    {
+        //        Application.Current.MainPage.DisplayAlert("x", PID + "\n" + _product.PID, "x");
+        //        if (_product.PID == PID)
+        //        {
+        //            Application.Current.MainPage.DisplayAlert("x", "OI OI ", "x");
+        //            return true;
+        //        }
+        //    }
+        //    Application.Current.MainPage.DisplayAlert("x", "PEPE ", "x");
+        //    return false;
+        //}
+
+        //private void isInFavouriteListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    ObservableCollection<Product> products = sender as ObservableCollection<Product>;
+        //    if (e.Action == NotifyCollectionChangedAction.Add)
+        //    {
+
+        //    }
+        //}
+
+        //public bool IsInCart(string UserID, string PID)
+        //{
+        //    ObservableCollection<CartProduct> _products = GetCartProductsByUserID(UserID);
+        //    foreach (var _product in _products)
+        //    {
+        //        if (_product.PID.Equals(PID)) return true;
+        //    }
+        //    return false;
+        //}
+
 
         public async Task AddToFavourites(Product product, string UserID)
         {
