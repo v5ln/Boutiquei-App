@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Boutiquei.Views
 {
-    public partial class AddressCard : ContentView
+    public partial class AddressCard : StackLayout
     {
         public AddressCard()
         {
