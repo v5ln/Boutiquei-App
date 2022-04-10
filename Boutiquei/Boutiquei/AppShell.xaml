@@ -42,16 +42,9 @@
             <ShellContent Route="BoutiquesPage" ContentTemplate="{DataTemplate local:BoutiquesPage}" />
         </Tab>
 
-        <Tab Title="Order Address">
-            <ShellContent Route="OrderAddress" ContentTemplate="{DataTemplate local:OrderAddressPage}" />
+        <Tab Title="Success Page">
+            <ShellContent Route="SuccessPage" ContentTemplate="{DataTemplate local:SuccessPage}" />
         </Tab>
-        <Tab Title="Address List">
-            <ShellContent Route="AddressListPage" ContentTemplate="{DataTemplate local:AddressListPage}" />
-        </Tab>
-        <Tab Title="Add Address">
-            <ShellContent Route="AddNewAddressPage" ContentTemplate="{DataTemplate local:AddNewAddressPage}" />
-        </Tab>
-
         <!--<Tab Title="Brands">
             <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
