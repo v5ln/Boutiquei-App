@@ -44,13 +44,10 @@
         <Tab Title="Orders">
             <ShellContent Route="OrdersPage" ContentTemplate="{DataTemplate local:OrdersPage}" />
         </Tab>
-        <!--<Tab Title="Brands">
-            <Tab.Icon>
-                <FontImageSource FontFamily="FAS"
-                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Tag}"/>
-            </Tab.Icon>
-            <ShellContent Route="BrandsPage" ContentTemplate="{DataTemplate local:BrandsPage}" />
-        </Tab>-->
+        <Tab Title="Check Out">
+            <ShellContent Route="CheckoutPage" ContentTemplate="{DataTemplate local:CheckoutPage}" />
+        </Tab>
+        
         <Tab Title="Cart">
             <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
