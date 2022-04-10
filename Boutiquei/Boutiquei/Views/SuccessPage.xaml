@@ -10,6 +10,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="SUCCSESS" HorizontalOptions="CenterAndExpand"/>
+            <Image Source="{Binding ImageSource}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
