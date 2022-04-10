@@ -170,5 +170,121 @@ namespace Boutiquei.Services
             return total;
         }
 
+
+        //Sprint 4 :
+
+        public ObservableCollection<Address> GetAllAdressesByUserID(string UserID)
+        {
+            return firebaseClient.Child($"Users/{UserID}/").Child("Addresses").AsObservable<Address>().AsObservableCollection();
+
+        }
+
+
+        public async Task AddNewAddress(Address address, string UserID)
+        {
+            await firebaseClient.Child($"Users/{UserID}/").Child("Addresses").PostAsync(JsonConvert.SerializeObject(address));
+        }
+
+        public async Task DeleteAddress(string UserID, string AddressID)
+        {
+
+            var toDeletePerson = (await firebaseClient
+             .Child($"Users/{UserID}/").Child("Addresses")
+             .OnceAsync<Address>()).Where(a => a.Object.AddressID == AddressID).FirstOrDefault();
+            await firebaseClient.Child($"Users/{UserID}/").Child("Addresses").Child(toDeletePerson.Key).DeleteAsync();
+
+        }
+
+        public async Task UpdateNotDefultAddress(string UserID, string AddressID)
+        {
+
+
+            var toUpdate = (await firebaseClient
+             .Child($"Users/{UserID}/").Child("Addresses")
+             .OnceAsync<Address>()).Where(a => a.Object.AddressID == AddressID).FirstOrDefault();
+            // modify your data (toUpdate is your old object value)
+            toUpdate.Object.IsDefault = "0";
+
+            //update the new value
+            await firebaseClient
+                    .Child($"Users/{UserID}").Child("Addresses")
+                    .Child(toUpdate.Key)
+                     .PutAsync(toUpdate.Object);
+        }
+
+        public async Task UpdateDefultAddress(string UserID, string AddressID)
+        {
+
+            (await firebaseClient
+             .Child($"Users/{UserID}/").Child("Addresses")
+             .OnceAsync<Address>()).Where(a => a.Object.AddressID != AddressID).ToList().ForEach(async x =>
+             {
+                 await UpdateNotDefultAddress(UserID, x.Object.AddressID);
+             }
+             );
+
+
+            var toUpdate = (await firebaseClient
+             .Child($"Users/{UserID}/").Child("Addresses")
+             .OnceAsync<Address>()).Where(a => a.Object.AddressID == AddressID).FirstOrDefault();
+            // modify your data (toUpdate is your old object value)
+            toUpdate.Object.IsDefault = "1";
+
+            //update the new value
+            await firebaseClient
+                    .Child($"Users/{UserID}").Child("Addresses")
+                    .Child(toUpdate.Key)
+                     .PutAsync(toUpdate.Object);
+        }
+
+        public async Task<String> TotalProductsQuantity(string UserID)
+        {
+            var d = await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").OnceAsync<CartProduct>();
+
+
+            var Quantity = d.Sum(x => decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency));
+            // d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
+            return Quantity.ToString();
+        }
+        public async Task AddtoOrder(string UserID, Order order)
+        {
+            // must be in MV :
+            /*
+             
+             private readonly Random _random = new Random();
+             Order order = new Order();
+
+             order.OrderDate = DateTime.Now.ToString("dd-MMM-yyyy");
+             order.OrderStatus = "Processing";
+             order.OrderTotal = await TotalProductsPrice(UserID);
+             order.Quantity = await TotalProductsQuantity(UserID);
+             order.OrderNumber = _random.Next(1, 100000).ToString();
+            */
+            await firebaseClient.Child($"Users/{UserID}/").Child("Orders").PostAsync(JsonConvert.SerializeObject(order));
+
+
+
+        }
+
+        public async Task DeleteAllProductsInCart(string UserID)
+        {
+            await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").DeleteAsync();
+        }
+
+        public ObservableCollection<Order> GetOrders(string UserID)
+        {
+            return firebaseClient.Child($"Users/{UserID}/").Child("Orders").AsObservable<Order>().AsObservableCollection();
+
+        }
+
+
+        public async Task<Address> GetTheDefultAddress(string UserID)
+        {
+
+            var AllAddresses = await firebaseClient.Child($"Users/{UserID}/").Child("Addresses").OnceAsync<Address>();
+            Object defultAddress = AllAddresses.Where(x => x.Object.IsDefault == "1").Select(itm => itm.Object).FirstOrDefault();
+            Address defultAddress_ = defultAddress as Address;
+            return defultAddress_;
+        }
     }
 }
