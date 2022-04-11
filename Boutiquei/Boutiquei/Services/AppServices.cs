@@ -123,7 +123,18 @@ namespace Boutiquei.Services
 
         public async Task AddToFavourites(Product product, string UserID)
         {
-            await firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
+            var product_ = (await firebaseClient
+          .Child($"Users/{UserID}/Favourite").Child("Products")
+         .OnceAsync<CartProduct>()).Where(a => a.Object.PID == product.PID).FirstOrDefault();
+
+            if (product_ == null)
+            {
+                await firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "The product's already added in the Favourite", "Ok");
+            }
         }
 
         public async Task AddToCart(CartProduct product, string UserID)
@@ -135,7 +146,6 @@ namespace Boutiquei.Services
                     .Child($"Users/{UserID}/Cart").Child("Total")
                      .PutAsync(newTotal);
         }
-
 
         public async Task DeleteFromCart(string UserID, string PID)
         {
