@@ -20,8 +20,10 @@ namespace Boutiquei.ViewModels
         public ObservableCollection<PImgs> ProductImages { get; set; }
         public ObservableCollection<Sizes> ProductSizes { get; set; }
         public ObservableCollection<Colors> ProductColores { get; set; }
-        ObservableCollection<Product> ProductsInFav { get; set; }
-        public CartProduct cartProduct { set; get; }
+        private ObservableCollection<Product> productsInFav { get; set; }
+        private ObservableCollection<Product> productsInCart { get; set; }
+        private CartProduct cartProduct { set; get; }
+
         private string _quantity;
         public string Quantity
         {
@@ -35,6 +37,21 @@ namespace Boutiquei.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private string _size;
+        public string Size
+        {
+            get
+            {
+                return _size;
+            }
+            set
+            {
+                _size = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _FavBtn;
         public string FavBtn
         {
@@ -54,6 +71,7 @@ namespace Boutiquei.ViewModels
         public ICommand IncreaseCommand { get; }
         public ICommand DecreaseCommand { get; }
         public ICommand FavouriteCommand { get; }
+        public ICommand CartCommand { get; }
 
 
         public ProductViewModel(Product product)
@@ -63,43 +81,85 @@ namespace Boutiquei.ViewModels
             ProductImages = new ObservableCollection<PImgs>();
             ProductSizes = new ObservableCollection<Sizes>();
             ProductColores = new ObservableCollection<Colors>();
-            ProductsInFav = new ObservableCollection<Product>();
+            productsInFav = new ObservableCollection<Product>();
             Quantity = "1";
 
             ProductImages = Services.GetAllBoutiqueProductImgs(Product.BID, Product.PID);
             ProductSizes = Services.GetAllBoutiqueProductSizes(Product.BID, Product.PID);
             ProductColores = Services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
             FavBtn = "FAR";
-            //ProductsInFav = Services.GetFavouriteProductsByUserID("User1");
-            //ProductsInFav.CollectionChanged += isInFavouriteListChanged;
+
+            productsInFav = Services.GetFavouriteProductsByUserID("User1");
+            productsInCart = Services.GetFavouriteProductsByUserID("User1");
+            productsInFav.CollectionChanged += productsInFavListChanged;
+            productsInCart.CollectionChanged += productsInCartListChanged;
 
             IncreaseCommand = new Xamarin.Forms.Command(onIncreaseTapped);
             DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
             FavouriteCommand = new Xamarin.Forms.Command(onFavouriteTapped);
+            CartCommand = new Xamarin.Forms.Command(onCartTapped);
         }
 
-        //private void isInFavouriteListChanged(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    Application.Current.MainPage.DisplayAlert("x", "PEPE ", "x");
-        //    Quantity = "91341";
-        //    ObservableCollection<Product> products = (ObservableCollection<Product>)sender;
-        //    if (e.Action == NotifyCollectionChangedAction.Add)
-        //    {
-        //        foreach (var product in products)
-        //        {
-        //            if (product.PID == Product.PID)
-        //            {
-        //                FavBtn = "FAS";
-        //            }
-        //        }
-        //        FavBtn = "FAR";
-        //    }
-        //}
+        private void productsInCartListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            ObservableCollection<CartProduct> products = (ObservableCollection<CartProduct>)sender;
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                if (e.NewItems[0].ToString() != "Boutiquei.Models.CartProduct")
+                {
+                    productsInCart.Clear();
+                }
+                else
+                {
+                    foreach (var product in products)
+                    {
+                        if (product.PID == Product.PID)
+                        {
+                            Console.WriteLine(product.PID);
+                            return;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void productsInFavListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //FavBtn = "FAR";
+            Console.WriteLine(" fa fadfadfsassfssafsss");
+            ObservableCollection<Product> products = (ObservableCollection<Product>)sender;
+            Console.WriteLine(e.NewItems[0].ToString() + "  ssssss");
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                Console.WriteLine(e.NewItems[0].ToString() + "  ssssss");
+                if (e.NewItems[0].ToString() != "Boutiquei.Models.Product")
+                {
+                    productsInFav.Clear();
+                }
+                else
+                {
+                    foreach (var product in products)
+                    {
+                        if (product.PID == Product.PID)
+                        {
+                            FavBtn = "FAS";
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void onCartTapped(object obj)
+        {
+            
+        }
 
         private async void onFavouriteTapped()
         {
 
-            if(FavBtn == "FAR")
+            if (FavBtn == "FAR")
             {
                 FavBtn = "FAS";
                 await Application.Current.MainPage.DisplayAlert("x", Product.PID, "x");
