@@ -126,11 +126,11 @@ namespace Boutiquei.Services
             await firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
         }
 
-        public async Task AddToCart(Product product, string UserID)
+        public async Task AddToCart(CartProduct product, string UserID)
         {
             await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
             string total = firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
-            string newTotal = (Convert.ToInt32(total) + Convert.ToInt32(product.Price)).ToString();
+            string newTotal = (Convert.ToInt32(total) + (Convert.ToInt32(product.Price) * Convert.ToInt32(product.Quantity))).ToString();
             await firebaseClient
                     .Child($"Users/{UserID}/Cart").Child("Total")
                      .PutAsync(newTotal);
