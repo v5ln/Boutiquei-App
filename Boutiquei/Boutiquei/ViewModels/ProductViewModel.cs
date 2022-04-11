@@ -193,6 +193,34 @@ namespace Boutiquei.ViewModels
         }
 
 
+        //set and get sellected color : 
+        public string selectedCoror { set; get; }
+
+        public void SetSelectedColor(string selectedCoror)
+        {
+            this.selectedCoror = selectedCoror;
+        }
+        private Colors previousSelected;
+        Colors selectedColor;
+        public Colors SelectedColor
+        {
+            get => selectedColor;
+            set
+            {
+                if (value != null)
+                {
+                    SetSelectedColor(value.PColor);
+                    Application.Current.MainPage.DisplayAlert("selected color", value.PColor, "Ok");
+
+                    previousSelected = value;
+
+                    value = null;
+                }
+                selectedColor = value;
+
+            }
+        }
+
         //set and get selected size from picker in vm size 
         public string selectedSize { set; get; }
 
@@ -201,21 +229,22 @@ namespace Boutiquei.ViewModels
             this.selectedSize = selectedSize;
         }
 
-        private Sizes previousSelectedd;
-        Sizes selectedBoutiquee;
+        private Sizes previousSelected_;
+        Sizes selectedSize_;
         public Sizes SelectedSize
         {
-            get => selectedBoutiquee;
+            get => selectedSize_;
             set
             {
                 if (value != null)
                 {
                     SetSelectedSize(value.PSize);
-                    previousSelectedd = value;
+                    Application.Current.MainPage.DisplayAlert("selected size", value.PSize, "Ok");
+                    previousSelected_ = value;
 
                     value = null;
                 }
-                selectedBoutiquee = value;
+                selectedSize_ = value;
 
             }
         }

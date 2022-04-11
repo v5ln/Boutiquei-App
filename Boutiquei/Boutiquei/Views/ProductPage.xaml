@@ -65,32 +65,37 @@
                                     HorizontalOptions="End"/>
                         </StackLayout>
                     </StackLayout>
-                    <CollectionView Margin="25,0,0,5"
-                                    HeightRequest="34"
-                                    ItemsSource="{Binding ProductColores}">
+
+                    <CollectionView
+                    BackgroundColor="Transparent"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding ProductColores}"
+                    SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
+                    SelectionMode="Single"
+                         HeightRequest="50">
+                      
                         <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
+                           
+                                 <GridItemsLayout Orientation="Horizontal"  ></GridItemsLayout>
+                           
+                        </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid
-                                    Margin="0,0,30,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="34"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="34"/>
-                                    </Grid.ColumnDefinitions>
-                                            <StackLayout Margin="0,0,0,1">
-                                            <Frame HasShadow="False"
-                                               BorderColor="Black"
-                                               CornerRadius="17"
-                                               HeightRequest="34"
-                                               WidthRequest="34"
-                                               Padding="0"
-                                               BackgroundColor="{Binding PColor}"/>
-                                        </StackLayout>
-                                </Grid>
+                             
+                                  
+                                   
+                                    <StackLayout>
+                                        
+                                            <Frame WidthRequest="35"
+                                                   HeightRequest="34"
+                                                   BackgroundColor="{Binding PColor}"
+                                                   HorizontalOptions="Center"
+                                                   
+                                                   />
+                                       
+                                    </StackLayout>
+                                  
+                             
                             </DataTemplate> 
                         </CollectionView.ItemTemplate>
                     </CollectionView>

@@ -15,7 +15,13 @@ namespace Boutiquei.Views
             ProductViewModel productViewModel = new ProductViewModel(product);
             BindingContext = productViewModel;
         }
-
+        void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var previous = e.PreviousSelection;
+            var current = e.CurrentSelection;
+            Colors colors = current as Colors;
+            Console.WriteLine("ggggggggggggggggghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjjjjjjjffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"+ colors.PColor);
+        }
         //private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
         //{
         //    Picker picker = sender as Picker;
