@@ -88,7 +88,7 @@ namespace Boutiquei.ViewModels
             //TotalAfterDelvery = (Convert.ToInt32(Total)+ Convert.ToInt32(Delevry)).ToString();
             Quantity = "3";
 
-            Quantity = Services.TotalProductsQuantity("User1").GetAwaiter().GetResult();
+            //Quantity = Services.TotalProductsQuantity("User1").GetAwaiter().GetResult();
             status = "Processing";
             Delevry = "10";
 

@@ -39,13 +39,13 @@
                         <Entry Placeholder=" EX:Nablus" FontSize="16" x:Name="EntryPhone"/>
                     </StackLayout>
                 </Frame>
-                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                <!--<Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
                     <StackLayout>
 
                         <Label Text="Phone Number" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
                         <Entry Placeholder=" EX:+9725588545" FontSize="16" x:Name="EntryPhone"/>
                     </StackLayout>
-                </Frame>
+                </Frame>-->
                 <Button  BackgroundColor="#242424" Text="SAVE ADDRESS" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
 
             </StackLayout>
