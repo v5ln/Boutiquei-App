@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -80,29 +81,85 @@ namespace Boutiquei.Services
             return firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").AsObservable<CartProduct>().AsObservableCollection();
         }
         //
-        //public string GetCartTotalByUserID(string UserID)
+
+        //public bool IsInFavourite(string UserID, string PID)
         //{
-        //    return firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
+        //    ObservableCollection<Product> _products = GetFavouriteProductsByUserID(UserID);
+
+        //    _products.CollectionChanged += isInFavouriteListChanged;
+
+        //    foreach (var _product in _products)
+        //    {
+        //        Application.Current.MainPage.DisplayAlert("x", PID + "\n" + _product.PID, "x");
+        //        if (_product.PID == PID)
+        //        {
+        //            Application.Current.MainPage.DisplayAlert("x", "OI OI ", "x");
+        //            return true;
+        //        }
+        //    }
+        //    Application.Current.MainPage.DisplayAlert("x", "PEPE ", "x");
+        //    return false;
         //}
+
+        //private void isInFavouriteListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    ObservableCollection<Product> products = sender as ObservableCollection<Product>;
+        //    if (e.Action == NotifyCollectionChangedAction.Add)
+        //    {
+
+        //    }
+        //}
+
+        //public bool IsInCart(string UserID, string PID)
+        //{
+        //    ObservableCollection<CartProduct> _products = GetCartProductsByUserID(UserID);
+        //    foreach (var _product in _products)
+        //    {
+        //        if (_product.PID.Equals(PID)) return true;
+        //    }
+        //    return false;
+        //}
+
 
         public async Task AddToFavourites(Product product, string UserID)
         {
-            await firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
+            var product_ = (await firebaseClient
+          .Child($"Users/{UserID}/Favourite").Child("Products")
+         .OnceAsync<CartProduct>()).Where(a => a.Object.PID == product.PID).FirstOrDefault();
+
+            if (product_ == null)
+            {
+                await firebaseClient.Child($"Users/{UserID}/Favourite").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "The product's already added in the Favourite", "Ok");
+            }
         }
 
-        public async Task AddToCart(Product product, string UserID)
+        public async Task AddToCart(CartProduct product, string UserID)
         {
             await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
+            string total = firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
+            string newTotal = (Convert.ToInt32(total) + (Convert.ToInt32(product.Price) * Convert.ToInt32(product.Quantity))).ToString();
+            await firebaseClient
+                    .Child($"Users/{UserID}/Cart").Child("Total")
+                     .PutAsync(newTotal);
         }
-
 
         public async Task DeleteFromCart(string UserID, string PID)
         {
-            var toDeletePerson = (await firebaseClient
+            var toUpdate = (await firebaseClient
              .Child($"Users/{UserID}/Cart").Child("Products")
              .OnceAsync<CartProduct>()).Where(a => a.Object.PID == PID).FirstOrDefault();
 
-            await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").Child(toDeletePerson.Key).DeleteAsync();
+            await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").Child(toUpdate.Key).DeleteAsync();
+
+            string total = firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
+            string newTotal = (Convert.ToInt32(total) - ( Convert.ToInt32(toUpdate.Object.Price) * Convert.ToInt32(toUpdate.Object.Quantity)) ).ToString();
+            await firebaseClient
+                    .Child($"Users/{UserID}/Cart").Child("Total")
+                     .PutAsync(newTotal);
 
         }
 
@@ -131,6 +188,12 @@ namespace Boutiquei.Services
                     .Child($"Users/{UserID}/Cart").Child("Products")
                     .Child(toUpdate.Key)
                      .PutAsync(toUpdate.Object);
+
+            string total = firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
+            string newTotal = (Convert.ToInt32(total) + Convert.ToInt32(toUpdate.Object.Price)).ToString();
+            await firebaseClient
+                    .Child($"Users/{UserID}/Cart").Child("Total")
+                     .PutAsync(newTotal);
         }
 
         public async Task UpdateDecreaseQuantity(string UserID, string PID)
@@ -151,6 +214,11 @@ namespace Boutiquei.Services
                       .Child($"Users/{UserID}/Cart").Child("Products")
                       .Child(toUpdate.Key)
                       .PutAsync(toUpdate.Object);
+                string total = firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
+                string newTotal = (Convert.ToInt32(total) - Convert.ToInt32(toUpdate.Object.Price)).ToString();
+                await firebaseClient
+                        .Child($"Users/{UserID}/Cart").Child("Total")
+                         .PutAsync(newTotal);
             }
 
             else
@@ -160,15 +228,156 @@ namespace Boutiquei.Services
             
         }
 
+        //public async Task<string> GetTotalProductsPrice(string UserID)
+        //{
+        //    var _products = await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").OnceAsync<CartProduct>();
+
+
+        //    string total = _products.Sum(x => decimal.Parse(x.Object.Price, NumberStyles.Currency) * decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency)).ToString();
+        //    //d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
+        //    return total;
+        //}
+
+        //public async Task<string> GetTotalProductsPrice(string UserID)
+        //{
+        //    string total = "2";
+        //    await Task.Run(() =>
+        //    {
+        //        var _products = GetCartProductsByUserID(UserID);
+
+        //        //string total = _products.Sum(product => Convert.ToInt32(product.Price) * Convert.ToInt32(product.Quantity)).ToString();
+
+        //        foreach (var product in _products)
+        //        {
+        //            total = (Convert.ToInt32(total) + (Convert.ToInt32(product.Price) * Convert.ToInt32(product.Quantity))).ToString();
+        //        }
+        //        Console.WriteLine(total);
+        //        //d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
+        //        return total;
+        //    });
+        //    return total;
+
+        //}
         public async Task<string> GetTotalProductsPrice(string UserID)
         {
-            var _products = await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").OnceAsync<CartProduct>();
-
-
-            string total = _products.Sum(x => decimal.Parse(x.Object.Price, NumberStyles.Currency) * decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency)).ToString();
-            //d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
-            return total;
+            return await firebaseClient.Child($"Users/{UserID}/Cart").Child("Total").OnceSingleAsync<string>();
         }
 
+
+        //Sprint 4 :
+
+        public ObservableCollection<Address> GetAllAdressesByUserID(string UserID)
+        {
+            return firebaseClient.Child($"Users/{UserID}/").Child("Addresses").AsObservable<Address>().AsObservableCollection();
+
+        }
+
+
+        public async Task AddNewAddress(Address address, string UserID)
+        {
+            await firebaseClient.Child($"Users/{UserID}/").Child("Addresses").PostAsync(JsonConvert.SerializeObject(address));
+        }
+
+        public async Task DeleteAddress(string UserID, string AddressID)
+        {
+
+            var toDeletePerson = (await firebaseClient
+             .Child($"Users/{UserID}/").Child("Addresses")
+             .OnceAsync<Address>()).Where(a => a.Object.AddressID == AddressID).FirstOrDefault();
+            await firebaseClient.Child($"Users/{UserID}/").Child("Addresses").Child(toDeletePerson.Key).DeleteAsync();
+
+        }
+
+        public async Task UpdateNotDefultAddress(string UserID, string AddressID)
+        {
+
+
+            var toUpdate = (await firebaseClient
+             .Child($"Users/{UserID}/").Child("Addresses")
+             .OnceAsync<Address>()).Where(a => a.Object.AddressID == AddressID).FirstOrDefault();
+            // modify your data (toUpdate is your old object value)
+            toUpdate.Object.IsDefault = "0";
+
+            //update the new value
+            await firebaseClient
+                    .Child($"Users/{UserID}").Child("Addresses")
+                    .Child(toUpdate.Key)
+                     .PutAsync(toUpdate.Object);
+        }
+
+        public async Task UpdateDefultAddress(string UserID, string AddressID)
+        {
+
+            (await firebaseClient
+             .Child($"Users/{UserID}/").Child("Addresses")
+             .OnceAsync<Address>()).Where(a => a.Object.AddressID != AddressID).ToList().ForEach(async x =>
+             {
+                 await UpdateNotDefultAddress(UserID, x.Object.AddressID);
+             }
+             );
+
+
+            var toUpdate = (await firebaseClient
+             .Child($"Users/{UserID}/").Child("Addresses")
+             .OnceAsync<Address>()).Where(a => a.Object.AddressID == AddressID).FirstOrDefault();
+            // modify your data (toUpdate is your old object value)
+            toUpdate.Object.IsDefault = "1";
+
+            //update the new value
+            await firebaseClient
+                    .Child($"Users/{UserID}").Child("Addresses")
+                    .Child(toUpdate.Key)
+                     .PutAsync(toUpdate.Object);
+        }
+
+        public async Task<String> TotalProductsQuantity(string UserID)
+        {
+            var d = await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").OnceAsync<CartProduct>();
+
+
+            var Quantity = d.Sum(x => decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency));
+            // d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
+            return Quantity.ToString();
+        }
+        public async Task AddtoOrder(string UserID, Order order)
+        {
+            // must be in MV :
+            /*
+             
+             private readonly Random _random = new Random();
+             Order order = new Order();
+
+             order.OrderDate = DateTime.Now.ToString("dd-MMM-yyyy");
+             order.OrderStatus = "Processing";
+             order.OrderTotal = await TotalProductsPrice(UserID);
+             order.Quantity = await TotalProductsQuantity(UserID);
+             order.OrderNumber = _random.Next(1, 100000).ToString();
+            */
+            await firebaseClient.Child($"Users/{UserID}/").Child("Orders").PostAsync(JsonConvert.SerializeObject(order));
+
+
+
+        }
+
+        public async Task DeleteAllProductsInCart(string UserID)
+        {
+            await firebaseClient.Child($"Users/{UserID}/Cart").Child("Products").DeleteAsync();
+        }
+
+        public ObservableCollection<Order> GetOrders(string UserID)
+        {
+            return firebaseClient.Child($"Users/{UserID}/").Child("Orders").AsObservable<Order>().AsObservableCollection();
+
+        }
+
+
+        public async Task<Address> GetTheDefultAddress(string UserID)
+        {
+
+            var AllAddresses = await firebaseClient.Child($"Users/{UserID}/").Child("Addresses").OnceAsync<Address>();
+            Address defultAddress = AllAddresses.Where(x => x.Object.IsDefault == "1").Select(itm => itm.Object).FirstOrDefault();
+            Address defultAddress_ = defultAddress as Address;
+            return defultAddress_;
+        }
     }
 }
