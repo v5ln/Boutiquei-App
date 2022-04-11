@@ -21,7 +21,7 @@ namespace Boutiquei.ViewModels
         public ObservableCollection<Sizes> ProductSizes { get; set; }
         public ObservableCollection<Colors> ProductColores { get; set; }
         private ObservableCollection<Product> productsInFav { get; set; }
-        private ObservableCollection<Product> productsInCart { get; set; }
+        private ObservableCollection<CartProduct> productsInCart { get; set; }
         private CartProduct cartProduct { set; get; }
 
         private string _quantity;
@@ -66,6 +66,8 @@ namespace Boutiquei.ViewModels
             }
         }
 
+        private bool isInCart = false;
+
         AppServices Services = new AppServices();
 
         public ICommand IncreaseCommand { get; }
@@ -87,10 +89,10 @@ namespace Boutiquei.ViewModels
             ProductImages = Services.GetAllBoutiqueProductImgs(Product.BID, Product.PID);
             ProductSizes = Services.GetAllBoutiqueProductSizes(Product.BID, Product.PID);
             ProductColores = Services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
-            FavBtn = "FAR";
+            //FavBtn = "FAR";
 
             productsInFav = Services.GetFavouriteProductsByUserID("User1");
-            productsInCart = Services.GetFavouriteProductsByUserID("User1");
+            productsInCart = Services.GetCartProductsByUserID("User1");
             productsInFav.CollectionChanged += productsInFavListChanged;
             productsInCart.CollectionChanged += productsInCartListChanged;
 
@@ -115,24 +117,23 @@ namespace Boutiquei.ViewModels
                     {
                         if (product.PID == Product.PID)
                         {
-                            Console.WriteLine(product.PID);
+                            isInCart = true;
                             return;
                         }
                     }
-
+                    isInCart = false;
                 }
             }
         }
 
         private void productsInFavListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //FavBtn = "FAR";
-            Console.WriteLine(" fa fadfadfsassfssafsss");
+            FavBtn = "FAR";
+            
             ObservableCollection<Product> products = (ObservableCollection<Product>)sender;
-            Console.WriteLine(e.NewItems[0].ToString() + "  ssssss");
+            
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                Console.WriteLine(e.NewItems[0].ToString() + "  ssssss");
                 if (e.NewItems[0].ToString() != "Boutiquei.Models.Product")
                 {
                     productsInFav.Clear();
@@ -151,9 +152,26 @@ namespace Boutiquei.ViewModels
             }
         }
 
-        private void onCartTapped(object obj)
+        private async void onCartTapped(object obj)
         {
-            
+            if (isInCart)
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "The product already in cart", "Ok");
+                return;
+            }
+
+            cartProduct = new CartProduct
+            {
+                BID = Product.BID,
+                PID = Product.PID,
+                PImgCover = Product.PImgCover,
+                Quantity = Quantity,
+                PName = Product.PName,
+                Price = Product.Price
+            };
+            isInCart = true;
+            await Services.AddToCart(cartProduct, "User1");
+
         }
 
         private async void onFavouriteTapped()
@@ -162,7 +180,6 @@ namespace Boutiquei.ViewModels
             if (FavBtn == "FAR")
             {
                 FavBtn = "FAS";
-                await Application.Current.MainPage.DisplayAlert("x", Product.PID, "x");
                 await Services.AddToFavourites(Product, "User1");
             }
             else

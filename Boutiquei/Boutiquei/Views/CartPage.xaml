@@ -52,8 +52,9 @@
                                                 WidthRequest="30"
                                                 HeightRequest="30"
                                                 HorizontalOptions="Start"
-                                                Command="{Binding Source={x:Reference ProductsCollection}, Path=BindingContext.IncreaseCommand}"
-                                                CommandParameter="{Binding .}"/>
+                                                CommandParameter="{Binding .}"
+                                                Command="{Binding Source={x:Reference ProductsCollection}, Path=BindingContext.IncreaseCommand}"/>
+                                                
                                         <Label Text="{Binding Quantity}"
                                                FontFamily="NSB"
                                                TextColor="#242424"
