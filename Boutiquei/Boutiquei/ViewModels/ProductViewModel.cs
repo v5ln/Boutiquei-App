@@ -98,8 +98,12 @@ namespace Boutiquei.ViewModels
             DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
             FavouriteCommand = new Xamarin.Forms.Command(onFavouriteTapped);
             CartCommand = new Xamarin.Forms.Command(onCartTapped);
+
+             
+
         }
 
+       
         private void productsInCartListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             ObservableCollection<CartProduct> products = (ObservableCollection<CartProduct>)sender;
@@ -187,6 +191,35 @@ namespace Boutiquei.ViewModels
             }
             Quantity = (Convert.ToInt32(Quantity) - 1).ToString();
         }
+
+
+        //set and get selected size from picker in vm size 
+        public string selectedSize { set; get; }
+
+        public void SetSelectedSize(string selectedSize)
+        {
+            this.selectedSize = selectedSize;
+        }
+
+        private Sizes previousSelectedd;
+        Sizes selectedBoutiquee;
+        public Sizes SelectedSize
+        {
+            get => selectedBoutiquee;
+            set
+            {
+                if (value != null)
+                {
+                    SetSelectedSize(value.PSize);
+                    previousSelectedd = value;
+
+                    value = null;
+                }
+                selectedBoutiquee = value;
+
+            }
+        }
+
 
         // when add to cart btn 
         //public void AddToCart()

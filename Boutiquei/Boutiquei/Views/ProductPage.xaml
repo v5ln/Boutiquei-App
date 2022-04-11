@@ -94,13 +94,15 @@
                             </DataTemplate> 
                         </CollectionView.ItemTemplate>
                     </CollectionView>
+                    <!--add SelectedItem="{Binding SelectedSize}" to picker -->
                     <Picker Title="Size"
                             TitleColor="Black"
                             FontSize="18"
                             FontFamily="NSR"
                             ItemsSource="{Binding ProductSizes}"
                             ItemDisplayBinding="{Binding PSize}"
-                            VerticalOptions="StartAndExpand">
+                            VerticalOptions="StartAndExpand"
+                            SelectedItem="{Binding SelectedSize}">
                     </Picker>
                 </StackLayout>
             </ScrollView>
