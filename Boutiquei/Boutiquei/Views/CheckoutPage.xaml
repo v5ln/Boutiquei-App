@@ -11,7 +11,10 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Shipping Address" TextColor="#909090" FontSize="18" FontFamily="NSS"/>
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Shipping Address" TextColor="#909090" FontSize="18" FontFamily="NSS" Margin="10"/>
+                <Button Text="Edit" HorizontalOptions="EndAndExpand" BackgroundColor="#C4C4C4" TextColor="Black" BorderWidth="1" BorderColor="Transparent" Margin="20,5,20,0" CornerRadius="8" HeightRequest="35" WidthRequest="50"/>
+            </StackLayout>
             <views:AddressCard BindingContext="{Binding Address}"/>
             <Frame BackgroundColor="#F5F5F5" Margin="10,10,20,20">
                 <StackLayout>
@@ -35,7 +38,7 @@
 
                 </StackLayout>
             </Frame>
-            <Button  BackgroundColor="#242424" Text="SUBMIT ORDER" CornerRadius="8" Padding="0,17,0,17" Margin="20,125,20,20"/>
+            <Button  BackgroundColor="#242424" Text="SUBMIT ORDER" CornerRadius="8" Padding="0,17,0,17" Margin="20"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
