@@ -3,7 +3,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.ProductPage"
-    BackgroundColor="Transparent"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     Shell.TabBarIsVisible="False">
 
@@ -41,6 +40,7 @@
                         <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,17,0">
                             <Button CornerRadius="5"
                                     Text="+"
+                                    Command="{Binding IncreaseCommand}"
                                     FontFamily="NSB"
                                     BackgroundColor="#E0E0E0"
                                     FontSize="18"
@@ -48,13 +48,14 @@
                                     WidthRequest="30"
                                     HeightRequest="30"
                                     HorizontalOptions="Start"/>
-                            <Label Text="1"
+                            <Label Text="{Binding Quantity}"
                                    FontFamily="NSB"
                                    TextColor="#242424"
                                    Margin="15,0"
                                    FontSize="18"/>
                             <Button CornerRadius="5"
                                     Text="-"
+                                    Command="{Binding DecreaseCommand}"
                                     FontFamily="NSB"
                                     BackgroundColor="#E0E0E0"
                                     FontSize="18"
@@ -67,7 +68,8 @@
                     <CollectionView Margin="25,0,0,5"
                                     HeightRequest="34"
                                     ItemsSource="{Binding ProductColores}"
-                                    >
+                                    SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
+                                    SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
@@ -81,7 +83,6 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="34"/>
                                     </Grid.ColumnDefinitions>
-                                   
                                             <StackLayout Margin="0,0,0,1">
                                             <Frame HasShadow="False"
                                                BorderColor="Black"
@@ -91,8 +92,6 @@
                                                Padding="0"
                                                BackgroundColor="{Binding PColor}"/>
                                         </StackLayout>
-                                       
-                                    
                                 </Grid>
                             </DataTemplate> 
                         </CollectionView.ItemTemplate>
@@ -103,18 +102,29 @@
                             FontFamily="NSR"
                             ItemsSource="{Binding ProductSizes}"
                             ItemDisplayBinding="{Binding PSize}"
-                            VerticalOptions="StartAndExpand">
+                            VerticalOptions="StartAndExpand"
+                            SelectedItem="{Binding SelectedSize}">
                     </Picker>
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" Margin="25,30" VerticalOptions="End">
-                <Button  BackgroundColor="#F0F0F0" CornerRadius="8" WidthRequest="60" HeightRequest="60" Margin="0,0,15,0">
+                <Button  BackgroundColor="#F0F0F0"
+                         CornerRadius="8"
+                         WidthRequest="60"
+                         HeightRequest="60"
+                         Margin="0,0,15,0"
+                         Command="{Binding FavouriteCommand}">
                     <Button.ImageSource>
-                        <FontImageSource FontFamily="FAR"
+                        <FontImageSource FontFamily="{Binding FavBtn}"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
                     </Button.ImageSource>
                 </Button>
-                <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"/>
+                <Button  BackgroundColor="#242424"
+                         Text="ADD TO CART"
+                         CornerRadius="8"
+                         HorizontalOptions="FillAndExpand"
+                         Margin="0"
+                         Command="{Binding CartCommand}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
