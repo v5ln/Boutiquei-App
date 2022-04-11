@@ -100,8 +100,12 @@ namespace Boutiquei.ViewModels
             DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
             FavouriteCommand = new Xamarin.Forms.Command(onFavouriteTapped);
             CartCommand = new Xamarin.Forms.Command(onCartTapped);
+
+             
+
         }
 
+       
         private void productsInCartListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             ObservableCollection<CartProduct> products = (ObservableCollection<CartProduct>)sender;
@@ -204,6 +208,65 @@ namespace Boutiquei.ViewModels
             }
             Quantity = (Convert.ToInt32(Quantity) - 1).ToString();
         }
+
+
+        //set and get sellected color : 
+        public string selectedColor { set; get; }
+
+        public void SetSelectedColor(string selectedColor)
+        {
+            this.selectedColor = selectedColor;
+        }
+
+        private Colors previousSelected;
+        Colors _selectedColor;
+        public Colors SelectedColor
+        {
+            get => _selectedColor;
+            set
+            {
+                if (value != null)
+                {
+                    SetSelectedColor(value.PColor);
+                    //Application.Current.MainPage.DisplayAlert("selected color", value.PColor, "Ok");
+
+                    previousSelected = value;
+
+                    value = null;
+                }
+                _selectedColor = value;
+
+            }
+        }
+
+        //set and get selected size from picker in vm size 
+        public string selectedSize { set; get; }
+
+        public void SetSelectedSize(string selectedSize)
+        {
+            this.selectedSize = selectedSize;
+        }
+
+        private Sizes previousSelected_;
+        Sizes selectedSize_;
+        public Sizes SelectedSize
+        {
+            get => selectedSize_;
+            set
+            {
+                if (value != null)
+                {
+                    SetSelectedSize(value.PSize);
+                    //Application.Current.MainPage.DisplayAlert("selected size", value.PSize, "Ok");
+                    previousSelected_ = value;
+
+                    value = null;
+                }
+                selectedSize_ = value;
+
+            }
+        }
+
 
         // when add to cart btn 
         //public void AddToCart()

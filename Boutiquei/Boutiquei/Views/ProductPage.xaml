@@ -67,7 +67,9 @@
                     </StackLayout>
                     <CollectionView Margin="25,0,0,5"
                                     HeightRequest="34"
-                                    ItemsSource="{Binding ProductColores}">
+                                    ItemsSource="{Binding ProductColores}"
+                                    SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
+                                    SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
@@ -100,7 +102,8 @@
                             FontFamily="NSR"
                             ItemsSource="{Binding ProductSizes}"
                             ItemDisplayBinding="{Binding PSize}"
-                            VerticalOptions="StartAndExpand">
+                            VerticalOptions="StartAndExpand"
+                            SelectedItem="{Binding SelectedSize}">
                     </Picker>
                 </StackLayout>
             </ScrollView>
