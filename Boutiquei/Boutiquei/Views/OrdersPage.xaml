@@ -2,8 +2,39 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.OrdersPage">
+    x:Class="Boutiquei.Views.OrdersPage"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    Title="My Orders">
+    <ContentPage.BindingContext>
+        <viewmodels:OrdersViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        
+        <StackLayout BackgroundColor="#f9f9f9">
+            <CollectionView ItemsSource="{Binding Orders}" ItemSizingStrategy="MeasureAllItems ">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame BackgroundColor="White" Margin="20,25,20,0" CornerRadius="8" HasShadow="False">
+                                <StackLayout Padding="20,15,15,20">
+                                    <StackLayout Orientation="Horizontal" Padding="0,15,0,0">
+                                    <Label Text="Order No" TextColor="#242424" FontFamily="NSS" FontSize="16"/>
+                                    <Label HorizontalOptions="StartAndExpand" Text="{Binding OrderNumber}" TextColor="#242424" FontFamily="NSS" FontSize="16" />
+                                    <Label HorizontalOptions="End" Text="{Binding OrderDate}" TextColor="#808080" FontFamily="NSR" FontSize="14"/>
+                                </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Padding="0,15,0,0">
+                                    <Label  Text="Quantity" TextColor="#808080" FontFamily="NSR" FontSize="16"/>
+                                    <Label HorizontalOptions="StartAndExpand" Text="{Binding Quantity}" TextColor="#242424" FontFamily="NSB" FontSize="16" />
+                                    <Label Text="Total Amount" TextColor="#808080" FontFamily="NSR" FontSize="16"/>
+                                    <Label Text="₪" FontSize="16" FontFamily="NSB" TextColor="#242424" ></Label>
+                                    <Label HorizontalOptions="End" Text="{Binding OrderTotal}" TextColor="#242424" FontFamily="NSB" FontSize="16"/>
+                                </StackLayout>
+                                    <Label Text="{Binding OrderStatus}" TextColor="#242424" FontFamily="NSS" FontSize="16" Padding="0,15,0,0"/>
+                            </StackLayout>
+                        </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

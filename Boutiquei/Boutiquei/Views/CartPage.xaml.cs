@@ -12,5 +12,9 @@ namespace Boutiquei.Views
         {
             InitializeComponent();
         }
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.Navigation.PushAsync(new CheckoutPage());
+        }
     }
 }

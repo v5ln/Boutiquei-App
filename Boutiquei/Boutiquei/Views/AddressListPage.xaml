@@ -36,6 +36,8 @@
 
                 </Grid>
             </StackLayout>
+            <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
+
 
         </StackLayout>
     </ContentPage.Content>
