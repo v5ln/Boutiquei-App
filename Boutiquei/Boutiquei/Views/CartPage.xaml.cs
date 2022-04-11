@@ -5,6 +5,7 @@ using Xamarin.Forms;
 
 namespace Boutiquei.Views
 {
+    
     public partial class CartPage : ContentPage
     {
         public CartPage()
