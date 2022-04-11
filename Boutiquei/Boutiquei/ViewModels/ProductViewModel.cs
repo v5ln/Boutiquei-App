@@ -171,7 +171,9 @@ namespace Boutiquei.ViewModels
                 PImgCover = Product.PImgCover,
                 Quantity = Quantity,
                 PName = Product.PName,
-                Price = Product.Price
+                Price = Product.Price,
+                PColor = selectedColor,
+                PSize = selectedSize
             };
             isInCart = true;
             await Services.AddToCart(cartProduct, "User1");

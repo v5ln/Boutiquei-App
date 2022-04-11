@@ -77,7 +77,7 @@ namespace Boutiquei.ViewModels
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(800);
                     Total = await Services.GetTotalProductsPrice("User1");
                 }
             }
