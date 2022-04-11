@@ -5,13 +5,13 @@
     x:Class="Boutiquei.Views.AddressCard"
     xmlns:models="clr-namespace:Boutiquei.Models"
     x:DataType="models:Address">
+
     <Frame BackgroundColor="#F5F5F5" Margin="10,10,20,20">
         <StackLayout>
             <Label Text="{Binding Name}" FontSize="18" TextColor="#242424" FontFamily="NSB"></Label>
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding City}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
                 <Label Text="{Binding AddressDetails}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
-                
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding District}" TextColor="#808080" FontSize="14" FontFamily="NSR"></Label>
@@ -19,6 +19,4 @@
             </StackLayout>
         </StackLayout>
     </Frame>
-    
-   
 </StackLayout>
