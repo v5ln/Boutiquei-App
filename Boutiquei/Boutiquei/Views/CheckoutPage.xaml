@@ -13,7 +13,8 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Shipping Address" TextColor="#909090" FontSize="18" FontFamily="NSS" Margin="10"/>
-                <Button Text="Edit" HorizontalOptions="EndAndExpand" BackgroundColor="#C4C4C4" TextColor="Black" BorderWidth="1" BorderColor="Transparent" Margin="20,5,20,0" CornerRadius="8" HeightRequest="35" WidthRequest="50"/>
+                <Button Text="Edit" Clicked="Button_Clicked"
+                        HorizontalOptions="EndAndExpand" BackgroundColor="#C4C4C4" TextColor="Black" BorderWidth="1" BorderColor="Transparent" Margin="20,5,20,0" CornerRadius="8" HeightRequest="35" WidthRequest="50"/>
             </StackLayout>
             <views:AddressCard BindingContext="{Binding Address}"/>
             <Frame BackgroundColor="#F5F5F5" Margin="10,10,20,20">
@@ -21,24 +22,25 @@
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Order:" HorizontalOptions="StartAndExpand" FontSize="18" FontFamily="NSR" TextColor="#808080"/>
                         <Label Text="₪" FontFamily="NSS" TextColor="#242424" FontSize="18"></Label>
-                        <Label Text="33" HorizontalOptions="End" FontFamily="NSS" TextColor="#242424" FontSize="18"/>
+                        <Label Text="{Binding Total}" HorizontalOptions="End" FontFamily="NSS" TextColor="#242424" FontSize="18"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
 
                         <Label Text="Delivery:" HorizontalOptions="StartAndExpand" FontSize="18" FontFamily="NSR" TextColor="#808080"/>
                         <Label Text="₪" FontFamily="NSS" TextColor="#242424" FontSize="18" ></Label>
-                        <Label Text="33" HorizontalOptions="End" FontFamily="NSS" TextColor="#242424" FontSize="18"/>
+                        <Label Text="{Binding Delevry}" HorizontalOptions="End" FontFamily="NSS" TextColor="#242424" FontSize="18"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
 
                         <Label Text="Total:" HorizontalOptions="StartAndExpand" FontSize="18" FontFamily="NSR" TextColor="#808080"/>
                         <Label Text="₪" FontFamily="NSS" TextColor="#242424" FontSize="18" ></Label>
-                        <Label Text="33" HorizontalOptions="End" FontFamily="NSS" TextColor="#242424" FontSize="18"/>
+                        <Label Text="{Binding TotalAfterDelvery}" HorizontalOptions="End" FontFamily="NSS" TextColor="#242424" FontSize="18"/>
                     </StackLayout>
 
                 </StackLayout>
             </Frame>
-            <Button  BackgroundColor="#242424" Text="SUBMIT ORDER" CornerRadius="8" Padding="0,17,0,17" Margin="20"/>
+            <Button  BackgroundColor="#242424" Text="SUBMIT ORDER" CornerRadius="8" Padding="0,17,0,17" Margin="20"
+                     Command="{Binding }"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

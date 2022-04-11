@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
-
+using Boutiquei.Views;
 
 namespace Boutiquei.ViewModels
 {
@@ -51,6 +51,7 @@ namespace Boutiquei.ViewModels
         public ICommand IncreaseCommand { get; }
         public ICommand DecreaseCommand { get; }
         public ICommand DeleteCommand { get; }
+        public ICommand CheckoutCommand { get; }
         public CartViewModel()
         {
             //string UserID = "User1";
@@ -64,7 +65,10 @@ namespace Boutiquei.ViewModels
             IncreaseCommand = new Xamarin.Forms.Command(onIncreaseTapped);
             DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
             DeleteCommand = new Xamarin.Forms.Command(onDeleteTapped);
+            CheckoutCommand = new Xamarin.Forms.Command(onCheckoutTapped);
         }
+
+        
 
         private async void CartChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -82,7 +86,10 @@ namespace Boutiquei.ViewModels
                 }
             }
         }
-
+        private async void onCheckoutTapped(object obj)
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new CheckoutPage());
+        }
         public async void onIncreaseTapped(object _product)
         {
             var product = _product as CartProduct;
