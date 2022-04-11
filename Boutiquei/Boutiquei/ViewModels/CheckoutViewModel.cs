@@ -105,15 +105,15 @@ namespace Boutiquei.ViewModels
 
         private async void onOrderTapped(object obj)
         {
-            Order order = new Order
-            {
-                OrderDate = date,
-                OrderNumber = orderNumber,
-                OrderTotal = TotalAfterDelvery,
-                OrderStatus = status,
-                Quantity = Quantity
-            };
-            await Services.AddtoOrder("User1", order);
+            //Order order = new Order
+            //{
+            //    OrderDate = date,
+            //    OrderNumber = orderNumber,
+            //    OrderTotal = TotalAfterDelvery,
+            //    OrderStatus = status,
+            //    Quantity = Quantity
+            //};
+            //await Services.AddtoOrder("User1", order);ß
 
             await Application.Current.MainPage.Navigation.PushAsync(new SuccessPage());
 
