@@ -194,29 +194,30 @@ namespace Boutiquei.ViewModels
 
 
         //set and get sellected color : 
-        public string selectedCoror { set; get; }
+        public string selectedColor { set; get; }
 
-        public void SetSelectedColor(string selectedCoror)
+        public void SetSelectedColor(string selectedColor)
         {
-            this.selectedCoror = selectedCoror;
+            this.selectedColor = selectedColor;
         }
+
         private Colors previousSelected;
-        Colors selectedColor;
+        Colors _selectedColor;
         public Colors SelectedColor
         {
-            get => selectedColor;
+            get => _selectedColor;
             set
             {
                 if (value != null)
                 {
                     SetSelectedColor(value.PColor);
-                    Application.Current.MainPage.DisplayAlert("selected color", value.PColor, "Ok");
+                    //Application.Current.MainPage.DisplayAlert("selected color", value.PColor, "Ok");
 
                     previousSelected = value;
 
                     value = null;
                 }
-                selectedColor = value;
+                _selectedColor = value;
 
             }
         }
@@ -239,7 +240,7 @@ namespace Boutiquei.ViewModels
                 if (value != null)
                 {
                     SetSelectedSize(value.PSize);
-                    Application.Current.MainPage.DisplayAlert("selected size", value.PSize, "Ok");
+                    //Application.Current.MainPage.DisplayAlert("selected size", value.PSize, "Ok");
                     previousSelected_ = value;
 
                     value = null;

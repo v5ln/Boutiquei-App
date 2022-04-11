@@ -65,41 +65,37 @@
                                     HorizontalOptions="End"/>
                         </StackLayout>
                     </StackLayout>
-
-                    <CollectionView
-                    BackgroundColor="Transparent"
-                    ItemSizingStrategy="MeasureAllItems"
-                    ItemsSource="{Binding ProductColores}"
-                    SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
-                    SelectionMode="Single"
-                         HeightRequest="50">
-                      
+                    <CollectionView Margin="25,0,0,5"
+                                    HeightRequest="34"
+                                    ItemsSource="{Binding ProductColores}"
+                                    SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
+                                    SelectionMode="Single">
                         <CollectionView.ItemsLayout>
-                           
-                                 <GridItemsLayout Orientation="Horizontal"  ></GridItemsLayout>
-                           
-                        </CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                             
-                                  
-                                   
-                                    <StackLayout>
-                                        
-                                            <Frame WidthRequest="35"
-                                                   HeightRequest="34"
-                                                   BackgroundColor="{Binding PColor}"
-                                                   HorizontalOptions="Center"
-                                                   
-                                                   />
-                                       
-                                    </StackLayout>
-                                  
-                             
+                                <Grid
+                                    Margin="0,0,30,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="34"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="34"/>
+                                    </Grid.ColumnDefinitions>
+                                            <StackLayout Margin="0,0,0,1">
+                                            <Frame HasShadow="False"
+                                               BorderColor="Black"
+                                               CornerRadius="17"
+                                               HeightRequest="34"
+                                               WidthRequest="34"
+                                               Padding="0"
+                                               BackgroundColor="{Binding PColor}"/>
+                                        </StackLayout>
+                                </Grid>
                             </DataTemplate> 
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                    <!--add SelectedItem="{Binding SelectedSize}" to picker -->
                     <Picker Title="Size"
                             TitleColor="Black"
                             FontSize="18"
@@ -117,14 +113,18 @@
                          WidthRequest="60"
                          HeightRequest="60"
                          Margin="0,0,15,0"
-                         x:Name="FavBtn"
                          Command="{Binding FavouriteCommand}">
                     <Button.ImageSource>
                         <FontImageSource FontFamily="{Binding FavBtn}"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
                     </Button.ImageSource>
                 </Button>
-                <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" HorizontalOptions="FillAndExpand" Margin="0,0,0,0"/>
+                <Button  BackgroundColor="#242424"
+                         Text="ADD TO CART"
+                         CornerRadius="8"
+                         HorizontalOptions="FillAndExpand"
+                         Margin="0"
+                         Command="{Binding CartCommand}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
