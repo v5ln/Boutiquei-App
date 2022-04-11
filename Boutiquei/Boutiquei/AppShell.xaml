@@ -42,7 +42,9 @@
             <ShellContent Route="BoutiquesPage" ContentTemplate="{DataTemplate local:BoutiquesPage}" />
         </Tab>
 
+
         <Tab Title="Brands">
+
             <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Tag}"/>
