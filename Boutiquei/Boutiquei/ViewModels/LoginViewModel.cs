@@ -43,9 +43,9 @@ namespace Boutiquei.ViewModels
         async Task SignIn(string email, string password)
         {
             string token = await auth.LoginWithEmailAndPassword(email, password);
+            Console.WriteLine("token: "+token);
             if (token != string.Empty)
             {
-
                 try
                 {
                     await SecureStorage.SetAsync("oauth_token", token);
