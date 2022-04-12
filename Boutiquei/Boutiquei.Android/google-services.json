@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "470459419757",
+    "firebase_url": "https://boutiquei-54faf-default-rtdb.firebaseio.com",
+    "project_id": "boutiquei-54faf",
+    "storage_bucket": "boutiquei-54faf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470459419757:android:31e6e2cb4495ce6eb6c364",
+        "android_client_info": {
+          "package_name": "cap.boutiquei_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470459419757-8mas74lu2vrkrolrnr70uiua1vmunor2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGVrI69mu6bhjT4l_woTkMWvw_-oruHOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470459419757-8mas74lu2vrkrolrnr70uiua1vmunor2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "470459419757-8kd6ep5a05etrfh5g0qcb02eg9qr3fag.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "cap.Boutiquei-App"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
