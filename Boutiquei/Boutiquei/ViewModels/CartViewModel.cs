@@ -11,12 +11,29 @@ using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
 using Boutiquei.Views;
+using Xamarin.Essentials;
 
 namespace Boutiquei.ViewModels
 {
-    
     public class CartViewModel : BaseViewModel
     {
+
+        private static string accessToken { get; set; }
+
+        private async Task AccessToken()
+        {
+            try
+            {
+                var oauthToken = await SecureStorage.GetAsync("oauth_token");
+                accessToken = oauthToken;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
         private string _total;
         public string Total
         {
@@ -52,9 +69,15 @@ namespace Boutiquei.ViewModels
         public ICommand DecreaseCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand CheckoutCommand { get; }
+
         public CartViewModel()
         {
             //string UserID = "User1";
+            _ = AccessToken();
+
+            Console.WriteLine(accessToken);
+
+
             Services = new AppServices();
             Cart = new ObservableCollection<CartProduct>();
             Total = "0";

@@ -26,6 +26,7 @@ namespace Boutiquei.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Firebase.Core.App.Configure();
+
             LoadApplication(new App());
 
 
