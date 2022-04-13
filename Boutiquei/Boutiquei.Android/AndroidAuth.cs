@@ -1,14 +1,21 @@
-﻿using System;
-using System;
-using System.Threading.Tasks;
+﻿using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
 using Firebase.Auth;
-using Foundation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Boutiquei.Droid;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(AndriodAuth))]
 namespace Boutiquei.Droid
 {
-    public class AndriodAuth : IGoogleAuth
+    internal class AndroidAuth : IGoogleAuth
     {
         public bool IsSigIn()
         {
@@ -71,5 +78,7 @@ namespace Boutiquei.Droid
                 return null;
             }
         }
+
+       
     }
 }
