@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Boutiquei.Droid;
 using Xamarin.Forms;
 
+[assembly: Dependency(typeof(AndroidAuth))]
 namespace Boutiquei.Droid
 {
     internal class AndroidAuth : IGoogleAuth
