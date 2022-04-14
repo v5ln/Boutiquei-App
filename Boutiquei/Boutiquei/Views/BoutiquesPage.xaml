@@ -13,15 +13,28 @@
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
 
-        <ToolbarItem Clicked="ToolbarItem_Clicked">
+        
+        <ToolbarItem Clicked="ToolbarItem_Clicked"
+                     Priority="0"
+                     Order="Primary">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAR"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
+        <ToolbarItem Clicked="ToolbarItem_Clicked"
+                     Priority="1"
+                     Order="Primary">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAR"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        
 
         
     </ContentPage.ToolbarItems>
+     
     <ContentPage.Content>
         <StackLayout>
             <RefreshView
