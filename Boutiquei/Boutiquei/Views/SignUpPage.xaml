@@ -13,6 +13,14 @@
                     <Label Text="Create Your Account" FontSize="Small"/>
                 </StackLayout>
                 <StackLayout>
+
+                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
+                        <Entry Text="{Binding Name }" Placeholder="Name"/>
+                    </Frame>
+                    
+                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
+                        <Entry Text="{Binding PhoneNumber }" Placeholder="Phone Number" IsPassword="True"/>
+                    </Frame>
                     
                     <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
                         <Entry Text="{Binding Email }" Placeholder="Email"/>
@@ -21,6 +29,7 @@
                     <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
                         <Entry Text="{Binding Password }" Placeholder="Password" IsPassword="True"/>
                     </Frame>
+                    
                     <Button Margin="20"
                 WidthRequest="207"
                 HeightRequest="46"

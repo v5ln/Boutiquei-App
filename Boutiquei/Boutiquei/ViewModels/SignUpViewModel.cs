@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Boutiquei.Models;
 using Boutiquei.Services;
 using Boutiquei.Views;
 using MvvmHelpers;
@@ -12,6 +13,8 @@ namespace Boutiquei.ViewModels
     {
         public string Email { get; set; }//
         public string Password { get; set; }//
+        public string PhoneNumber { get; set; }//
+        public string Name { get; set; }//
         private readonly IGoogleAuth auth;//
 
         public ICommand SignUpCommad { get; }//
@@ -43,14 +46,25 @@ namespace Boutiquei.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
                 return;
             }
+            if (PhoneNumber == "")
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the phone nummber", "Ok");
+                return;
+            }
+            if (Name == "")
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the name", "Ok");
+                return;
+            }
             try
             {
                 await auth.SignUpWithEmailAndPassword(Email, Password);
+                await services.AddNewUser(new AppUser {Name = Name, PhoneNumber = PhoneNumber});
                 Application.Current.MainPage = new LoginPage();
             }
             catch
             {
-                await Application.Current.MainPage.DisplayAlert("Faild", "Something went Wrong, Please Try Again", "Ok");
+                await Application.Current.MainPage.DisplayAlert("Faild", "Something went wrong, Please Try Again", "Ok");
                 Application.Current.MainPage = new SignUpPage();
             }
         }
