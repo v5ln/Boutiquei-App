@@ -91,8 +91,8 @@ namespace Boutiquei.ViewModels
             ProductColores = Services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
             //FavBtn = "FAR";
 
-            productsInFav = Services.GetFavouriteProductsByUserID("User1");
-            productsInCart = Services.GetCartProductsByUserID("User1");
+            productsInFav = Services.GetFavouriteProductsByUserID();
+            productsInCart = Services.GetCartProductsByUserID();
             productsInFav.CollectionChanged += productsInFavListChanged;
             productsInCart.CollectionChanged += productsInCartListChanged;
 
@@ -176,7 +176,7 @@ namespace Boutiquei.ViewModels
                 PSize = selectedSize
             };
             isInCart = true;
-            await Services.AddToCart(cartProduct, "User1");
+            await Services.AddToCart(cartProduct);
 
         }
 
@@ -186,12 +186,12 @@ namespace Boutiquei.ViewModels
             if (FavBtn == "FAR")
             {
                 FavBtn = "FAS";
-                await Services.AddToFavourites(Product, "User1");
+                await Services.AddToFavourites(Product);
             }
             else
             {
                 FavBtn = "FAR";
-                await Services.DeleteFromFavourites("User1", Product.PID);
+                await Services.DeleteFromFavourites( Product.PID);
             }
 
         }

@@ -9,33 +9,67 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
+using System.Windows.Input;
+using Xamarin.Essentials;
+
 namespace Boutiquei.ViewModels
 {
     public class BotiquesViewModel : BaseViewModel
     {
+
+        IGoogleAuth Auth;
+
+        public static string accessToken { get; set; }
+
+        private async Task AccessToken()
+        {
+            try
+            {
+                var oauthToken = await SecureStorage.GetAsync("oauth_token");
+                accessToken = oauthToken;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
 
         public ObservableCollection<Store> Boutique { get; set; }
         public AppServices Services { get; set; }
 
         public AsyncCommand RefreshCommand { get; }
-        public Command LoadMoreCommand { get; }
-        public Command DelayLoadMoreCommand { get; }
+        //public Command LoadMoreCommand { get; }
+        //public Command DelayLoadMoreCommand { get; }
+        public ICommand AccountCommand { get; }
 
         public BotiquesViewModel()
         {
+
+            _ = AccessToken();
+            Auth = DependencyService.Get<IGoogleAuth>();
             Boutique = new ObservableCollection<Store>();
             Services = new AppServices();
 
-            LoadMore();
+            Load();
 
             RefreshCommand = new AsyncCommand(Refresh);
+            AccountCommand = new Command(OnAccountTapped);
 
             //SelectedCommand = new AsyncCommand<object>(Selected);
 
-            LoadMoreCommand = new Command(LoadMore);
-            DelayLoadMoreCommand = new Command(DelayLoadMore);
+            //LoadMoreCommand = new Command(Load);
+            //DelayLoadMoreCommand = new Command(DelayLoadMore);
         }
+
+        void OnAccountTapped()
+        {
+            //await Shell.Current.Navigation.PushAsync(new AccountPage());
+            SecureStorage.RemoveAll();
+            Auth.SignOut();
+            Application.Current.MainPage = new LoginPage();
+        }
+
         private Store previousSelected;
         Store selectedBoutique;
         public Store SelectedBoutique{
@@ -81,12 +115,12 @@ namespace Boutiquei.ViewModels
             await Task.Delay(2000);
 
             Boutique.Clear();
-            LoadMore();
+            Load();
 
             IsBusy = false;
         }
 
-        void LoadMore()
+        void Load()
         {
 
             /*
@@ -112,10 +146,10 @@ namespace Boutiquei.ViewModels
             
         }
 
-        void DelayLoadMore()
-        {
-            LoadMore();
-        }
+        //void DelayLoadMore()
+        //{
+        //    LoadMore();
+        //}
 
     }
 }
