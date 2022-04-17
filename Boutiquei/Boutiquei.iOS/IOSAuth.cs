@@ -44,7 +44,6 @@ namespace Boutiquei.iOS
         {
             
                 var user = await Auth.DefaultInstance.CreateUserAsync(email, password);
-                var changeRequest = user.User.ProfileChangeRequest();
 
                 return await user.User.GetIdTokenAsync();
             

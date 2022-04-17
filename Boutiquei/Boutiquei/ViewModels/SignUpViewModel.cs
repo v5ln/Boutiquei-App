@@ -5,6 +5,7 @@ using Boutiquei.Models;
 using Boutiquei.Services;
 using Boutiquei.Views;
 using MvvmHelpers;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Boutiquei.ViewModels
@@ -58,9 +59,10 @@ namespace Boutiquei.ViewModels
             }
             try
             {
-                await auth.SignUpWithEmailAndPassword(Email, Password);
+                var token = await auth.SignUpWithEmailAndPassword(Email, Password);
+                await SecureStorage.SetAsync("oauth_token", token);
                 await services.AddNewUser(new AppUser {Name = Name, PhoneNumber = PhoneNumber});
-                Application.Current.MainPage = new LoginPage();
+                Application.Current.MainPage = new AppShell();
             }
             catch
             {
