@@ -42,19 +42,36 @@
             <ShellContent Route="BoutiquesPage" ContentTemplate="{DataTemplate local:BoutiquesPage}" />
         </Tab>
 
+
         <Tab Title="Brands">
+
             <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Tag}"/>
             </Tab.Icon>
             <ShellContent Route="BrandsPage" ContentTemplate="{DataTemplate local:BrandsPage}" />
         </Tab>
+        <Tab Title="NewAddress">
+            <ShellContent Route="AddNewAddressPage" ContentTemplate="{DataTemplate local:AddNewAddressPage}" />
+        </Tab>
+
+        <Tab Title="AddressListPage">
+            <ShellContent Route="AddressListPage" ContentTemplate="{DataTemplate local:AddressListPage}" />
+        </Tab>
+        
         <Tab Title="Cart">
             <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShoppingCart}"/>
             </Tab.Icon>
             <ShellContent Route="CartPage" ContentTemplate="{DataTemplate local:CartPage}" />
+        </Tab>
+        <Tab Title="Favorite">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAR"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
+            </Tab.Icon>
+            <ShellContent Route="FavoritePage" ContentTemplate="{DataTemplate local:FavoritePage}" />
         </Tab>
     </TabBar>
 

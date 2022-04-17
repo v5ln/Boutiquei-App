@@ -9,11 +9,22 @@ namespace Boutiquei
     public partial class App : Application
     {
 
+        IGoogleAuth auth;
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShell();
+            auth = DependencyService.Get<IGoogleAuth>();
+
+            if (auth.IsSigIn())
+            {
+                MainPage = new AppShell();
+            }
+            else
+            {
+                MainPage = new LoginPage();
+            }
         }
+
 
         protected override void OnStart()
         {

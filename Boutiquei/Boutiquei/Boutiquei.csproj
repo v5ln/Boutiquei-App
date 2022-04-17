@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
@@ -81,4 +80,5 @@
     <EmbeddedResource Include="Resources\Fonts\NunitoSans-Regular.ttf" />
     <EmbeddedResource Include="Resources\Fonts\NunitoSans-SemiBold.ttf" />
   </ItemGroup>
+
 </Project>

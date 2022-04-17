@@ -23,7 +23,8 @@
             <CollectionView
                     BackgroundColor="#FBFBFC"
                     ItemSizingStrategy="MeasureAllItems"
-                    ItemsSource="{Binding Favorite}">
+                    ItemsSource="{Binding Favorite}"
+                    x:Name="ProductsCollection">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
                         <Label HorizontalOptions="Center" Text="There Is No Product In Favorite " />
@@ -34,11 +35,11 @@
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItems>
-                                    <!--CommandParameter="{Binding .}"
- Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BotiquesViewModel}}, Path=DeleteCommand}"-->
                                     <SwipeItem
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding Source={x:Reference ProductsCollection},Path=BindingContext.DeleteCommand}"
                                     BackgroundColor="Red"
-                                    Text="Delete" />
+                                    Text="Delete"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <StackLayout  Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
@@ -57,6 +58,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </StackLayout >
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Boutiquei.Views.AddNewAddressPage"
+    Title="Add New Address Page"
+    >
+
+    <ContentPage.Content>
+        <ScrollView>
+        
+            <StackLayout Orientation="Vertical">
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+                        <Label Text="Full Name" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry  Placeholder="EX:Omar Banna" FontSize="16" FontFamily="NSS" TextColor="black" x:Name="EntryFullName"/>
+
+                    </StackLayout>
+                </Frame >
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="Address" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Placeholder="EX:Yafa street" FontSize="16" x:Name="EntryAddress"/>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="District" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Placeholder=" Select District" FontSize="16" x:Name="EntryDistrict"/>
+                    </StackLayout>
+                    
+                </Frame>
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="City" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Placeholder=" EX:Nablus" FontSize="16" x:Name="EntryPhone"/>
+                    </StackLayout>
+                </Frame>
+                <!--<Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="Phone Number" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Placeholder=" EX:+9725588545" FontSize="16" x:Name="EntryPhone"/>
+                    </StackLayout>
+                </Frame>-->
+                <Button  BackgroundColor="#242424" Text="SAVE ADDRESS" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
+
+            </StackLayout>
+            </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>
