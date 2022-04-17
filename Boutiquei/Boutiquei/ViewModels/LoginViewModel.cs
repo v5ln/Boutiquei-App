@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Boutiquei.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -31,25 +33,42 @@ namespace Boutiquei.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs("Password"));
             }
         }
-        public Command SubmitCommand { get; }
+        public Command LoginCommand { get; }
+        public ICommand SignUpCommmand { get; }
 
         IGoogleAuth auth;
         public LoginViewModel()
         {
             auth = DependencyService.Get<IGoogleAuth>();
-            SubmitCommand = new Command(async () => await SignIn(email, password));
+            LoginCommand = new Command(OnLoginTapped);
+            SignUpCommmand = new Command(OnSignUpTapped);
         }
 
-        async Task SignIn(string email, string password)
+        private void OnSignUpTapped(object obj)
         {
-            string token = await auth.LoginWithEmailAndPassword(email, password);
-            Console.WriteLine("token: "+token);
+            Application.Current.MainPage = new SignUpPage();
+        }
+
+        private async void OnLoginTapped(object obj)
+        {
+            if (Email == "")
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
+                return;
+            }
+            if (Password == "")
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
+                return;
+            }
+            string token = await auth.LoginWithEmailAndPassword(Email, Password);
+            //Console.WriteLine("token: "+token);
             if (token != string.Empty)
             {
                 try
                 {
                     await SecureStorage.SetAsync("oauth_token", token);
-                    App.Current.MainPage = new AppShell();
+                    Application.Current.MainPage = new AppShell();
                 }
                 catch (Exception ex)
                 {

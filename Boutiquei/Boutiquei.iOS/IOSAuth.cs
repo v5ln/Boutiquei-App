@@ -16,6 +16,11 @@ namespace Boutiquei.iOS
             return user != null;
         }
 
+        public void SignOut()
+        {
+            Auth.DefaultInstance.SignOut(out NSError error);
+        }
+
         public bool IsSigOut()
         {
             try

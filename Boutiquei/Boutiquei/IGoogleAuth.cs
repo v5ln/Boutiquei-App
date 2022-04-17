@@ -7,7 +7,10 @@ namespace Boutiquei
     {
         Task<string> LoginWithEmailAndPassword(string email, string password);
         Task<string> SignUpWithEmailAndPassword(string email, string password);
+        
         bool IsSigIn();
         bool IsSigOut();
+
+        void SignOut();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Boutiquei.Views;
 using MvvmHelpers;
 using Xamarin.Forms;
 
@@ -8,36 +9,49 @@ namespace Boutiquei.ViewModels
 {
     public class SignUpViewModel : BaseViewModel
     {
+        public string Email { get; set; }//
+        public string Password { get; set; }//
+        private readonly IGoogleAuth auth;//
 
-        IGoogleAuth auth;
-        public ICommand SigUpCommad { get; }
+        public ICommand SignUpCommad { get; }//
+        public ICommand LoginCommand { get; }
+
+
         public SignUpViewModel()
         {
             auth = DependencyService.Get<IGoogleAuth>();
-            SigUpCommad = new Command(async () => await SignUp(email, password));
+            SignUpCommad = new Command(OnSignUpTapped);
+            LoginCommand = new Command(OnLoginTapped);
         }
-        
 
-        
-        
-
-        public string email { get; set; }
-        public string password { get; set; }
-
-        private async Task SignUp(string email, string password)
+        private void OnLoginTapped(object obj)
         {
+            Application.Current.MainPage = new LoginPage();
+        }
+
+        private async void OnSignUpTapped(object obj)
+        {
+            if (Email == "")
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
+                return;
+            }
+            if (Password == "")
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
+                return;
+            }
             try
             {
-                string ulr = await auth.SignUpWithEmailAndPassword(email, password);
+                string ulr = await auth.SignUpWithEmailAndPassword(Email, Password);
                 Console.WriteLine(ulr);
-
-
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine("The Exceptions : " + ex);
             }
         }
+
+        
     }
 }
