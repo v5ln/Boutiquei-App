@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Boutiquei.Models;
 using Boutiquei.Services;
@@ -12,6 +13,8 @@ namespace Boutiquei.ViewModels
     public class CheckoutViewModel : BaseViewModel
     {
         //public Order Order { get; set; }
+
+
         private Address address;
         public Address Address
         {
@@ -25,7 +28,6 @@ namespace Boutiquei.ViewModels
                 OnPropertyChanged();
             }
         }
-
         private string total;
         public string Total
         {
@@ -66,54 +68,83 @@ namespace Boutiquei.ViewModels
             }
         }
         private readonly Random _random = new Random();
-        private string orderNumber;
-        private string status;
+        private string orderNumber { set; get; }
+        private string status { set; get; }
 
-        private string date;
-        public string Delevry;
+        private string date { set; get; }
+        public string Delevry { set; get; }
         public AppServices Services;
 
         public ICommand OrderCommand { get; }
 
         public CheckoutViewModel()
         {
-            Address = new Address();
-            Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
+
+            Services = new AppServices();
+
+            Task.Run(async () => { await LoadData(); }).Wait();
+            // _ = GetAddress();
+            //Task.Run(async () => { await LoadData(); }).Wait();
+            //Address = new Address();
+            //Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
             //GetData();
-            Total = "100";
-            //Total = Services.GetTotalProductsPrice().GetAwaiter().GetResult();
-            
+            //Total = "100";
+            //Total = Services.GetTotalProductsPrice("User1").GetAwaiter().GetResult();
+
             date = DateTime.Now.ToString("dd-MMM-yyyy");
             orderNumber = _random.Next(1, 100000).ToString();
-            //TotalAfterDelvery = (Convert.ToInt32(Total)+ Convert.ToInt32(Delevry)).ToString();
-            Quantity = "3";
-
-            //Quantity = Services.TotalProductsQuantity().GetAwaiter().GetResult();
-            status = "Processing";
             Delevry = "10";
+            TotalAfterDelvery = (Convert.ToInt32(Total) + Convert.ToInt32(Delevry)).ToString();
+
+            status = "Processing";
+
 
             OrderCommand = new Xamarin.Forms.Command(onOrderTapped);
 
 
-            
+
+        }
+
+
+        async Task GetAddress()
+        {
+            Address = await Services.GetTheDefultAddress();
+        }
+        //  AppServices Server  = new AppServices();
+        public async Task LoadData()
+        {
+            Address = new Address();
+
+
+            try
+            {
+                Address = await Services.GetTheDefultAddress();
+                Total = await Services.GetTotalProductsPrice();
+                Quantity = await Services.TotalProductsQuantity();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception message : " + e.Message);
+            }
+
         }
 
         private async void GetData()
         {
-            Address = await Services.GetTheDefultAddress();
+            address = await Services.GetTheDefultAddress();
         }
 
         private async void onOrderTapped(object obj)
         {
-            //Order order = new Order
-            //{
-            //    OrderDate = date,
-            //    OrderNumber = orderNumber,
-            //    OrderTotal = TotalAfterDelvery,
-            //    OrderStatus = status,
-            //    Quantity = Quantity
-            //};
-            //await Services.AddtoOrder(, order);ß
+            Order order = new Order
+            {
+                OrderDate = date,
+                OrderNumber = orderNumber,
+                OrderTotal = TotalAfterDelvery,
+                OrderStatus = status,
+                Quantity = Quantity
+            };
+            await Services.AddtoOrder(order);
 
             await Application.Current.MainPage.Navigation.PushAsync(new SuccessPage());
 
