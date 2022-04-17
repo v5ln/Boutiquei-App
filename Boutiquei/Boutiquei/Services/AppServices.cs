@@ -5,9 +5,11 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Boutiquei.Models;
+using Boutiquei.Views;
 using Firebase.Database;
 using Firebase.Database.Query;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Boutiquei.Services
@@ -17,6 +19,27 @@ namespace Boutiquei.Services
         FirebaseClient firebaseClient = new FirebaseClient("https://boutiquei-54faf-default-rtdb.firebaseio.com/");
 
         //
+
+        public AppServices()
+        {
+            _ = AccessToken();
+        }
+
+        private static string accessToken { get; set; }
+
+        private async Task AccessToken()
+        {
+            try
+            {
+                var oauthToken = await SecureStorage.GetAsync("oauth_token");
+                accessToken = oauthToken;
+            }
+            catch
+            {
+                Application.Current.MainPage = new LoginPage();
+            }
+        }
+
         public ObservableCollection<Store> GetAllBoutiques()
         {
             return firebaseClient.Child("Stores").Child("Boutiques").AsObservable<Store>().AsObservableCollection();
@@ -377,6 +400,20 @@ namespace Boutiquei.Services
             var AllAddresses = await firebaseClient.Child($"Users/{UserID}/").Child("Addresses").OnceAsync<Address>();
             Address defultAddress = AllAddresses.Where(x => x.Object.IsDefault == "1").Select(itm => itm.Object).FirstOrDefault();
             return defultAddress;
+        }
+
+        public async Task AddNewUser(AppUser user)
+        {
+            user.Token = accessToken;
+            await firebaseClient.Child("Users").PostAsync(JsonConvert.SerializeObject(user));
+
+            //var key = (await firebaseClient
+            // .Child("Users")
+            // .OnceAsync<AppUser>()).Where(a => a.Object.Token == accessToken).FirstOrDefault();
+            //await firebaseClient
+            //        .Child($"Users/{key}").Child("Cart").Child("Total")
+            //        .PostAsync(0);
+
         }
     }
 }

@@ -42,17 +42,12 @@ namespace Boutiquei.iOS
 
         public async Task<string> SignUpWithEmailAndPassword(string email, string password)
         {
-            try
-            {
+            
                 var user = await Auth.DefaultInstance.CreateUserAsync(email, password);
                 var changeRequest = user.User.ProfileChangeRequest();
 
                 return await user.User.GetIdTokenAsync();
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            
         }
 
     }
