@@ -4,20 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.FavoritePage"
       xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
-    Shell.TabBarIsVisible="False"
     Title="Favorite"
-    xmlns:fontAwesome="clr-namespace:FontAwesome">
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true">
     <ContentPage.BindingContext>
         <viewmodels:FavoriteViewModel/>
     </ContentPage.BindingContext>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ToolbarItem_Clicked">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="FAS"
-                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShoppingCart}"/>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Orientation="Vertical">
             <CollectionView

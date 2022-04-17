@@ -139,7 +139,7 @@ namespace Boutiquei.ViewModels
             };
             await Services.AddtoOrder(order);
 
-            Application.Current.MainPage = new SuccessPage();
+            Application.Current.MainPage = new NavigationPage(new SuccessPage());
 
         }
     }
