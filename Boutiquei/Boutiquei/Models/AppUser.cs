@@ -5,6 +5,6 @@ namespace Boutiquei.Models
     {
         public string Name { get; set; }
         public string Token { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Email { set; get; }
     }
 }

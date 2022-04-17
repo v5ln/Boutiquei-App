@@ -19,10 +19,6 @@
                     </Frame>
                     
                     <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
-                        <Entry Text="{Binding PhoneNumber }" Placeholder="Phone Number" IsPassword="True"/>
-                    </Frame>
-                    
-                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
                         <Entry Text="{Binding Email }" Placeholder="Email"/>
                     </Frame>
                     
