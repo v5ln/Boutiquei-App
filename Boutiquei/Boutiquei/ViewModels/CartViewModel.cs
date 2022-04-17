@@ -17,23 +17,6 @@ namespace Boutiquei.ViewModels
 {
     public class CartViewModel : BaseViewModel
     {
-
-        private static string accessToken { get; set; }
-
-        private async Task AccessToken()
-        {
-            try
-            {
-                var oauthToken = await SecureStorage.GetAsync("oauth_token");
-                accessToken = oauthToken;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-
         private string _total;
         public string Total
         {
@@ -61,6 +44,9 @@ namespace Boutiquei.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<CartProduct> cartFromAPI { get; set; }
+
         public AppServices Services;
 
         
@@ -72,18 +58,15 @@ namespace Boutiquei.ViewModels
 
         public CartViewModel()
         {
-            //string UserID = "User1";
-            _ = AccessToken();
-
-            Console.WriteLine(accessToken);
 
 
             Services = new AppServices();
             Cart = new ObservableCollection<CartProduct>();
+            cartFromAPI = new ObservableCollection<CartProduct>();
             Total = "0";
-            Cart = Services.GetCartProductsByUserID("User1");
+            cartFromAPI = Services.GetCartProductsByUserID();
 
-            Cart.CollectionChanged += CartChanged;
+            cartFromAPI.CollectionChanged += CartChanged;
 
             IncreaseCommand = new Xamarin.Forms.Command(onIncreaseTapped);
             DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
@@ -93,21 +76,34 @@ namespace Boutiquei.ViewModels
 
         
 
-        private async void CartChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void CartChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            Console.WriteLine(e.Action);
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                if (e.NewItems[0].GetType() != typeof(Boutiquei.Models.CartProduct))
+                if (e.NewItems[0] != null)
                 {
-                    Console.WriteLine((string)e.NewItems[0]);
-                    Cart.Clear();
+                    Cart = new ObservableCollection<CartProduct>(cartFromAPI);
+                    UpdateTotal();
+                    OnPropertyChanged();
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(800);
-                    Total = await Services.GetTotalProductsPrice("User1");
+                    OnPropertyChanged();
                 }
             }
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                Cart = new ObservableCollection<CartProduct>(cartFromAPI);
+                UpdateTotal();
+                OnPropertyChanged();
+            }
+
+        }
+        private async void UpdateTotal()
+        {
+            System.Threading.Thread.Sleep(800);
+            Total = await Services.GetTotalProductsPrice();
         }
         private async void onCheckoutTapped(object obj)
         {
@@ -116,21 +112,21 @@ namespace Boutiquei.ViewModels
         public async void onIncreaseTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.UpdateIncreaseQuantity("User1", product.PID);
-            Total = await Services.GetTotalProductsPrice("User1");
+            await Services.UpdateIncreaseQuantity( product.PID);
+            Total = await Services.GetTotalProductsPrice();
         }
         public async void onDecreaseTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.UpdateDecreaseQuantity("User1", product.PID);
-            Total = await Services.GetTotalProductsPrice("User1");
+            await Services.UpdateDecreaseQuantity( product.PID);
+            Total = await Services.GetTotalProductsPrice();
             
         }
         public async void onDeleteTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.DeleteFromCart("User1", product.PID);
-            Total = await Services.GetTotalProductsPrice("User1");
+            await Services.DeleteFromCart( product.PID);
+            Total = await Services.GetTotalProductsPrice();
         }
     }
 }

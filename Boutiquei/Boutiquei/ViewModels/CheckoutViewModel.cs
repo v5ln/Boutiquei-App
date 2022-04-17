@@ -81,14 +81,14 @@ namespace Boutiquei.ViewModels
             Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
             //GetData();
             Total = "100";
-            //Total = Services.GetTotalProductsPrice("User1").GetAwaiter().GetResult();
+            //Total = Services.GetTotalProductsPrice().GetAwaiter().GetResult();
             
             date = DateTime.Now.ToString("dd-MMM-yyyy");
             orderNumber = _random.Next(1, 100000).ToString();
             //TotalAfterDelvery = (Convert.ToInt32(Total)+ Convert.ToInt32(Delevry)).ToString();
             Quantity = "3";
 
-            //Quantity = Services.TotalProductsQuantity("User1").GetAwaiter().GetResult();
+            //Quantity = Services.TotalProductsQuantity().GetAwaiter().GetResult();
             status = "Processing";
             Delevry = "10";
 
@@ -100,7 +100,7 @@ namespace Boutiquei.ViewModels
 
         private async void GetData()
         {
-            Address = await Services.GetTheDefultAddress("User1");
+            Address = await Services.GetTheDefultAddress();
         }
 
         private async void onOrderTapped(object obj)
@@ -113,7 +113,7 @@ namespace Boutiquei.ViewModels
             //    OrderStatus = status,
             //    Quantity = Quantity
             //};
-            //await Services.AddtoOrder("User1", order);ß
+            //await Services.AddtoOrder(, order);ß
 
             await Application.Current.MainPage.Navigation.PushAsync(new SuccessPage());
 

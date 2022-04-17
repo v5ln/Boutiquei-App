@@ -66,6 +66,13 @@
             </Tab.Icon>
             <ShellContent Route="CartPage" ContentTemplate="{DataTemplate local:CartPage}" />
         </Tab>
+        <Tab Title="Favorite">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FAR"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
+            </Tab.Icon>
+            <ShellContent Route="FavoritePage" ContentTemplate="{DataTemplate local:FavoritePage}" />
+        </Tab>
     </TabBar>
 
 

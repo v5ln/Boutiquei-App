@@ -33,7 +33,7 @@ namespace Boutiquei.ViewModels
         {
             Services = new AppServices();
             Favorite = new ObservableCollection<Product>();
-            Favorite = Services.GetFavouriteProductsByUserID("User1");
+            Favorite = Services.GetFavouriteProductsByUserID();
             Favorite.CollectionChanged += Favorite_CollectionChanged;
             
             
@@ -60,7 +60,7 @@ namespace Boutiquei.ViewModels
         public async void onDeleteTapped(object _product)
         {
             var product = _product as Product;
-            await Services.DeleteFromFavourites("User1", product.PID);
+            await Services.DeleteFromFavourites(product.PID);
         }
     }
 }

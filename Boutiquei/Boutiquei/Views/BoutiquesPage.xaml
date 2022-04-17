@@ -12,30 +12,24 @@
         <viewmodels:BotiquesViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-
-        <ToolbarItem Clicked="ToolbarItem_Clicked">
+        <ToolbarItem Command="{Binding AccountCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAR"
-                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-
-        
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <RefreshView
                 Command="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}">
-
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Boutique}"
                     SelectedItem="{Binding SelectedBoutique, Mode=TwoWay}"
-                    
                     SelectionMode="Single">
-
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
                             <Label HorizontalOptions="Center" Text="There Is No Boutiques" />
@@ -43,8 +37,7 @@
                     </CollectionView.EmptyView>
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
-                                         Span="2"></GridItemsLayout>
-
+                                         Span="2"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -55,5 +48,4 @@
             </RefreshView>
         </StackLayout>
     </ContentPage.Content>
-  
 </ContentPage>
