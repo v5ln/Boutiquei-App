@@ -17,10 +17,10 @@
                 </StackLayout>
                 <StackLayout Orientation="Vertical" Margin="15">
                     <Frame CornerRadius="15" Padding="0" WidthRequest="150" Margin="15">
-                        <Entry Text="{Binding Email}" Placeholder="Phone" />
+                        <Entry Text="{Binding Email}" Placeholder="Email" Keyboard="Email"/>
                     </Frame>
                     <Frame CornerRadius="15" Padding="0" WidthRequest="150" Margin="15">
-                        <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True" />
+                        <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True"/>
                     </Frame>
                 </StackLayout>
                 <StackLayout HorizontalOptions="Center">

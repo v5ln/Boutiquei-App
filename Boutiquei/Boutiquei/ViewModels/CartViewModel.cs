@@ -78,6 +78,7 @@ namespace Boutiquei.ViewModels
 
         private void CartChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            Console.WriteLine(e.Action);
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
                 if (e.NewItems[0] != null)
@@ -91,7 +92,13 @@ namespace Boutiquei.ViewModels
                     OnPropertyChanged();
                 }
             }
-            
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                Cart.Remove((CartProduct)e.OldItems[0]);
+                UpdateTotal();
+                OnPropertyChanged();
+            }
+
         }
         private async void UpdateTotal()
         {
