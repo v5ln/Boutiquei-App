@@ -71,7 +71,7 @@
                 <FontImageSource FontFamily="FAR"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
             </Tab.Icon>
-            <ShellContent Route="CartPage" ContentTemplate="{DataTemplate local:CartPage}" />
+            <ShellContent Route="FavoritePage" ContentTemplate="{DataTemplate local:FavoritePage}" />
         </Tab>
     </TabBar>
 

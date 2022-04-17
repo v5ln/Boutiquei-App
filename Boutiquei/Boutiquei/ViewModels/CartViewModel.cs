@@ -72,7 +72,7 @@ namespace Boutiquei.ViewModels
 
         public CartViewModel()
         {
-            //string UserID = "User1";
+            //string UserID = ;
             _ = AccessToken();
 
             Console.WriteLine(accessToken);
@@ -81,7 +81,7 @@ namespace Boutiquei.ViewModels
             Services = new AppServices();
             Cart = new ObservableCollection<CartProduct>();
             Total = "0";
-            Cart = Services.GetCartProductsByUserID("User1");
+            Cart = Services.GetCartProductsByUserID();
 
             Cart.CollectionChanged += CartChanged;
 
@@ -105,7 +105,7 @@ namespace Boutiquei.ViewModels
                 else
                 {
                     System.Threading.Thread.Sleep(800);
-                    Total = await Services.GetTotalProductsPrice("User1");
+                    Total = await Services.GetTotalProductsPrice();
                 }
             }
         }
@@ -116,21 +116,21 @@ namespace Boutiquei.ViewModels
         public async void onIncreaseTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.UpdateIncreaseQuantity("User1", product.PID);
-            Total = await Services.GetTotalProductsPrice("User1");
+            await Services.UpdateIncreaseQuantity( product.PID);
+            Total = await Services.GetTotalProductsPrice();
         }
         public async void onDecreaseTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.UpdateDecreaseQuantity("User1", product.PID);
-            Total = await Services.GetTotalProductsPrice("User1");
+            await Services.UpdateDecreaseQuantity( product.PID);
+            Total = await Services.GetTotalProductsPrice();
             
         }
         public async void onDeleteTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.DeleteFromCart("User1", product.PID);
-            Total = await Services.GetTotalProductsPrice("User1");
+            await Services.DeleteFromCart( product.PID);
+            Total = await Services.GetTotalProductsPrice();
         }
     }
 }

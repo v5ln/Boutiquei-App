@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Boutiquei.iOS;
 using Firebase.Auth;
 using Foundation;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(IOSAuth))]
@@ -37,7 +38,7 @@ namespace Boutiquei.iOS
         public async Task<string> LoginWithEmailAndPassword(string email, string password)
         {
             var user = await Auth.DefaultInstance.SignInWithPasswordAsync(email, password);
-            return await user.User.GetIdTokenAsync();
+            return user.User.Uid;
         }
 
         public async Task<string> SignUpWithEmailAndPassword(string email, string password)
@@ -45,7 +46,7 @@ namespace Boutiquei.iOS
             
                 var user = await Auth.DefaultInstance.CreateUserAsync(email, password);
 
-                return await user.User.GetIdTokenAsync();
+                return user.User.Uid;
             
         }
 

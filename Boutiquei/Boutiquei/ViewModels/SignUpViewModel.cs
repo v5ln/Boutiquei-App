@@ -69,6 +69,7 @@ namespace Boutiquei.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Faild", "Something went wrong, Please Try Again", "Ok");
                 Application.Current.MainPage = new SignUpPage();
             }
+
         }
 
         
