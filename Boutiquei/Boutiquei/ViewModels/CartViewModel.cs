@@ -83,7 +83,7 @@ namespace Boutiquei.ViewModels
             {
                 if (e.NewItems[0] != null)
                 {
-                    Cart.Add((CartProduct)e.NewItems[0]);
+                    Cart = new ObservableCollection<CartProduct>(cartFromAPI);
                     UpdateTotal();
                     OnPropertyChanged();
                 }
@@ -94,7 +94,7 @@ namespace Boutiquei.ViewModels
             }
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
-                Cart.Remove((CartProduct)e.OldItems[0]);
+                Cart = new ObservableCollection<CartProduct>(cartFromAPI);
                 UpdateTotal();
                 OnPropertyChanged();
             }
