@@ -14,7 +14,6 @@ namespace Boutiquei.ViewModels
     {
         public string Email { get; set; }//
         public string Password { get; set; }//
-        public string PhoneNumber { get; set; }//
         public string Name { get; set; }//
         private readonly IGoogleAuth auth;//
 
@@ -47,11 +46,6 @@ namespace Boutiquei.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
                 return;
             }
-            if (PhoneNumber == "")
-            {
-                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the phone nummber", "Ok");
-                return;
-            }
             if (Name == "")
             {
                 await Application.Current.MainPage.DisplayAlert("Faild", "You should write the name", "Ok");
@@ -61,7 +55,7 @@ namespace Boutiquei.ViewModels
             {
                 var token = await auth.SignUpWithEmailAndPassword(Email, Password);
                 await SecureStorage.SetAsync("oauth_token", token);
-                await services.AddNewUser(new AppUser {Name = Name, PhoneNumber = PhoneNumber});
+                await services.AddNewUser(new AppUser {Name = Name, Email = Email});
                 Application.Current.MainPage = new AppShell();
             }
             catch
