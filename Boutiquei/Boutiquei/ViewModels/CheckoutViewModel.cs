@@ -82,13 +82,13 @@ namespace Boutiquei.ViewModels
 
             Services = new AppServices();
 
-            Task.Run(async () => { await LoadData(); }).Wait();
+            //Task.Run(async () => { await LoadData(); }).Wait();
             // _ = GetAddress();
             //Task.Run(async () => { await LoadData(); }).Wait();
-            //Address = new Address();
-            //Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
+            Address = new Address();
+            Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
             //GetData();
-            //Total = "100";
+            Total = "100";
             //Total = Services.GetTotalProductsPrice("User1").GetAwaiter().GetResult();
 
             date = DateTime.Now.ToString("dd-MMM-yyyy");
@@ -106,11 +106,7 @@ namespace Boutiquei.ViewModels
         }
 
 
-        async Task GetAddress()
-        {
-            Address = await Services.GetTheDefultAddress();
-        }
-        //  AppServices Server  = new AppServices();
+        
         public async Task LoadData()
         {
             Address = new Address();
@@ -129,10 +125,7 @@ namespace Boutiquei.ViewModels
 
         }
 
-        private async void GetData()
-        {
-            address = await Services.GetTheDefultAddress();
-        }
+        
 
         private async void onOrderTapped(object obj)
         {
@@ -146,7 +139,7 @@ namespace Boutiquei.ViewModels
             };
             await Services.AddtoOrder(order);
 
-            await Application.Current.MainPage.Navigation.PushAsync(new SuccessPage());
+            Application.Current.MainPage = new SuccessPage();
 
         }
     }

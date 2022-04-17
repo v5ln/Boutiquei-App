@@ -32,7 +32,6 @@
 
     
     <TabBar>
-
         <Tab Title="Boutiques">
             <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
@@ -41,8 +40,6 @@
             </Tab.Icon>
             <ShellContent Route="BoutiquesPage" ContentTemplate="{DataTemplate local:BoutiquesPage}" />
         </Tab>
-
-
         <Tab Title="Brands">
 
             <Tab.Icon>
@@ -51,14 +48,6 @@
             </Tab.Icon>
             <ShellContent Route="BrandsPage" ContentTemplate="{DataTemplate local:BrandsPage}" />
         </Tab>
-        <Tab Title="NewAddress">
-            <ShellContent Route="AddNewAddressPage" ContentTemplate="{DataTemplate local:AddNewAddressPage}" />
-        </Tab>
-
-        <Tab Title="AddressListPage">
-            <ShellContent Route="AddressListPage" ContentTemplate="{DataTemplate local:AddressListPage}" />
-        </Tab>
-        
         <Tab Title="Cart">
             <Tab.Icon>
                 <FontImageSource FontFamily="FAS"
