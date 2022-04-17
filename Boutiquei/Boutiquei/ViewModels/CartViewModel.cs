@@ -17,23 +17,6 @@ namespace Boutiquei.ViewModels
 {
     public class CartViewModel : BaseViewModel
     {
-
-        private static string accessToken { get; set; }
-
-        private async Task AccessToken()
-        {
-            try
-            {
-                var oauthToken = await SecureStorage.GetAsync("oauth_token");
-                accessToken = oauthToken;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-
         private string _total;
         public string Total
         {
@@ -61,6 +44,9 @@ namespace Boutiquei.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<CartProduct> cartFromAPI { get; set; }
+
         public AppServices Services;
 
         
@@ -72,18 +58,15 @@ namespace Boutiquei.ViewModels
 
         public CartViewModel()
         {
-            //string UserID = ;
-            _ = AccessToken();
-
-            Console.WriteLine(accessToken);
 
 
             Services = new AppServices();
             Cart = new ObservableCollection<CartProduct>();
+            cartFromAPI = new ObservableCollection<CartProduct>();
             Total = "0";
-            Cart = Services.GetCartProductsByUserID();
+            cartFromAPI = Services.GetCartProductsByUserID();
 
-            Cart.CollectionChanged += CartChanged;
+            cartFromAPI.CollectionChanged += CartChanged;
 
             IncreaseCommand = new Xamarin.Forms.Command(onIncreaseTapped);
             DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
@@ -93,21 +76,28 @@ namespace Boutiquei.ViewModels
 
         
 
-        private async void CartChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void CartChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                if (e.NewItems[0].GetType() != typeof(Boutiquei.Models.CartProduct))
+                if (e.NewItems[0] != null)
                 {
-                    Console.WriteLine((string)e.NewItems[0]);
-                    Cart.Clear();
+                    Cart.Add((CartProduct)e.NewItems[0]);
+                    UpdateTotal();
+                    OnPropertyChanged();
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(800);
-                    Total = await Services.GetTotalProductsPrice();
+                    Console.WriteLine("-----------------------------------------");
+                    OnPropertyChanged();
                 }
             }
+            
+        }
+        private async void UpdateTotal()
+        {
+            System.Threading.Thread.Sleep(800);
+            Total = await Services.GetTotalProductsPrice();
         }
         private async void onCheckoutTapped(object obj)
         {
