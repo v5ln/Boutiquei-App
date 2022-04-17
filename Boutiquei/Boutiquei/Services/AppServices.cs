@@ -363,6 +363,7 @@ namespace Boutiquei.Services
             // d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
             return Quantity.ToString();
         }
+
         public async Task AddtoOrder( Order order)
         {
             // must be in MV :
@@ -417,6 +418,12 @@ namespace Boutiquei.Services
             //        .Child($"Users/{key}").Child("Cart").Child("Total")
             //        .PostAsync(0);
 
+        }
+
+
+        public async Task<AppUser> GetUserDetails()
+        {
+            return await firebaseClient.Child($"Users/{userID}").OnceSingleAsync<AppUser>();    
         }
     }
 }
