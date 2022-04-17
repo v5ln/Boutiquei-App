@@ -88,7 +88,6 @@ namespace Boutiquei.ViewModels
                 }
                 else
                 {
-                    Console.WriteLine("-----------------------------------------");
                     OnPropertyChanged();
                 }
             }
