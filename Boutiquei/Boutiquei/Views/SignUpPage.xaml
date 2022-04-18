@@ -2,58 +2,37 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:Boutiquei.ViewModels"
-    x:Class="Boutiquei.Views.SignUpPage">
+    x:Class="Boutiquei.Views.SignUpPage" BackgroundColor="White"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true">
 <ContentPage.BindingContext>
         <viewmodel:SignUpViewModel/>
         </ContentPage.BindingContext>
         <ContentPage.Content>
+        <StackLayout>
             <StackLayout>
-                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Welcome!" FontSize="Title" />
-                    <Label Text="Create Your Account" FontSize="Small"/>
+                <StackLayout Margin="20,20,20,20">
+           
+                    <Label Text="Welcome " TextColor="#303030" FontSize="24" FontFamily="MWB"/>
                 </StackLayout>
-                <StackLayout>
+                <Frame Margin="20,0">
+                    <StackLayout>
+                        <StackLayout Margin="10,20,10,20">
+                            <Entry Keyboard="Text" Text="{Binding Name}" Placeholder="Name" FontSize="16" FontFamily="NSS" TextColor="black"/>
+                        </StackLayout>
+                        <StackLayout Margin="10,20,10,20">
+                            <Entry Keyboard="Email" Text="{Binding Email}" Placeholder="Email" FontSize="16" FontFamily="NSS" TextColor="black"/>
+                        </StackLayout >
+                        <StackLayout Margin="10,20,10,20">
+                            <Entry IsPassword="True" Text="{Binding Password}" Placeholder="Password" FontSize="16" FontFamily="NSS" TextColor="black" />
+                        </StackLayout>
+                        <Button  Command="{Binding SignUpCommad}" FontFamily="NSS" FontSize="18" TextColor="White" BackgroundColor="#242424" Text="SIGNUP" CornerRadius="8" Padding="0,17,0,17" Margin="30,30,30,0"/>
+                        <Label HorizontalOptions="Center" Text="Already have account? " TextColor="#808080" FontSize="14" FontFamily="NSS"/>
+                        <Button  Command="{Binding LoginCommand}" FontFamily="NSS" FontSize="18" TextColor="#303030" BackgroundColor="White" Text="LOGIN" CornerRadius="8" Padding="0,17,0,17" Margin="30,0,30,20"/>
+                    </StackLayout>
+                </Frame>
+        </StackLayout>
 
-                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
-                        <Entry Text="{Binding Name }" Placeholder="Name"/>
-                    </Frame>
-                    
-                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
-                        <Entry Text="{Binding PhoneNumber }" Placeholder="Phone Number" IsPassword="True"/>
-                    </Frame>
-                    
-                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
-                        <Entry Text="{Binding Email }" Placeholder="Email"/>
-                    </Frame>
-                    
-                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
-                        <Entry Text="{Binding Password }" Placeholder="Password" IsPassword="True"/>
-                    </Frame>
-                    
-                    <Button Margin="20"
-                WidthRequest="207"
-                HeightRequest="46"
-                Text="Sign Up"
-                TextColor="#FFFFFF"
-                FontAttributes="Bold"
-                BackgroundColor="#603D8F"
-                CornerRadius="20"
-                Font="Segoe UI"
-               Command="{Binding SignUpCommad}"
-                FontSize="16"></Button>
-                    <Button Margin="20"
-                WidthRequest="207"
-                HeightRequest="46"
-                Text="Sign In"
-                TextColor="#FFFFFF"
-                FontAttributes="Bold"
-                BackgroundColor="#603D8F"
-                CornerRadius="20"
-                Font="Segoe UI"
-               Command="{Binding LoginCommand}"
-                FontSize="16"></Button>
-
-                </StackLayout>
-            </StackLayout>
-        </ContentPage.Content>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
