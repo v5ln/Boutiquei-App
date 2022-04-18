@@ -9,6 +9,7 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
+using System.Windows.Input;
 
 namespace Boutiquei.ViewModels
 {
@@ -25,9 +26,14 @@ namespace Boutiquei.ViewModels
             set
             {
                 _addresses = value;
+                OnPropertyChanged();
             }
+
         }
         private ObservableCollection<Address> addresses;
+
+        public ICommand AddAddressCommand { get; set; }
+
         public AddressListViewModel()
         {
             services = new AppServices();
@@ -35,6 +41,13 @@ namespace Boutiquei.ViewModels
             addresses = new ObservableCollection<Address>();
             addresses = services.GetAllAdressesByUserID();
             addresses.CollectionChanged += Addresses_CollectionChanged;
+
+            AddAddressCommand = new Command(OnAddTapped);
+        }
+
+        private async void OnAddTapped(object obj)
+        {
+            await Shell.Current.Navigation.PushAsync(new AddNewAddressPage());
         }
 
         private void Addresses_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

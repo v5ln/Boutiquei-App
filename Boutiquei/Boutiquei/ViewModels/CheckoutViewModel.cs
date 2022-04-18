@@ -90,8 +90,9 @@ namespace Boutiquei.ViewModels
             IsNull = true;
             //Task.Run(async () => { await LoadData(); }).Wait();
             // _ = GetAddress();
-            Task.Run(async () => { await LoadData(); }).Wait();
             Address = new Address();
+
+            Task.Run(async () => { await LoadData(); }).Wait();
             //Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
             //GetData();
             Total = "100";
@@ -109,12 +110,13 @@ namespace Boutiquei.ViewModels
             EditCommand = new Xamarin.Forms.Command(OnEditTapped);
 
 
-
         }
 
         private async void OnEditTapped(object obj)
         {
-            await Shell.Current.Navigation.PushAsync(new AddressListPage());
+            await Shell.Current.Navigation.PushAsync(new OrderAddressPage());
+            await LoadData();
+            Console.WriteLine("hihiihihiihiihiihihih");
         }
 
         public async Task LoadData()
@@ -125,6 +127,7 @@ namespace Boutiquei.ViewModels
             try
             {
                 Address = await Services.GetTheDefultAddress();
+                OnPropertyChanged();
                 if (Address == null)
                 {
                     IsValid = false;

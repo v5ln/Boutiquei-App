@@ -7,6 +7,7 @@
     xmlns:views="clr-namespace:Boutiquei.Views"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
+    BackgroundColor="White"
     Title="Boutiquei">
     <ContentPage.BindingContext>
         <viewmodels:BotiquesViewModel/>
@@ -21,9 +22,6 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <RefreshView
-                Command="{Binding RefreshCommand}"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}">
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
@@ -45,7 +43,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
