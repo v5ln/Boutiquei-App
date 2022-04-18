@@ -7,49 +7,36 @@
         <viewmodel:SignUpViewModel/>
         </ContentPage.BindingContext>
         <ContentPage.Content>
+        <StackLayout>
             <StackLayout>
-                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Welcome!" FontSize="Title" />
-                    <Label Text="Create Your Account" FontSize="Small"/>
-                </StackLayout>
-                <StackLayout>
+                <StackLayout Margin="20,20,20,20">
+                    <Image Source=""/>
 
-                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
-                        <Entry Text="{Binding Name }" Placeholder="Name"/>
-                    </Frame>
-                    
-                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
-                        <Entry Text="{Binding Email }" Placeholder="Email"/>
-                    </Frame>
-                    
-                    <Frame CornerRadius="15" Margin="25,10,25,10" HasShadow="True" HeightRequest="40" Padding="0">
-                        <Entry Text="{Binding Password }" Placeholder="Password" IsPassword="True"/>
-                    </Frame>
-                    
-                    <Button Margin="20"
-                WidthRequest="207"
-                HeightRequest="46"
-                Text="Sign Up"
-                TextColor="#FFFFFF"
-                FontAttributes="Bold"
-                BackgroundColor="#603D8F"
-                CornerRadius="20"
-                Font="Segoe UI"
-               Command="{Binding SignUpCommad}"
-                FontSize="16"></Button>
-                    <Button Margin="20"
-                WidthRequest="207"
-                HeightRequest="46"
-                Text="Sign In"
-                TextColor="#FFFFFF"
-                FontAttributes="Bold"
-                BackgroundColor="#603D8F"
-                CornerRadius="20"
-                Font="Segoe UI"
-               Command="{Binding LoginCommand}"
-                FontSize="16"></Button>
-
+                    <Label Text="Welcome " TextColor="#303030" FontSize="24" FontFamily="MWB"/>
                 </StackLayout>
+                <Frame>
+                    <StackLayout>
+                        <StackLayout Margin="10,20,10,20">
+                            <Entry Text="{Binding Name}" Placeholder="Name" FontSize="16" FontFamily="NSS" TextColor="black"/>
+                        </StackLayout>
+                        <StackLayout>
+                            <Entry Text="{Binding Email}" Placeholder="Email" FontSize="16" FontFamily="NSS" TextColor="black"/>
+                        </StackLayout>
+                        <StackLayout>
+                            <Entry Text="{Binding Password}" Placeholder="Password" FontSize="16" FontFamily="NSS" TextColor="black" />
+                        </StackLayout>
+                        <StackLayout>
+                            <Entry Text="{Binding xx}" Placeholder="Confirm Password" FontSize="16" FontFamily="NSS" TextColor="black"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button  Command="{Binding SignUpCommad}" BackgroundColor="#242424" Text="Sign up" CornerRadius="8" Padding="0,17,0,17" Margin="30,70,30,0"/>
+                <Label Text="Already have account? " TextColor="#808080" FontSize="14" FontFamily="NSS"/>
+                <Button  Command="{Binding LoginCommand}" BackgroundColor="White" Text="Sign up" TextColor="Black" CornerRadius="8" Padding="0,17,0,17" Margin="30,0,30,20"/>
+
+
             </StackLayout>
-        </ContentPage.Content>
+
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
