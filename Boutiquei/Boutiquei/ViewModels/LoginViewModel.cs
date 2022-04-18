@@ -70,9 +70,10 @@ namespace Boutiquei.ViewModels
                     await SecureStorage.SetAsync("oauth_token", token);
                     Application.Current.MainPage = new AppShell();
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    Console.WriteLine(ex.Message);
+                    await Application.Current.MainPage.DisplayAlert("Faild", "Something went wrong, Please Try Again", "Ok");
+                    Application.Current.MainPage = new LoginPage();
                 }
 
             }

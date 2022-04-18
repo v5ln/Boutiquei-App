@@ -85,7 +85,9 @@
                     <Label Text="{Binding Total}" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>
                 </StackLayout>
             </StackLayout>
-            <Button Command="{Binding CheckoutCommand}"  BackgroundColor="#242424" Text="CHECKOUT" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
+            <Button Command="{Binding CheckoutCommand}"  BackgroundColor="#242424"  FontFamily="NSB"
+                    FontSize="18"
+                    TextColor="White" Text="CHECKOUT" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -5,6 +5,7 @@
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     x:Class="Boutiquei.Views.AddressListPage"
     xmlns:views="clr-namespace:Boutiquei.Views"
+    Shell.TabBarIsVisible="False"
     Title="Shipping address">
     <ContentPage.BindingContext>
         <viewmodels:AddressListViewModel/>
@@ -28,16 +29,15 @@
                     </Grid.ColumnDefinitions>
 
                     <StackLayout >
-                        <Button  BorderColor="Black" CornerRadius="26" HeightRequest="52" WidthRequest="52" Padding="0" BackgroundColor="#f0f0f0"
-                                               Text="+" FontFamily="NSR" FontSize="24" TextColor="Black" >
+                        <Button BorderColor="Black" CornerRadius="26" HeightRequest="52" WidthRequest="52" Padding="0" BackgroundColor="#f0f0f0"
+                                Text="+" FontFamily="NSR" FontSize="24" TextColor="Black"
+                                Command="{Binding AddAddressCommand}">
                         </Button>
                     </StackLayout>
                    
 
                 </Grid>
             </StackLayout>
-            <Button  BackgroundColor="#242424" Text="check out" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
-
 
         </StackLayout>
     </ContentPage.Content>

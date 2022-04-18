@@ -5,23 +5,22 @@
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     xmlns:views="clr-namespace:Boutiquei.Views"
         xmlns:fontAwesome="clr-namespace:FontAwesome"
+    Title="Brands"
+    BackgroundColor="White"
     x:Class="Boutiquei.Views.BrandsPage">
     <ContentPage.BindingContext>
         <viewmodels:BrandsViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ToolbarItem_Clicked">
+        <ToolbarItem Command="{Binding AccountCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="FAR"
-                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <RefreshView
-                Command="{Binding RefreshCommand}"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}">
                 <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
@@ -43,7 +42,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

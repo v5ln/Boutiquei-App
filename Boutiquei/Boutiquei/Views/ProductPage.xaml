@@ -121,6 +121,9 @@
                 </Button>
                 <Button  BackgroundColor="#242424"
                          Text="ADD TO CART"
+                         FontFamily="NSB"
+                         FontSize="18"
+                         TextColor="White"
                          CornerRadius="8"
                          HorizontalOptions="FillAndExpand"
                          Margin="0"

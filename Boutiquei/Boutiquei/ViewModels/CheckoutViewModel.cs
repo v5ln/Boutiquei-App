@@ -14,6 +14,8 @@ namespace Boutiquei.ViewModels
     {
         //public Order Order { get; set; }
 
+        public bool IsValid { set; get; }
+        public bool IsNull { set; get; }
 
         private Address address;
         public Address Address
@@ -84,11 +86,13 @@ namespace Boutiquei.ViewModels
         {
 
             Services = new AppServices();
-
+            IsValid = false;
+            IsNull = true;
             //Task.Run(async () => { await LoadData(); }).Wait();
             // _ = GetAddress();
-            Task.Run(async () => { await LoadData(); }).Wait();
             Address = new Address();
+
+            Task.Run(async () => { await LoadData(); }).Wait();
             //Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
             //GetData();
             Total = "100";
@@ -106,12 +110,13 @@ namespace Boutiquei.ViewModels
             EditCommand = new Xamarin.Forms.Command(OnEditTapped);
 
 
-
         }
 
         private async void OnEditTapped(object obj)
         {
-            await Shell.Current.Navigation.PushAsync(new AddressListPage());
+            await Shell.Current.Navigation.PushAsync(new OrderAddressPage());
+            await LoadData();
+            Console.WriteLine("hihiihihiihiihiihihih");
         }
 
         public async Task LoadData()
@@ -122,9 +127,18 @@ namespace Boutiquei.ViewModels
             try
             {
                 Address = await Services.GetTheDefultAddress();
+                OnPropertyChanged();
                 if (Address == null)
                 {
-                    Address.Name = "You dont have any address\nClick on Edit to add address";
+                    IsValid = false;
+                    IsNull = true;
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    IsValid = true;
+                    IsNull = false;
+                    OnPropertyChanged();
                 }
                 Total = await Services.GetTotalProductsPrice();
                 Quantity = await Services.TotalProductsQuantity();

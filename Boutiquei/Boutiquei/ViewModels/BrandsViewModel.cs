@@ -9,6 +9,8 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
+using System.Windows.Input;
+
 namespace Boutiquei.ViewModels
 {
     public class BrandsViewModel : BaseViewModel
@@ -21,6 +23,8 @@ namespace Boutiquei.ViewModels
         public Command LoadMoreCommand { get; }
         public Command DelayLoadMoreCommand { get; }
 
+        public ICommand AccountCommand { get; }
+
         public BrandsViewModel()
         {
             Brand = new ObservableCollection<Store>();
@@ -28,13 +32,23 @@ namespace Boutiquei.ViewModels
 
             LoadMore();
 
-            RefreshCommand = new AsyncCommand(Refresh);
+            AccountCommand = new Command(OnAccountTapped);
+
+
+            //RefreshCommand = new AsyncCommand(Refresh);
 
             //SelectedCommand = new AsyncCommand<object>(Selected);
 
-            LoadMoreCommand = new Command(LoadMore);
-            DelayLoadMoreCommand = new Command(DelayLoadMore);
+            //LoadMoreCommand = new Command(LoadMore);
+            //DelayLoadMoreCommand = new Command(DelayLoadMore);
         }
+
+        private async void OnAccountTapped()
+        {
+            await Shell.Current.Navigation.PushAsync(new AccountPage());
+        }
+
+
         private Store previousSelected;
         Store selectedBrand;
         public Store SelectedBrand
@@ -76,17 +90,17 @@ namespace Boutiquei.ViewModels
 
 
 
-        async Task Refresh()
-        {
-            IsBusy = true;
+        //async Task Refresh()
+        //{
+        //    IsBusy = true;
 
-            await Task.Delay(2000);
+        //    await Task.Delay(2000);
 
-            Brand.Clear();
-            LoadMore();
+        //    Brand.Clear();
+        //    LoadMore();
 
-            IsBusy = false;
-        }
+        //    IsBusy = false;
+        //}
 
         void LoadMore()
         {
@@ -114,9 +128,9 @@ namespace Boutiquei.ViewModels
 
         }
 
-        void DelayLoadMore()
-        {
-            LoadMore();
-        }
+        //void DelayLoadMore()
+        //{
+        //    LoadMore();
+        //}
     }
 }
