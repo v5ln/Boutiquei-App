@@ -13,8 +13,8 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Shipping Address" TextColor="#909090" FontSize="18" FontFamily="NSS" Margin="10"/>
-                <Button Text="Edit" Clicked="Button_Clicked"
-                        HorizontalOptions="EndAndExpand" BackgroundColor="#C4C4C4" TextColor="Black" BorderWidth="1" BorderColor="Transparent" Margin="20,5,20,0" CornerRadius="8" HeightRequest="35" WidthRequest="50"/>
+                <Button Text="Edit" Command="{Binding }"
+                        HorizontalOptions="EndAndExpand" BackgroundColor="#C4C4C4" TextColor="Black" BorderWidth="1" BorderColor="Transparent" Margin="20,5,20,0" CornerRadius="8" Padding="20,10"/>
             </StackLayout>
 
             <views:AddressCard BindingContext="{Binding Address}" />

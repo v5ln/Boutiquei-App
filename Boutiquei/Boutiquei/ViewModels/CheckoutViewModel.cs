@@ -76,6 +76,9 @@ namespace Boutiquei.ViewModels
         public AppServices Services;
 
         public ICommand OrderCommand { get; }
+        public ICommand EditCommand { get; }
+
+        
 
         public CheckoutViewModel()
         {
@@ -84,9 +87,9 @@ namespace Boutiquei.ViewModels
 
             //Task.Run(async () => { await LoadData(); }).Wait();
             // _ = GetAddress();
-            //Task.Run(async () => { await LoadData(); }).Wait();
+            Task.Run(async () => { await LoadData(); }).Wait();
             Address = new Address();
-            Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
+            //Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
             //GetData();
             Total = "100";
             //Total = Services.GetTotalProductsPrice("User1").GetAwaiter().GetResult();
@@ -100,13 +103,17 @@ namespace Boutiquei.ViewModels
 
 
             OrderCommand = new Xamarin.Forms.Command(onOrderTapped);
+            EditCommand = new Xamarin.Forms.Command(OnEditTapped);
 
 
 
         }
 
+        private async void OnEditTapped(object obj)
+        {
+            await Shell.Current.Navigation.PushAsync(new AddressListPage());
+        }
 
-        
         public async Task LoadData()
         {
             Address = new Address();
@@ -115,6 +122,10 @@ namespace Boutiquei.ViewModels
             try
             {
                 Address = await Services.GetTheDefultAddress();
+                if (Address == null)
+                {
+                    Address.Name = "You dont have any address\nClick on Edit to add address";
+                }
                 Total = await Services.GetTotalProductsPrice();
                 Quantity = await Services.TotalProductsQuantity();
             }

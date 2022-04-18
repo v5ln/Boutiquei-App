@@ -14,12 +14,13 @@ namespace Boutiquei.ViewModels
 {
     public class AddressListViewModel : BaseViewModel
     {
+        private AppServices services;
         public ObservableCollection<Address> Addresses { get; set; }
         public AddressListViewModel()
         {
+            services = new AppServices();
             Addresses = new ObservableCollection<Address>();
-            Addresses.Add(new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" });
-            Addresses.Add(new Address { AddressDetails = "4st street", City = "Khobar", Name = "Omar Banna", Phone = "98786732", District = "Doha" });
+            Addresses = services.GetAllAdressesByUserID();
         }
     }
 }
