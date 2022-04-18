@@ -14,6 +14,8 @@ namespace Boutiquei.ViewModels
     {
         //public Order Order { get; set; }
 
+        public bool IsValid { set; get; }
+        public bool IsNull { set; get; }
 
         private Address address;
         public Address Address
@@ -84,7 +86,8 @@ namespace Boutiquei.ViewModels
         {
 
             Services = new AppServices();
-
+            IsValid = false;
+            IsNull = true;
             //Task.Run(async () => { await LoadData(); }).Wait();
             // _ = GetAddress();
             Task.Run(async () => { await LoadData(); }).Wait();
@@ -124,7 +127,15 @@ namespace Boutiquei.ViewModels
                 Address = await Services.GetTheDefultAddress();
                 if (Address == null)
                 {
-                    Address.Name = "You dont have any address\nClick on Edit to add address";
+                    IsValid = false;
+                    IsNull = true;
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    IsValid = true;
+                    IsNull = false;
+                    OnPropertyChanged();
                 }
                 Total = await Services.GetTotalProductsPrice();
                 Quantity = await Services.TotalProductsQuantity();

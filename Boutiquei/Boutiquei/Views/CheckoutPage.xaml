@@ -13,12 +13,24 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Shipping Address" TextColor="#909090" FontSize="18" FontFamily="NSS" Margin="10"/>
-                <Button Text="Edit" Command="{Binding }"
+                <Button Text="Edit" Command="{Binding EditCommand}"
                         HorizontalOptions="EndAndExpand" BackgroundColor="#C4C4C4" TextColor="Black" BorderWidth="1" BorderColor="Transparent" Margin="20,5,20,0" CornerRadius="8" Padding="20,10"/>
             </StackLayout>
-
-            <views:AddressCard BindingContext="{Binding Address}" />
-
+            <StackLayout IsVisible="{Binding IsValid}">
+                <views:AddressCard BindingContext="{Binding Address}" />
+            </StackLayout>
+            
+            <StackLayout HorizontalOptions="Center"
+                         IsVisible="{Binding IsNull}">
+                <Label Text="You dont have any address"
+                       FontSize="18"
+                       FontFamily="NSR"
+                       TextColor="#303030"/>
+                <Label Text="Click on edit to add one"
+                       FontSize="18"
+                       FontFamily="NSR"
+                       TextColor="#303030"/>
+            </StackLayout>
             <Frame  BackgroundColor="#F5F5F5" Margin="10,10,20,20">
                 <StackLayout >
                     <StackLayout Orientation="Horizontal">

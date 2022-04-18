@@ -12,6 +12,7 @@ namespace Boutiquei.ViewModels
 {
     public class FavoriteViewModel : BaseViewModel
     {
+        private ObservableCollection<Product> favoriteFromApi{ get; set; }
         private ObservableCollection<Product> favorite;
         public ObservableCollection<Product> Favorite {
             get
@@ -33,8 +34,9 @@ namespace Boutiquei.ViewModels
         {
             Services = new AppServices();
             Favorite = new ObservableCollection<Product>();
-            Favorite = Services.GetFavouriteProductsByUserID();
-            Favorite.CollectionChanged += Favorite_CollectionChanged;
+            favoriteFromApi = new ObservableCollection<Product>();
+            favoriteFromApi = Services.GetFavouriteProductsByUserID();
+            favoriteFromApi.CollectionChanged += Favorite_CollectionChanged;
             
             
             DeleteCommand = new Xamarin.Forms.Command(onDeleteTapped);
@@ -45,13 +47,15 @@ namespace Boutiquei.ViewModels
 
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                if (e.NewItems[0].ToString() != "Boutiquei.Models.Product")
+                if (e.NewItems[0] != null)
                 {
-                    Favorite.Clear();
+                    Favorite.Add((Product)e.NewItems[0]);
+                    OnPropertyChanged();
                 }
             }
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
+                Favorite.Remove((Product)e.OldItems[0]);
                 OnPropertyChanged();
             }
 
