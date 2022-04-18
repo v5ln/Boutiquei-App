@@ -62,12 +62,12 @@ namespace Boutiquei.ViewModels
             //DelayLoadMoreCommand = new Command(DelayLoadMore);
         }
 
-        void OnAccountTapped()
+        private async void OnAccountTapped()
         {
             //await Shell.Current.Navigation.PushAsync(new AccountPage());
-            SecureStorage.RemoveAll();
-            Auth.SignOut();
-            Application.Current.MainPage = new LoginPage();
+            
+
+            await Shell.Current.Navigation.PushAsync(new AccountPage());
         }
 
         private Store previousSelected;

@@ -2,7 +2,9 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:Boutiquei.ViewModels"
-    x:Class="Boutiquei.Views.SignUpPage" BackgroundColor="White">
+    x:Class="Boutiquei.Views.SignUpPage" BackgroundColor="White"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true">
 <ContentPage.BindingContext>
         <viewmodel:SignUpViewModel/>
         </ContentPage.BindingContext>
@@ -24,9 +26,9 @@
                         <StackLayout Margin="10,20,10,20">
                             <Entry IsPassword="True" Text="{Binding Password}" Placeholder="Password" FontSize="16" FontFamily="NSS" TextColor="black" />
                         </StackLayout>
-                        <Button  Command="{Binding SignUpCommad}" BackgroundColor="#242424" Text="Sign up" CornerRadius="8" Padding="0,17,0,17" Margin="30,30,30,0"/>
+                        <Button  Command="{Binding SignUpCommad}" FontFamily="NSS" FontSize="18" TextColor="White" BackgroundColor="#242424" Text="SIGNUP" CornerRadius="8" Padding="0,17,0,17" Margin="30,30,30,0"/>
                         <Label HorizontalOptions="Center" Text="Already have account? " TextColor="#808080" FontSize="14" FontFamily="NSS"/>
-                        <Button  Command="{Binding LoginCommand}" BackgroundColor="White" Text="Log in" TextColor="Black" CornerRadius="8" Padding="0,17,0,17" Margin="30,0,30,20"/>
+                        <Button  Command="{Binding LoginCommand}" FontFamily="NSS" FontSize="18" TextColor="#303030" BackgroundColor="White" Text="LOGIN" CornerRadius="8" Padding="0,17,0,17" Margin="30,0,30,20"/>
                     </StackLayout>
                 </Frame>
         </StackLayout>
