@@ -425,5 +425,10 @@ namespace Boutiquei.Services
         {
             return await firebaseClient.Child($"Users/{userID}").OnceSingleAsync<AppUser>();    
         }
+
+        public async Task UpdateUserTotal()
+        {
+           await firebaseClient.Child($"Users/{userID}").Child("Cart").Child("Total").PutAsync("0");
+        }
     }
 }

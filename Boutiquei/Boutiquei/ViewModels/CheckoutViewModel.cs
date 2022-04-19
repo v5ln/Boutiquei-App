@@ -95,7 +95,7 @@ namespace Boutiquei.ViewModels
             Task.Run(async () => { await LoadData(); }).Wait();
             //Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
             //GetData();
-            Total = "100";
+             
             //Total = Services.GetTotalProductsPrice("User1").GetAwaiter().GetResult();
 
             date = DateTime.Now.ToString("dd-MMM-yyyy");
@@ -154,17 +154,21 @@ namespace Boutiquei.ViewModels
 
         private async void onOrderTapped(object obj)
         {
-            Order order = new Order
-            {
-                OrderDate = date,
-                OrderNumber = orderNumber,
-                OrderTotal = TotalAfterDelvery,
-                OrderStatus = status,
-                Quantity = Quantity
-            };
-            await Services.AddtoOrder(order);
-
-            Application.Current.MainPage = new NavigationPage(new SuccessPage());
+            
+                Order order = new Order
+                {
+                    OrderDate = date,
+                    OrderNumber = orderNumber,
+                    OrderTotal = TotalAfterDelvery,
+                    OrderStatus = status,
+                    Quantity = Quantity
+                };
+                await Services.AddtoOrder(order);
+                await Services.DeleteAllProductsInCart();
+                await Services.UpdateUserTotal();
+                Application.Current.MainPage = new NavigationPage(new SuccessPage());
+            
+            
 
         }
     }

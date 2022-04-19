@@ -53,6 +53,7 @@ namespace Boutiquei.ViewModels
             };
             await services.AddNewAddress(address);
             await services.UpdateDefultAddress(address.AddressID);
+            _ = Application.Current.MainPage.DisplayAlert("Message", "Address added successfully", "Ok");
             await Shell.Current.Navigation.PopAsync();
 
         }

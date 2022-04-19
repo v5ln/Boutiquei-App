@@ -59,7 +59,6 @@ namespace Boutiquei.ViewModels
         public CartViewModel()
         {
 
-
             Services = new AppServices();
             Cart = new ObservableCollection<CartProduct>();
             cartFromAPI = new ObservableCollection<CartProduct>();
@@ -107,8 +106,16 @@ namespace Boutiquei.ViewModels
         }
         private async void onCheckoutTapped(object obj)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new CheckoutPage());
-        }
+            if (Total != "0")
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new CheckoutPage());
+            }
+        
+            else
+            {
+                _ = Application.Current.MainPage.DisplayAlert("Warning", "Please add products to cart", "Ok");
+            }
+         }
         public async void onIncreaseTapped(object _product)
         {
             var product = _product as CartProduct;

@@ -50,6 +50,7 @@ namespace Boutiquei.ViewModels
                 if (e.NewItems[0] != null)
                 {
                     Favorite.Add((Product)e.NewItems[0]);
+                    _ = Application.Current.MainPage.DisplayAlert("Message", "Prodact added to favorites successfully", "Ok");
                     OnPropertyChanged();
                 }
             }

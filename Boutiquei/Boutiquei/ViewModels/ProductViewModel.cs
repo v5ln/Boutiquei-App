@@ -187,6 +187,8 @@ namespace Boutiquei.ViewModels
             {
                 FavBtn = "FAS";
                 await Services.AddToFavourites(Product);
+                _ = Application.Current.MainPage.DisplayAlert("Message", "Prodact added to Cart successfully", "Ok");
+
             }
             else
             {
