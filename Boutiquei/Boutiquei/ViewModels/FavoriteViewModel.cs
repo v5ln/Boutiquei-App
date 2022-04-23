@@ -12,9 +12,9 @@ namespace Boutiquei.ViewModels
 {
     public class FavoriteViewModel : BaseViewModel
     {
-        private ObservableCollection<Product> favoriteFromApi{ get; set; }
         private ObservableCollection<Product> favorite;
-        public ObservableCollection<Product> Favorite {
+        public ObservableCollection<Product> Favorite
+        {
             get
             {
                 return favorite;
@@ -26,7 +26,7 @@ namespace Boutiquei.ViewModels
             }
 
         }
-        
+
         public AppServices Services;
 
         public ICommand DeleteCommand { get; }
@@ -34,11 +34,10 @@ namespace Boutiquei.ViewModels
         {
             Services = new AppServices();
             Favorite = new ObservableCollection<Product>();
-            favoriteFromApi = new ObservableCollection<Product>();
-            favoriteFromApi = Services.GetFavouriteProductsByUserID();
-            favoriteFromApi.CollectionChanged += Favorite_CollectionChanged;
-            
-            
+            Favorite = Services.GetFavouriteProductsByUserID();
+            Favorite.CollectionChanged += Favorite_CollectionChanged;
+
+
             DeleteCommand = new Xamarin.Forms.Command(onDeleteTapped);
         }
 
@@ -47,16 +46,13 @@ namespace Boutiquei.ViewModels
 
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                if (e.NewItems[0] != null)
+                if (e.NewItems[0].ToString() != "Boutiquei.Models.Product")
                 {
-                    Favorite.Add((Product)e.NewItems[0]);
-                    _ = Application.Current.MainPage.DisplayAlert("Message", "Prodact added to favorites successfully", "Ok");
-                    OnPropertyChanged();
+                    Favorite.Clear();
                 }
             }
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
-                Favorite.Remove((Product)e.OldItems[0]);
                 OnPropertyChanged();
             }
 
