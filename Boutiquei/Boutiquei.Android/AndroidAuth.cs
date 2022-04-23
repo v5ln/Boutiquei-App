@@ -24,7 +24,10 @@ namespace Boutiquei.Droid
             return user != null;
 
         }
-
+        public void SignOut()
+        {
+            FirebaseAuth.Instance.SignOut();
+        }
         public bool IsSigOut()
         {
             try
