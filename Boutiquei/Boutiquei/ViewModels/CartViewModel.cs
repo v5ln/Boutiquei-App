@@ -49,7 +49,7 @@ namespace Boutiquei.ViewModels
 
         public AppServices Services;
 
-        
+
 
         public ICommand IncreaseCommand { get; }
         public ICommand DecreaseCommand { get; }
@@ -58,6 +58,7 @@ namespace Boutiquei.ViewModels
 
         public CartViewModel()
         {
+
 
             Services = new AppServices();
             Cart = new ObservableCollection<CartProduct>();
@@ -73,7 +74,7 @@ namespace Boutiquei.ViewModels
             CheckoutCommand = new Xamarin.Forms.Command(onCheckoutTapped);
         }
 
-        
+
 
         private void CartChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -106,6 +107,7 @@ namespace Boutiquei.ViewModels
         }
         private async void onCheckoutTapped(object obj)
         {
+           
             if (Total != "0")
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new CheckoutPage());
@@ -115,24 +117,26 @@ namespace Boutiquei.ViewModels
             {
                 _ = Application.Current.MainPage.DisplayAlert("Warning", "Please add products to cart", "Ok");
             }
-         }
+    
+        }
+        
         public async void onIncreaseTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.UpdateIncreaseQuantity( product.PID);
+            await Services.UpdateIncreaseQuantity(product.PID);
             Total = await Services.GetTotalProductsPrice();
         }
         public async void onDecreaseTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.UpdateDecreaseQuantity( product.PID);
+            await Services.UpdateDecreaseQuantity(product.PID);
             Total = await Services.GetTotalProductsPrice();
-            
+
         }
         public async void onDeleteTapped(object _product)
         {
             var product = _product as CartProduct;
-            await Services.DeleteFromCart( product.PID);
+            await Services.DeleteFromCart(product.PID);
             Total = await Services.GetTotalProductsPrice();
         }
     }
