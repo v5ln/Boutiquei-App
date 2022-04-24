@@ -10,6 +10,8 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" BackgroundColor="#FBFBFC">
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
             <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
@@ -88,6 +90,6 @@
             <Button Command="{Binding CheckoutCommand}"  BackgroundColor="#242424"  FontFamily="NSB"
                     FontSize="18"
                     TextColor="White" Text="CHECKOUT" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
-        </StackLayout>
+     </StackLayout>   </StackLayout>
     </ContentPage.Content>
 </ContentPage>

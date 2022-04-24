@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
 using System.Windows.Input;
 using System.Collections.Specialized;
+using Plugin.Connectivity;
 
 namespace Boutiquei.ViewModels
 {
@@ -101,11 +102,89 @@ namespace Boutiquei.ViewModels
             FavouriteCommand = new Xamarin.Forms.Command(onFavouriteTapped);
             CartCommand = new Xamarin.Forms.Command(onCartTapped);
 
-             
+            ChickWifiOnStart();
+            ChickWifiContinuously();
 
         }
 
-       
+        private bool _imgIsVisible;
+
+        public bool ImgIsVisible
+        {
+            get => _imgIsVisible;
+            set
+            {
+                _imgIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _contentIsVisible;
+
+        public bool ContentIsVisible
+        {
+            get => _contentIsVisible;
+            set
+            {
+                _contentIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _connection;
+
+        public string Connection
+        {
+            get => _connection;
+            set
+            {
+                _connection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ChickWifiOnStart()
+        {
+
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                ContentIsVisible = true;
+                ImgIsVisible = false;
+            }
+            else
+            {
+                Connection = "Nointernetconnection.png";
+                ContentIsVisible = false;
+                ImgIsVisible = true;
+            }
+        }
+        public void ChickWifiContinuously()
+        {
+            CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+            {
+
+                if (args.IsConnected)
+                {
+
+                    ContentIsVisible = true;
+                    ImgIsVisible = false;
+                    ProductImages.Clear();
+                    ProductSizes.Clear();
+                    ProductColores.Clear();
+                }
+                else
+                {
+                    Connection = "Nointernetconnection.png";
+                    ContentIsVisible = false;
+                    ImgIsVisible = true;
+                    ProductImages.Clear();
+                    ProductSizes.Clear();
+                    ProductColores.Clear();
+                   
+                }
+            };
+        }
         private void productsInCartListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             ObservableCollection<CartProduct> products = (ObservableCollection<CartProduct>)sender;

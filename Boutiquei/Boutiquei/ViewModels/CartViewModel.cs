@@ -12,6 +12,7 @@ using System.Text;
 using System.Collections.Specialized;
 using Boutiquei.Views;
 using Xamarin.Essentials;
+using Plugin.Connectivity;
 
 namespace Boutiquei.ViewModels
 {
@@ -72,8 +73,83 @@ namespace Boutiquei.ViewModels
             DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
             DeleteCommand = new Xamarin.Forms.Command(onDeleteTapped);
             CheckoutCommand = new Xamarin.Forms.Command(onCheckoutTapped);
+
+            ChickWifiOnStart();
+            ChickWifiContinuously();
+        }
+        private bool _imgIsVisible;
+
+        public bool ImgIsVisible
+        {
+            get => _imgIsVisible;
+            set
+            {
+                _imgIsVisible = value;
+                OnPropertyChanged();
+            }
         }
 
+        private bool _contentIsVisible;
+
+        public bool ContentIsVisible
+        {
+            get => _contentIsVisible;
+            set
+            {
+                _contentIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _connection;
+
+        public string Connection
+        {
+            get => _connection;
+            set
+            {
+                _connection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ChickWifiOnStart()
+        {
+
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                ContentIsVisible = true;
+                ImgIsVisible = false;
+            }
+            else
+            {
+                Connection = "Nointernetconnection.png";
+                ContentIsVisible = false;
+                ImgIsVisible = true;
+            }
+        }
+        public void ChickWifiContinuously()
+        {
+            CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+            {
+
+                if (args.IsConnected)
+                {
+
+                    ContentIsVisible = true;
+                    ImgIsVisible = false;
+                    cartFromAPI.Clear();
+                }
+                else
+                {
+                    Connection = "Nointernetconnection.png";
+                    ContentIsVisible = false;
+                    ImgIsVisible = true;
+                    cartFromAPI.Clear();
+                }
+            };
+        }
 
 
         private void CartChanged(object sender, NotifyCollectionChangedEventArgs e)

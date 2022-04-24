@@ -11,7 +11,10 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout BackgroundColor="#f9f9f9">
-            <CollectionView ItemsSource="{Binding Orders}" ItemSizingStrategy="MeasureAllItems ">
+
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+          
+                <CollectionView ItemsSource="{Binding Orders}" IsVisible="{Binding ContentIsVisible}" ItemSizingStrategy="MeasureAllItems ">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>

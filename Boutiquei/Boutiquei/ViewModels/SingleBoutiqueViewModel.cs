@@ -8,6 +8,7 @@ using Boutiquei.Services;
 using Boutiquei.ViewModels;
 using Boutiquei.Views;
 using MvvmHelpers;
+using Plugin.Connectivity;
 using Xamarin.Forms;
 [assembly: Xamarin.Forms.Dependency(typeof(SingleBoutiqueViewModel))]
 namespace Boutiquei.ViewModels
@@ -62,12 +63,85 @@ namespace Boutiquei.ViewModels
             //Products.Add(new ProductModel { Id = "p14", PName = "Product 14", PPrice = "55", StoreID = "s3", ProductImage = image6 });
             //Products.Add(new ProductModel { Id = "p15", PName = "Product 15", PPrice = "44", StoreID = "s3", ProductImage = image7 });
             //Products.Add(new ProductModel { Id = "p16", PName = "Product 16", PPrice = "33", StoreID = "s3", ProductImage = image5 });
-
+            ChickWifiOnStart();
+            ChickWifiContinuously();
 
 
         }
 
+        private bool _imgIsVisible;
 
+        public bool ImgIsVisible
+        {
+            get => _imgIsVisible;
+            set
+            {
+                _imgIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _contentIsVisible;
+
+        public bool ContentIsVisible
+        {
+            get => _contentIsVisible;
+            set
+            {
+                _contentIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _connection;
+
+        public string Connection
+        {
+            get => _connection;
+            set
+            {
+                _connection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ChickWifiOnStart()
+        {
+
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                ContentIsVisible = true;
+                ImgIsVisible = false;
+            }
+            else
+            {
+                Connection = "Nointernetconnection.png";
+                ContentIsVisible = false;
+                ImgIsVisible = true;
+            }
+        }
+        public void ChickWifiContinuously()
+        {
+            CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+            {
+
+                if (args.IsConnected)
+                {
+
+                    ContentIsVisible = true;
+                    ImgIsVisible = false;
+                    Products.Clear();
+                }
+                else
+                {
+                    Connection = "Nointernetconnection.png";
+                    ContentIsVisible = false;
+                    ImgIsVisible = true;
+                    Products.Clear();
+                }
+            };
+        }
         private Product previousSelected;
         Product selectedProduct;
         public Product SelectedProduct

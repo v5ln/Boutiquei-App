@@ -11,7 +11,10 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" >
+
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+                <StackLayout Orientation="Horizontal" >
                 <Label Text="Shipping Address" TextColor="#909090" FontSize="18" FontFamily="NSS" Margin="10"/>
                 <Button Text="Edit" Command="{Binding EditCommand}"
                         HorizontalOptions="EndAndExpand" BackgroundColor="#C4C4C4" TextColor="Black" BorderWidth="1" BorderColor="Transparent" Margin="20,5,20,0" CornerRadius="8" Padding="20,10"/>
@@ -54,6 +57,7 @@
             </Frame>
             <Button  BackgroundColor="#242424" Text="SUBMIT ORDER" CornerRadius="8" Padding="0,17,0,17" Margin="20"
                      Command="{Binding OrderCommand }"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

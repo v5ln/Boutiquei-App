@@ -12,9 +12,10 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
 
-        
-        <ScrollView>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+            <ScrollView>
         
             <StackLayout Orientation="Vertical">
                 <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
@@ -58,6 +59,6 @@
             </StackLayout>
             </ScrollView>
         <Button  BackgroundColor="#242424" Command="{Binding SaveCommand}" Text="SAVE ADDRESS" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
-           </StackLayout>
+           </StackLayout></StackLayout>
     </ContentPage.Content>
 </ContentPage>

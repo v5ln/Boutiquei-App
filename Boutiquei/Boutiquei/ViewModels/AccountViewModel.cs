@@ -5,6 +5,7 @@ using Boutiquei.Models;
 using Boutiquei.Services;
 using Boutiquei.Views;
 using MvvmHelpers;
+using Plugin.Connectivity;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -47,10 +48,81 @@ namespace Boutiquei.ViewModels
             LogOutCommand = new Command(OnLogoutTapped);
             OrdersCommand = new Command(OnOrdersTapped);
             AddressesCommand = new Command(OnAddressesTapped);
-
+            ChickWifiOnStart();
+            ChickWifiContinuously();
 
         }
+        private bool _imgIsVisible;
 
+        public bool ImgIsVisible
+        {
+            get => _imgIsVisible;
+            set
+            {
+                _imgIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _contentIsVisible;
+
+        public bool ContentIsVisible
+        {
+            get => _contentIsVisible;
+            set
+            {
+                _contentIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _connection;
+
+        public string Connection
+        {
+            get => _connection;
+            set
+            {
+                _connection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ChickWifiOnStart()
+        {
+
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                ContentIsVisible = true;
+                ImgIsVisible = false;
+            }
+            else
+            {
+                Connection = "Nointernetconnection.png";
+                ContentIsVisible = false;
+                ImgIsVisible = true;
+            }
+        }
+        public void ChickWifiContinuously()
+        {
+            CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+            {
+
+                if (args.IsConnected)
+                {
+
+                    ContentIsVisible = true;
+                    ImgIsVisible = false;
+                }
+                else
+                {
+                    Connection = "Nointernetconnection.png";
+                    ContentIsVisible = false;
+                    ImgIsVisible = true;
+                }
+            };
+        }
         private async void OnAddressesTapped(object obj)
         {
             await Shell.Current.Navigation.PushAsync(new AddressListPage());

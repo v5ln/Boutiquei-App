@@ -46,7 +46,7 @@ namespace Boutiquei.ViewModels
 
         public BotiquesViewModel()
         {
-
+           
             _ = AccessToken();
             Auth = DependencyService.Get<IGoogleAuth>();
             Boutique = new ObservableCollection<Store>();
@@ -109,12 +109,17 @@ namespace Boutiquei.ViewModels
                 
                 ContentIsVisible = true;
                 ImgIsVisible = false;
+               
+
+
             }
             else
             {
                 Connection = "Nointernetconnection.png";
                 ContentIsVisible = false;
                 ImgIsVisible = true;
+                
+
             }
         }
         public void ChickWifiContinuously()
@@ -127,12 +132,16 @@ namespace Boutiquei.ViewModels
                    
                     ContentIsVisible = true;
                     ImgIsVisible = false;
+                    Boutique.Clear();
                 }
                 else
                 {
                     Connection = "Nointernetconnection.png";
                     ContentIsVisible = false;
                     ImgIsVisible = true;
+
+                    Boutique.Clear();
+
                 }
             };
         }
@@ -186,7 +195,7 @@ namespace Boutiquei.ViewModels
         {
             IsBusy = true;
 
-            await Task.Delay(2000);
+            await Task.Delay(20);
 
             Boutique.Clear();
             Load();

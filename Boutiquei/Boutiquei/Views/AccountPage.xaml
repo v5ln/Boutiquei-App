@@ -12,7 +12,9 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Margin="0,30,0,0"
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+                <StackLayout Margin="0,30,0,0"
                          HorizontalOptions="Center"
                          BindingContext="{Binding User}">
                 <Label HorizontalOptions="Center"
@@ -59,7 +61,7 @@
                     CornerRadius="8"
                     Padding="0,17,0,17"
                     Margin="20"
-                    VerticalOptions="EndAndExpand"/>
+                    VerticalOptions="EndAndExpand"/></StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

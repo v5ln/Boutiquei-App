@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Boutiquei.Views;
+using MvvmHelpers;
+using Plugin.Connectivity;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Boutiquei.ViewModels
 {
-    public class LoginViewModel 
+    public class LoginViewModel : BaseViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private string email;
@@ -42,8 +44,81 @@ namespace Boutiquei.ViewModels
             auth = DependencyService.Get<IGoogleAuth>();
             LoginCommand = new Command(OnLoginTapped);
             SignUpCommmand = new Command(OnSignUpTapped);
+
+            ChickWifiOnStart();
+            ChickWifiContinuously();
+        }
+        private bool _imgIsVisible;
+
+        public bool ImgIsVisible
+        {
+            get => _imgIsVisible;
+            set
+            {
+                _imgIsVisible = value;
+                OnPropertyChanged();
+            }
         }
 
+        private bool _contentIsVisible;
+
+        public bool ContentIsVisible
+        {
+            get => _contentIsVisible;
+            set
+            {
+                _contentIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _connection;
+
+        public string Connection
+        {
+            get => _connection;
+            set
+            {
+                _connection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ChickWifiOnStart()
+        {
+
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                ContentIsVisible = true;
+                ImgIsVisible = false;
+            }
+            else
+            {
+                Connection = "Nointernetconnection.png";
+                ContentIsVisible = false;
+                ImgIsVisible = true;
+            }
+        }
+        public void ChickWifiContinuously()
+        {
+            CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+            {
+
+                if (args.IsConnected)
+                {
+
+                    ContentIsVisible = true;
+                    ImgIsVisible = false;
+                }
+                else
+                {
+                    Connection = "Nointernetconnection.png";
+                    ContentIsVisible = false;
+                    ImgIsVisible = true;
+                }
+            };
+        }
         private void OnSignUpTapped(object obj)
         {
             Application.Current.MainPage = new SignUpPage();

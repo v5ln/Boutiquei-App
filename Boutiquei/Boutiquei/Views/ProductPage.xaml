@@ -8,37 +8,40 @@
 
     
     <ContentPage.Content>
-        <Grid>
-            <ScrollView Orientation="Vertical">
-                <StackLayout >
-                    <CarouselView ItemsSource="{Binding ProductImages}"
+        
+            <Grid>
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+                <ScrollView Orientation="Vertical">
+                    <StackLayout >
+                        <CarouselView ItemsSource="{Binding ProductImages}"
                                   HeightRequest="380"
                                   IsBounceEnabled="False"
                                   Loop="False"
                                   IsTabStop="True"
                                   IsScrollAnimated="True">
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Image
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Image
                                         Aspect="Fill"
                                         Source="{Binding Pimg}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
-                    <Label Text="{Binding Product.PName}"
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <Label Text="{Binding Product.PName}"
                            Margin="25,25,0,10"
                            FontFamily="MWR"
                            FontSize="24"
                            LineBreakMode="WordWrap"/>
-                    <StackLayout Orientation="Horizontal" Margin="25,0,0,10">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                        <Label Text="₪" FontSize="30" FontFamily="NSB" TextColor="#303030"/>
-                        <Label Text="{Binding Product.Price}" FontSize="30" FontFamily="NSB" TextColor="#303030"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,17,0">
-                            <Button CornerRadius="5"
+                        <StackLayout Orientation="Horizontal" Margin="25,0,0,10">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                <Label Text="₪" FontSize="30" FontFamily="NSB" TextColor="#303030"/>
+                                <Label Text="{Binding Product.Price}" FontSize="30" FontFamily="NSB" TextColor="#303030"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,17,0">
+                                <Button CornerRadius="5"
                                     Text="+"
                                     Command="{Binding IncreaseCommand}"
                                     FontFamily="NSB"
@@ -48,12 +51,12 @@
                                     WidthRequest="30"
                                     HeightRequest="30"
                                     HorizontalOptions="Start"/>
-                            <Label Text="{Binding Quantity}"
+                                <Label Text="{Binding Quantity}"
                                    FontFamily="NSB"
                                    TextColor="#242424"
                                    Margin="15,0"
                                    FontSize="18"/>
-                            <Button CornerRadius="5"
+                                <Button CornerRadius="5"
                                     Text="-"
                                     Command="{Binding DecreaseCommand}"
                                     FontFamily="NSB"
@@ -63,27 +66,27 @@
                                     WidthRequest="30"
                                     HeightRequest="30"
                                     HorizontalOptions="End"/>
+                            </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                    <CollectionView Margin="25,0,0,5"
+                        <CollectionView Margin="25,0,0,5"
                                     HeightRequest="34"
                                     ItemsSource="{Binding ProductColores}"
                                     SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
                                     SelectionMode="Single">
-                        <CollectionView.ItemsLayout>
+                            <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid
                                     Margin="0,0,30,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="34"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="34"/>
-                                    </Grid.ColumnDefinitions>
-                                            <StackLayout Margin="0,0,0,1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="34"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="34"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Margin="0,0,0,1">
                                             <Frame HasShadow="False"
                                                BorderColor="Black"
                                                CornerRadius="17"
@@ -92,11 +95,11 @@
                                                Padding="0"
                                                BackgroundColor="{Binding PColor}"/>
                                         </StackLayout>
-                                </Grid>
-                            </DataTemplate> 
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <Picker Title="Size"
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Picker Title="Size"
                             TitleColor="Black"
                             FontSize="18"
                             FontFamily="NSR"
@@ -104,22 +107,22 @@
                             ItemDisplayBinding="{Binding PSize}"
                             VerticalOptions="StartAndExpand"
                             SelectedItem="{Binding SelectedSize}">
-                    </Picker>
-                </StackLayout>
-            </ScrollView>
-            <StackLayout Orientation="Horizontal" Margin="25,30" VerticalOptions="End">
-                <Button  BackgroundColor="#F0F0F0"
+                        </Picker>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout Orientation="Horizontal" Margin="25,30" VerticalOptions="End">
+                    <Button  BackgroundColor="#F0F0F0"
                          CornerRadius="8"
                          WidthRequest="60"
                          HeightRequest="60"
                          Margin="0,0,15,0"
                          Command="{Binding FavouriteCommand}">
-                    <Button.ImageSource>
-                        <FontImageSource FontFamily="{Binding FavBtn}"
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="{Binding FavBtn}"
                                  Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"/>
-                    </Button.ImageSource>
-                </Button>
-                <Button  BackgroundColor="#242424"
+                        </Button.ImageSource>
+                    </Button>
+                    <Button  BackgroundColor="#242424"
                          Text="ADD TO CART"
                          FontFamily="NSB"
                          FontSize="18"
@@ -128,6 +131,7 @@
                          HorizontalOptions="FillAndExpand"
                          Margin="0"
                          Command="{Binding CartCommand}"/>
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

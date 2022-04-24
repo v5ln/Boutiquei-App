@@ -12,7 +12,9 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Orientation="Vertical">
-            <CollectionView
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+             
+                <CollectionView IsVisible="{Binding ContentIsVisible}"
                     BackgroundColor="#FBFBFC"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Favorite}"

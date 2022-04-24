@@ -10,7 +10,9 @@
         </ContentPage.BindingContext>
         <ContentPage.Content>
         <StackLayout>
-            <StackLayout>
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+               
                 <StackLayout Margin="20,20,20,20">
            
                     <Label Text="Welcome " TextColor="#303030" FontSize="24" FontFamily="MWB"/>
