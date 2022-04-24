@@ -81,5 +81,10 @@
     <EmbeddedResource Include="Resources\Fonts\NunitoSans-Regular.ttf" />
     <EmbeddedResource Include="Resources\Fonts\NunitoSans-SemiBold.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Boutiquei.Models;
 using Boutiquei.Views;
@@ -16,15 +17,41 @@ namespace Boutiquei.Services
 {
     public class AppServices
     {
-        FirebaseClient firebaseClient = new FirebaseClient("https://boutiquei-54faf-default-rtdb.firebaseio.com/");
 
+        private static string firebaseURL = "https://boutiquei-54faf-default-rtdb.firebaseio.com/";
+        FirebaseClient firebaseClient = new FirebaseClient(firebaseURL);
+
+        public static void CheckURLValid(string firebaseURL, out Uri resultURI)
+        {
+            Uri uriResult;
+            bool result = Uri.TryCreate(firebaseURL, UriKind.Absolute, out uriResult)
+                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            resultURI = null;
+            if (result == false)
+            {
+                throw new Exception("Firebase URL not valid");
+            }
+            
+        }
+    
         //
 
         private static string userID { get; set; }
         public static string Token { get; set; }
         public AppServices()
         {
-            _ = LoadToken();
+            try
+            {
+                Uri uriResult;
+                CheckURLValid(firebaseURL,out uriResult);
+                _ = LoadToken();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("URL validate Exception : " + e.Message);
+                Application.Current.MainPage.DisplayAlert("Pay attention", "Firebase URL not valid", "Ok");
+            }
+            
         }
 
         private async Task LoadToken()
@@ -37,9 +64,21 @@ namespace Boutiquei.Services
 
         public ObservableCollection<Store> GetAllBoutiques()
         {
-            return firebaseClient.Child("Stores").Child("Boutiques").AsObservable<Store>().AsObservableCollection();
+
+             
+            var Boutiquies =  firebaseClient.Child("Stores").Child("Boutiques").AsObservable<Store>().AsObservableCollection();
+      /*      if(Boutiquies == null)
+            {
+                throw new Exception("Status code 500");
+            }
+*/
+            return Boutiquies;
+
+
         }
         //
+
+
         public ObservableCollection<Store> GetAllPrands()
         {
             return firebaseClient.Child("Stores").Child("Prands").AsObservable<Store>().AsObservableCollection();

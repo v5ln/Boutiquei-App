@@ -225,8 +225,19 @@ namespace Boutiquei.ViewModels
             Boutique.Add(new StoreModel { BCoverPic = cover, BMainPic = image2, BName = "Nagham Zalabieh", Id = "id", Type = "Boutique" });*/
 
             //Boutique.AddRange(boutiquesServices.GetAllBoutiques().GetAwaiter().GetResult());
-            Boutique = Services.GetAllBoutiques();
-            
+
+           // try
+            //{
+               Boutique = Services.GetAllBoutiques();
+            //}
+           // catch(Exception e)
+           // {
+            //    Console.WriteLine("Exception :" + e.Message);
+              //  Application.Current.MainPage.DisplayAlert("pay attention", "Firebase URL not valid", "Ok");
+
+            //}
+
+
         }
 
         //void DelayLoadMore()
