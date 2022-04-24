@@ -22,7 +22,12 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-                <CollectionView
+
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+
+
+            <CollectionView
+                    IsVisible="{Binding ContentIsVisible}"
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Boutique}"

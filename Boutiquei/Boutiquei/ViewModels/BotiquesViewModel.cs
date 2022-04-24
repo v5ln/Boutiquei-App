@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
 using System.Windows.Input;
 using Xamarin.Essentials;
+using Plugin.Connectivity;
 
 namespace Boutiquei.ViewModels
 {
@@ -56,12 +57,85 @@ namespace Boutiquei.ViewModels
             RefreshCommand = new AsyncCommand(Refresh);
             AccountCommand = new Command(OnAccountTapped);
 
+            ChickWifiOnStart();
+            ChickWifiContinuously();
             //SelectedCommand = new AsyncCommand<object>(Selected);
 
             //LoadMoreCommand = new Command(Load);
             //DelayLoadMoreCommand = new Command(DelayLoadMore);
         }
 
+        private bool _imgIsVisible;
+
+        public bool ImgIsVisible
+        {
+            get => _imgIsVisible;
+            set
+            {
+                _imgIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _contentIsVisible;
+
+        public bool ContentIsVisible
+        {
+            get => _contentIsVisible;
+            set
+            {
+                _contentIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _connection;
+
+        public string Connection
+        {
+            get => _connection;
+            set
+            {
+                _connection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ChickWifiOnStart()
+        {
+
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                
+                ContentIsVisible = true;
+                ImgIsVisible = false;
+            }
+            else
+            {
+                Connection = "Nointernetconnection.png";
+                ContentIsVisible = false;
+                ImgIsVisible = true;
+            }
+        }
+        public void ChickWifiContinuously()
+        {
+            CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+            {
+                 
+                if (args.IsConnected)
+                {
+                   
+                    ContentIsVisible = true;
+                    ImgIsVisible = false;
+                }
+                else
+                {
+                    Connection = "Nointernetconnection.png";
+                    ContentIsVisible = false;
+                    ImgIsVisible = true;
+                }
+            };
+        }
         private async void OnAccountTapped()
         {
             //await Shell.Current.Navigation.PushAsync(new AccountPage());

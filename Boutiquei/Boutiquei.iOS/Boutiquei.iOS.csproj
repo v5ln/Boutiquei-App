@@ -155,4 +155,7 @@
       <Name>Boutiquei</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Nointernetconnection.png" />
+  </ItemGroup>
 </Project>
