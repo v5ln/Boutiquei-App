@@ -66,13 +66,13 @@ namespace Boutiquei.Services
         {
 
              
-            var Boutiquies =  firebaseClient.Child("Stores").Child("Boutiques").AsObservable<Store>().AsObservableCollection();
+            var boutiquies =  firebaseClient.Child("Stores").Child("Boutiques").AsObservable<Store>().AsObservableCollection();
       /*      if(Boutiquies == null)
             {
                 throw new Exception("Status code 500");
             }
 */
-            return Boutiquies;
+            return boutiquies;
 
 
         }
@@ -180,8 +180,8 @@ namespace Boutiquei.Services
 
         public async Task AddToFavourites(Product product)
         {
-            
 
+            //this api is exist :: for editing => call GetFavouriteProductsByUserID() function :
             var product_ = (await firebaseClient
           .Child($"Users/{userID}/Favourite").Child("Products")
          .OnceAsync<CartProduct>()).Where(a => a.Object.PID == product.PID).FirstOrDefault();
@@ -198,8 +198,7 @@ namespace Boutiquei.Services
 
         public async Task AddToCart(CartProduct product )
         {
-            Console.WriteLine(Token);
-            Console.WriteLine(userID);
+           //split update total api from post product to cart :
             await firebaseClient.Child("Users").Child(userID).Child("Cart").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
             string total = firebaseClient.Child($"Users/{userID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
             string newTotal = (Convert.ToInt32(total) + (Convert.ToInt32(product.Price) * Convert.ToInt32(product.Quantity))).ToString();
@@ -212,12 +211,16 @@ namespace Boutiquei.Services
 
         public async Task DeleteFromCart(string PID)
         {
+
+            //this api is exist :: for editing => call GetCartProductsByUserID() function :
             var toUpdate = (await firebaseClient
              .Child($"Users/{userID}/Cart").Child("Products")
              .OnceAsync<CartProduct>()).Where(a => a.Object.PID == PID).FirstOrDefault();
 
             await firebaseClient.Child($"Users/{userID}/Cart").Child("Products").Child(toUpdate.Key).DeleteAsync();
 
+
+            //dublicate code , we will have update total method "use it here":
             string total = firebaseClient.Child($"Users/{userID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
             string newTotal = (Convert.ToInt32(total) - ( Convert.ToInt32(toUpdate.Object.Price) * Convert.ToInt32(toUpdate.Object.Quantity)) ).ToString();
             await firebaseClient
@@ -228,6 +231,8 @@ namespace Boutiquei.Services
 
         public async Task DeleteFromFavourites(string PID)
         {
+
+            //this api is exist :: for editing => call GetFavouriteProductsByUserID() function :
             var toDeletePerson = (await firebaseClient
              .Child($"Users/{userID}/Favourite").Child("Products")
              .OnceAsync<Product>()).Where(a => a.Object.PID == PID).FirstOrDefault();
@@ -240,6 +245,7 @@ namespace Boutiquei.Services
         public async Task UpdateIncreaseQuantity(string PID)
         {
 
+            //this api is exist :: for editing => call GetCartProductsByUserID() function :
             var toUpdate = (await firebaseClient
           .Child($"Users/{userID}/Cart").Child("Products")
              .OnceAsync<CartProduct>()).Where(a => a.Object.PID == PID).FirstOrDefault();
@@ -252,6 +258,7 @@ namespace Boutiquei.Services
                     .Child(toUpdate.Key)
                      .PutAsync(toUpdate.Object);
 
+            //dublicate code , we will have update total method "use it here":
             string total = firebaseClient.Child($"Users/{userID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
             string newTotal = (Convert.ToInt32(total) + Convert.ToInt32(toUpdate.Object.Price)).ToString();
             await firebaseClient
@@ -262,8 +269,9 @@ namespace Boutiquei.Services
         public async Task UpdateDecreaseQuantity( string PID)
         {
 
+            //this api is exist :: for editing => call GetCartProductsByUserID() function :
             var toUpdate = (await firebaseClient
-          .Child($"Users/{userID}/Cart").Child("Products")
+            .Child($"Users/{userID}/Cart").Child("Products")
              .OnceAsync<CartProduct>()).Where(a => a.Object.PID == PID).FirstOrDefault();
             // modify your data (toUpdate is your old object value)
 
@@ -277,6 +285,8 @@ namespace Boutiquei.Services
                       .Child($"Users/{userID}/Cart").Child("Products")
                       .Child(toUpdate.Key)
                       .PutAsync(toUpdate.Object);
+
+                //dublicate code , we will have update total method "use it here":
                 string total = firebaseClient.Child($"Users/{userID}/Cart").Child("Total").OnceSingleAsync<string>().GetAwaiter().GetResult();
                 string newTotal = (Convert.ToInt32(total) - Convert.ToInt32(toUpdate.Object.Price)).ToString();
                 await firebaseClient
@@ -344,6 +354,8 @@ namespace Boutiquei.Services
         public async Task DeleteAddress(string AddressID)
         {
 
+            //this api is exist :: for editing => call GetAllAdressesByUserID() function :
+
             var toDeletePerson = (await firebaseClient
              .Child($"Users/{userID}/").Child("Addresses")
              .OnceAsync<Address>()).Where(a => a.Object.AddressID == AddressID).FirstOrDefault();
@@ -395,10 +407,10 @@ namespace Boutiquei.Services
 
         public async Task<String> TotalProductsQuantity()
         {
-            var d = await firebaseClient.Child($"Users/{userID}/Cart").Child("Products").OnceAsync<CartProduct>();
+            var products = await firebaseClient.Child($"Users/{userID}/Cart").Child("Products").OnceAsync<CartProduct>();
 
 
-            var Quantity = d.Sum(x => decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency));
+            var Quantity = products.Sum(x => decimal.Parse(Convert.ToString(x.Object.Quantity), NumberStyles.Currency));
             // d.Select(x => x.Object.Total = Convert.ToInt32(total * Convert.ToInt32(x.Object.Quantity)));
             return Quantity.ToString();
         }
