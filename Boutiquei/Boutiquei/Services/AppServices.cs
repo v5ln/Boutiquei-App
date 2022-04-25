@@ -29,7 +29,8 @@ namespace Boutiquei.Services
             resultURI = null;
             if (result == false)
             {
-                throw new Exception("Firebase URL not valid");
+                //throw new Exception("Firebase URL not valid");
+                Application.Current.MainPage = new SplashScreenPage();
             }
             
         }

@@ -5,6 +5,7 @@
     x:Class="Boutiquei.Views.OrdersPage"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     Shell.TabBarIsVisible="False"
+    BackgroundColor="White"
     Title="My Orders">
     <ContentPage.BindingContext>
         <viewmodels:OrdersViewModel/>

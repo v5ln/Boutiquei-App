@@ -13,7 +13,7 @@ namespace Boutiquei.ViewModels
 {
     public class AccountViewModel : BaseViewModel
     {
-        private AppServices services;
+        private readonly AppServices services;
 
         private AppUser user;
         public AppUser User

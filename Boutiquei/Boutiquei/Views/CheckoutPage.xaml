@@ -5,6 +5,7 @@
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     xmlns:views="clr-namespace:Boutiquei.Views"
     x:Class="Boutiquei.Views.CheckoutPage"
+    BackgroundColor="White"
     Title="Check Out">
     <ContentPage.BindingContext>
         <viewmodels:CheckoutViewModel/>

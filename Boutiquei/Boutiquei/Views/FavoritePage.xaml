@@ -5,6 +5,7 @@
     x:Class="Boutiquei.Views.FavoritePage"
       xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     Title="Favorite"
+    BackgroundColor="White"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="true">
     <ContentPage.BindingContext>

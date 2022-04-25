@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.SingleBrandPage"
     xmlns:views="clr-namespace:Boutiquei.Views"
+    BackgroundColor="White"
     Title="{Binding Brand.Name}">
     
     <ContentPage.Content>

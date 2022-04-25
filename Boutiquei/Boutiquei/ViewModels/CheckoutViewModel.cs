@@ -236,13 +236,17 @@ namespace Boutiquei.ViewModels
                     OrderStatus = status,
                     Quantity = Quantity
                 };
+            try
+            {
                 await Services.AddtoOrder(order);
                 await Services.DeleteAllProductsInCart();
                 await Services.UpdateUserTotal();
                 Application.Current.MainPage = new NavigationPage(new SuccessPage());
-            
-            
-
+            }
+            catch
+            {
+                await LoadData();
+            }
         }
     }
 }

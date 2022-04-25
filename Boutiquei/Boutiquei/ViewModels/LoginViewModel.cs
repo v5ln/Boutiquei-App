@@ -14,7 +14,6 @@ namespace Boutiquei.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private string email;
         public string Email
         {
@@ -22,7 +21,7 @@ namespace Boutiquei.ViewModels
             set
             {
                 email = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                OnPropertyChanged();
             }
         }
         private string password;
@@ -32,7 +31,7 @@ namespace Boutiquei.ViewModels
             set
             {
                 password = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+                OnPropertyChanged();
             }
         }
         public Command LoginCommand { get; }

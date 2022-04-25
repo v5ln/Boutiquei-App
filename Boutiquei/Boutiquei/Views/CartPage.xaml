@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.CartPage" 
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    BackgroundColor="White"
     Title="Cart">
     <ContentPage.BindingContext>
         <viewmodels:CartViewModel/>

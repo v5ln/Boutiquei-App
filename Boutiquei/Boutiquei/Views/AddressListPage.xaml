@@ -5,6 +5,7 @@
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
     x:Class="Boutiquei.Views.AddressListPage"
     xmlns:views="clr-namespace:Boutiquei.Views"
+    BackgroundColor="White"
     Shell.TabBarIsVisible="False"
     Title="Shipping address">
     <ContentPage.BindingContext>

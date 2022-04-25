@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.ProductPage"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
+    BackgroundColor="White"
     Shell.TabBarIsVisible="False">
 
     
@@ -108,9 +109,7 @@
                             VerticalOptions="StartAndExpand"
                             SelectedItem="{Binding SelectedSize}">
                         </Picker>
-                    </StackLayout>
-                </ScrollView>
-                <StackLayout Orientation="Horizontal" Margin="25,30" VerticalOptions="End">
+                        <StackLayout Orientation="Horizontal" Margin="25,30" VerticalOptions="End">
                     <Button  BackgroundColor="#F0F0F0"
                          CornerRadius="8"
                          WidthRequest="60"
@@ -132,6 +131,10 @@
                          Margin="0"
                          Command="{Binding CartCommand}"/>
                 </StackLayout>
+                    </StackLayout>
+
+                </ScrollView>
+                
             </StackLayout>
         </Grid>
     </ContentPage.Content>
