@@ -194,7 +194,7 @@ namespace Boutiquei.ViewModels
 
         public async Task LoadData()
         {
-            Address = new Address();
+            //Address = new Address();
 
 
             try
@@ -238,10 +238,20 @@ namespace Boutiquei.ViewModels
                 };
             try
             {
-                await Services.AddtoOrder(order);
-                await Services.DeleteAllProductsInCart();
-                await Services.UpdateUserTotal();
-                Application.Current.MainPage = new NavigationPage(new SuccessPage());
+               
+                if (Address==null)
+                {
+                    
+                    _ = Application.Current.MainPage.DisplayAlert("Pay attention", "Please add you address", "Ok");
+                }
+                else
+                {
+                    await Services.AddtoOrder(order);
+                    await Services.DeleteAllProductsInCart();
+                    await Services.UpdateUserTotal();
+                    Application.Current.MainPage = new NavigationPage(new SuccessPage());
+                }
+               
             }
             catch
             {
