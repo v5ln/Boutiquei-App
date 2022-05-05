@@ -54,7 +54,7 @@ namespace Boutiquei.ViewModels
 
             Load();
 
-            RefreshCommand = new AsyncCommand(Refresh);
+           // RefreshCommand = new AsyncCommand(Refresh);
             AccountCommand = new Command(OnAccountTapped);
 
             ChickWifiOnStart();
@@ -191,7 +191,7 @@ namespace Boutiquei.ViewModels
 
 
 
-        async Task Refresh()
+      /*  async Task Refresh()
         {
             IsBusy = true;
 
@@ -201,7 +201,7 @@ namespace Boutiquei.ViewModels
             Load();
 
             IsBusy = false;
-        }
+        }*/
 
         void Load()
         {
@@ -226,14 +226,16 @@ namespace Boutiquei.ViewModels
 
             //Boutique.AddRange(boutiquesServices.GetAllBoutiques().GetAwaiter().GetResult());
 
-           // try
+            // try
             //{
-               Boutique = Services.GetAllBoutiques();
+     
+            Boutique = Services.GetAllBoutiques();
+            
             //}
-           // catch(Exception e)
-           // {
+            // catch(Exception e)
+            // {
             //    Console.WriteLine("Exception :" + e.Message);
-              //  Application.Current.MainPage.DisplayAlert("pay attention", "Firebase URL not valid", "Ok");
+            //  Application.Current.MainPage.DisplayAlert("pay attention", "Firebase URL not valid", "Ok");
 
             //}
 

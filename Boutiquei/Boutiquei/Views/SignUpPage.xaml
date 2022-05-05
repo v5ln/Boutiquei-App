@@ -31,6 +31,11 @@
                         <Button  Command="{Binding SignUpCommad}" FontFamily="NSS" FontSize="18" TextColor="White" BackgroundColor="#242424" Text="SIGNUP" CornerRadius="8" Padding="0,17,0,17" Margin="30,30,30,0"/>
                         <Label HorizontalOptions="Center" Text="Already have account? " TextColor="#808080" FontSize="14" FontFamily="NSS"/>
                         <Button  Command="{Binding LoginCommand}" FontFamily="NSS" FontSize="18" TextColor="#303030" BackgroundColor="White" Text="LOGIN" CornerRadius="8" Padding="0,17,0,17" Margin="30,0,30,20"/>
+                        
+                            <StackLayout Padding="12">
+                                <ActivityIndicator IsVisible="{Binding isBusy_}" IsRunning="{Binding isBusy_}" />
+                            </StackLayout>
+                        
                     </StackLayout>
                 </Frame>
         </StackLayout>

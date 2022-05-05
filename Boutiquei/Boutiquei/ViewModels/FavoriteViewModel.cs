@@ -151,25 +151,35 @@ namespace Boutiquei.ViewModels
             get => selectedProduct;
             set
             {
-                if (value != null)
+                try
                 {
-
-                    if (value.BID[0] == 'B')
+                    if (value != null)
                     {
-                        TYPE_OF_STORE = "Boutique";
-                    }
-                    else
-                    {
-                        TYPE_OF_STORE = "Brand";
-                    }
-                    Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value, TYPE_OF_STORE));
-                    previousSelected = value;
 
-                    value = null;
+                        if (value.BID[0] == 'B')
+                        {
+                            TYPE_OF_STORE = "Boutique";
+                        }
+                        else
+                        {
+                            TYPE_OF_STORE = "Brand";
+                        }
+
+                        Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value, TYPE_OF_STORE));
+
+
+                        previousSelected = value;
+
+                        value = null;
+                    }
+                    selectedProduct = value;
+                    OnPropertyChanged();
+
                 }
-                selectedProduct = value;
-                OnPropertyChanged();
-
+                catch (Exception e)
+                {
+                    Console.WriteLine("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH " + e.Message);
+                }
             }
         }
     }

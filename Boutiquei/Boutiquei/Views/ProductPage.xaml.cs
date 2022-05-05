@@ -22,9 +22,10 @@ namespace Boutiquei.Views
                 BrandProductViewModel brandProductViewModel = new BrandProductViewModel(product);
                 BindingContext = brandProductViewModel;
             }
-            
-           
+
+          
         }
+
         void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var previous = e.PreviousSelection;

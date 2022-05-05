@@ -22,7 +22,7 @@
                     SelectionMode="Single">
                         <CollectionView.EmptyView>
                             <StackLayout Padding="12">
-                                <Label HorizontalOptions="Center" Text="There Is No products" />
+                                <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
                             </StackLayout>
                         </CollectionView.EmptyView>
                         <CollectionView.ItemsLayout>

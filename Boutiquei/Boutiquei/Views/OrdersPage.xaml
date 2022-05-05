@@ -16,6 +16,11 @@
             <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
           
                 <CollectionView ItemsSource="{Binding Orders}" IsVisible="{Binding ContentIsVisible}" ItemSizingStrategy="MeasureAllItems ">
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="12">
+                        <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>

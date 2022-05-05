@@ -12,11 +12,14 @@ using Command = MvvmHelpers.Commands.Command;
 using System.Windows.Input;
 using System.Collections.Specialized;
 using Plugin.Connectivity;
+using System.Threading;
 
 namespace Boutiquei.ViewModels
 {
     public class ProductViewModel : BaseViewModel
     {
+
+
         public Product Product { get; set; }
         public ObservableCollection<PImgs> ProductImages { get; set; }
         public ObservableCollection<Sizes> ProductSizes { get; set; }
@@ -256,6 +259,7 @@ namespace Boutiquei.ViewModels
             };
             isInCart = true;
             await Services.AddToCart(cartProduct);
+           
             await Application.Current.MainPage.DisplayAlert("Message", "Product added to the cart successfully", "Ok");
         }
 

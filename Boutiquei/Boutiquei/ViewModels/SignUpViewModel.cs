@@ -24,6 +24,7 @@ namespace Boutiquei.ViewModels
 
         public SignUpViewModel()
         {
+            IsBusy_ = false;
             services = new AppServices();
             auth = DependencyService.Get<IGoogleAuth>();
             SignUpCommad = new Command(OnSignUpTapped);
@@ -55,8 +56,19 @@ namespace Boutiquei.ViewModels
                 OnPropertyChanged();
             }
         }
+        private bool isBusy;
 
-        private string _connection;
+        public bool IsBusy_
+        {
+            get => isBusy;
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged();
+            }
+        }
+     
+    private string _connection;
 
         public string Connection
         {
@@ -143,7 +155,7 @@ namespace Boutiquei.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Faild", "Something went wrong, Please Try Again", "Ok");
                 Application.Current.MainPage = new SignUpPage();
             }
-
+            IsBusy_ = true;
         }
 
         

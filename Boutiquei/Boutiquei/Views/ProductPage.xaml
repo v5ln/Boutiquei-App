@@ -5,11 +5,12 @@
     x:Class="Boutiquei.Views.ProductPage"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     BackgroundColor="White"
-    Shell.TabBarIsVisible="True">
- 
+   >
+
     <ContentPage.Content>
-        
-            <Grid>
+
+        <Grid>
+
             <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
             <StackLayout IsVisible="{Binding ContentIsVisible}">
                 <ScrollView Orientation="Vertical">
@@ -20,8 +21,14 @@
                                   Loop="False"
                                   IsTabStop="True"
                                   IsScrollAnimated="True">
+                            <CarouselView.EmptyView>
+                                <StackLayout Padding="12">
+                                    <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" WidthRequest="30" HeightRequest="30"/>
+                                </StackLayout>
+                            </CarouselView.EmptyView>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
+                                    
                                     <Grid>
                                         <Image
                                         Aspect="Fill"
@@ -74,6 +81,12 @@
                                     SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
                                     SelectionMode="Single"
                                     >
+
+                            <CollectionView.EmptyView>
+                                <StackLayout Padding="12">
+                                    <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" WidthRequest="20" HeightRequest="20"/>
+                                </StackLayout>
+                            </CollectionView.EmptyView>
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>

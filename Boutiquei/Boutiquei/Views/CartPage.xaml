@@ -20,8 +20,8 @@
                     x:Name="ProductsCollection">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
-                        <Label HorizontalOptions="Center" Text="There Is No Product In Cart"/>
-                    </StackLayout>
+                            <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black"/>
+                        </StackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

@@ -13,6 +13,7 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Orientation="Vertical">
+
             <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
              
                 <CollectionView IsVisible="{Binding ContentIsVisible}"
@@ -24,7 +25,7 @@
                     SelectionMode="Single">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
-                        <Label HorizontalOptions="Center" Text="There Is No Product In Favorite " />
+                        <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
                     </StackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>

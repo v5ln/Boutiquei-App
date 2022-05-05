@@ -26,5 +26,7 @@ namespace Boutiquei.Views
         {
             await Shell.Current.Navigation.PushAsync(new FavoritePage());
         }
+
+       
     }
 }

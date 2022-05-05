@@ -14,6 +14,7 @@
         <StackLayout>
             <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
             <StackLayout IsVisible="{Binding ContentIsVisible}">
+                
                 <StackLayout Margin="0,30,0,0"
                          HorizontalOptions="Center"
                          BindingContext="{Binding User}">
