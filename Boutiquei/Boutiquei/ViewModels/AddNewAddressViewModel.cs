@@ -106,11 +106,11 @@ namespace Boutiquei.ViewModels
 
         private async void OnSaveTapped(object obj)
         {
-            if (Name == "" ||
-                Address == "" ||
-                City == "" ||
-                District == "" ||
-                Phone == "")
+            if (Name == null ||
+                Address == null ||
+                City == null ||
+                District == null ||
+                Phone == null)
             {
                 await Application.Current.MainPage.DisplayAlert("Faild", "You must enter all field", "Ok");
                 return;

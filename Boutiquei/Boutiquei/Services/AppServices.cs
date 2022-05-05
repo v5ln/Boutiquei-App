@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Boutiquei.BoutiqueUserExceptions;
 using Boutiquei.Models;
 using Boutiquei.Views;
 using Firebase.Database;
@@ -453,6 +454,11 @@ namespace Boutiquei.Services
 
             var AllAddresses = await firebaseClient.Child($"Users/{userID}/").Child("Addresses").OnceAsync<Address>();
             Address defultAddress = AllAddresses.Where(x => x.Object.IsDefault == "1").Select(itm => itm.Object).FirstOrDefault();
+
+            if (defultAddress == null)
+            {
+                throw new NotFoundException("StatusCode from GetTheDefultAddress API : " + ((int)HttpStatusCode.NOT_FOUND));
+            }
             return defultAddress;
         }
 
@@ -462,7 +468,7 @@ namespace Boutiquei.Services
             //Task.Run(async () => { await LoadToken(); }).Wait();
             user.Token = Token;
             await firebaseClient.Child("Users").PostAsync(JsonConvert.SerializeObject(user));
-
+     
             //var key = (await firebaseClient
             // .Child("Users")
             // .OnceAsync<AppUser>()).Where(a => a.Object.Token == accessToken).FirstOrDefault();
@@ -483,4 +489,13 @@ namespace Boutiquei.Services
            await firebaseClient.Child($"Users/{userID}").Child("Cart").Child("Total").PutAsync("0");
         }
     }
+
+    public enum HttpStatusCode
+    {
+        OK = 200,
+        BAD_REQUEST = 400,
+        NOT_FOUND = 404,
+        INTERNAL_SERVER = 500,
+    }
 }
+ 

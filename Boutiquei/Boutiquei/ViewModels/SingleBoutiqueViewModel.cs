@@ -144,6 +144,7 @@ namespace Boutiquei.ViewModels
         }
         private Product previousSelected;
         Product selectedProduct;
+        string TYPE_OF_STORE = "Boutique";
         public Product SelectedProduct
         {
             get => selectedProduct;
@@ -152,8 +153,8 @@ namespace Boutiquei.ViewModels
                 if (value != null)
                 {
 
-
-                    Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value));
+                    
+                    Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value, TYPE_OF_STORE));
                     previousSelected = value;
 
                     value = null;

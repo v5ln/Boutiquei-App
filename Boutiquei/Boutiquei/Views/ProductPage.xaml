@@ -5,9 +5,8 @@
     x:Class="Boutiquei.Views.ProductPage"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     BackgroundColor="White"
-    Shell.TabBarIsVisible="False">
-
-    
+    Shell.TabBarIsVisible="True">
+ 
     <ContentPage.Content>
         
             <Grid>
@@ -73,31 +72,52 @@
                                     HeightRequest="34"
                                     ItemsSource="{Binding ProductColores}"
                                     SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
-                                    SelectionMode="Single">
+                                    SelectionMode="Single"
+                                    >
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid
-                                    Margin="0,0,30,0">
+                                    <Grid Margin="0,0,30,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="34"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="34"/>
                                         </Grid.ColumnDefinitions>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal" />
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="#FFDEDEDE" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
                                         <StackLayout Margin="0,0,0,1">
                                             <Frame HasShadow="False"
-                                               BorderColor="Black"
+                                               BorderColor="#000000"
                                                CornerRadius="17"
                                                HeightRequest="34"
                                                WidthRequest="34"
                                                Padding="0"
-                                               BackgroundColor="{Binding PColor}"/>
+                                               BackgroundColor="{Binding PColor}"
+                                                       />
                                         </StackLayout>
                                     </Grid>
                                 </DataTemplate>
+
+                                <!-- <Grid  HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                    >
+                                       
+                                       
+                                    </Grid>
+--> 
+                            
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                         <Picker Title="Size"
@@ -110,7 +130,7 @@
                             SelectedItem="{Binding SelectedSize}">
                         </Picker>
                         <StackLayout Orientation="Horizontal" Margin="25,30" VerticalOptions="End">
-                    <Button  BackgroundColor="#F0F0F0"
+                         <Button  BackgroundColor="#242424"
                          CornerRadius="8"
                          WidthRequest="60"
                          HeightRequest="60"

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Boutiquei.Models;
@@ -12,10 +15,9 @@ using Command = MvvmHelpers.Commands.Command;
 using System.Windows.Input;
 using System.Collections.Specialized;
 using Plugin.Connectivity;
-
 namespace Boutiquei.ViewModels
 {
-    public class ProductViewModel : BaseViewModel
+    public class BrandProductViewModel : BaseViewModel
     {
         public Product Product { get; set; }
         public ObservableCollection<PImgs> ProductImages { get; set; }
@@ -77,7 +79,7 @@ namespace Boutiquei.ViewModels
         public ICommand CartCommand { get; }
 
 
-        public ProductViewModel(Product product)
+        public BrandProductViewModel(Product product)
         {
             Product = new Product();
             Product = product;
@@ -87,9 +89,9 @@ namespace Boutiquei.ViewModels
             productsInFav = new ObservableCollection<Product>();
             Quantity = "1";
 
-            ProductImages = Services.GetAllBoutiqueProductImgs(Product.BID, Product.PID);
-            ProductSizes = Services.GetAllBoutiqueProductSizes(Product.BID, Product.PID);
-            ProductColores = Services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
+            ProductImages = Services.GetAllBrandProductImgs(Product.BID, Product.PID);
+            ProductSizes = Services.GetAllBrandProductSizes(Product.BID, Product.PID);
+            ProductColores = Services.GetAllBrandProductColors(Product.BID, Product.PID);
             //FavBtn = "FAR";
 
             productsInFav = Services.GetFavouriteProductsByUserID();
@@ -181,7 +183,7 @@ namespace Boutiquei.ViewModels
                     ProductImages.Clear();
                     ProductSizes.Clear();
                     ProductColores.Clear();
-                   
+
                 }
             };
         }
@@ -212,9 +214,9 @@ namespace Boutiquei.ViewModels
         private void productsInFavListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             FavBtn = "FAR";
-            
+
             ObservableCollection<Product> products = (ObservableCollection<Product>)sender;
-            
+
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 if (e.NewItems[0].ToString() != "Boutiquei.Models.Product")
@@ -272,14 +274,14 @@ namespace Boutiquei.ViewModels
             else
             {
                 FavBtn = "FAR";
-                await Services.DeleteFromFavourites( Product.PID);
+                await Services.DeleteFromFavourites(Product.PID);
             }
 
         }
 
         private void onIncreaseTapped(object _product)
         {
-            Quantity = (Convert.ToInt32(Quantity)+1).ToString();
+            Quantity = (Convert.ToInt32(Quantity) + 1).ToString();
         }
 
         private async void onDecreaseTapped(object _product)

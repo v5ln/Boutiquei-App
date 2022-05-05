@@ -110,21 +110,27 @@ namespace Boutiquei.ViewModels
 
         private async void OnSignUpTapped(object obj)
         {
-            if (Email == "")
-            {
-                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
-                return;
-            }
-            if (Password == "")
-            {
-                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
-                return;
-            }
-            if (Name == "")
+            if (Name == null)
             {
                 await Application.Current.MainPage.DisplayAlert("Faild", "You should write the name", "Ok");
                 return;
             }
+            if (Email == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the email", "Ok");
+                return;
+            }
+            if (Password == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You should write the password", "Ok");
+                return;
+            }
+            if (Password.Length<8)
+            {
+                await Application.Current.MainPage.DisplayAlert("Faild", "You'r password length must be grate or equle to 8", "Ok");
+                return;
+            }
+ 
             try
             {
                 var token = await auth.SignUpWithEmailAndPassword(Email, Password);

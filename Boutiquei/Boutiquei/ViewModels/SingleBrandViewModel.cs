@@ -3,10 +3,13 @@ using System.Collections.ObjectModel;
 using Boutiquei.Models;
 using Boutiquei.Services;
 using Boutiquei.ViewModels;
+using Boutiquei.Views;
 using MvvmHelpers;
 using Plugin.Connectivity;
-
+using static System.Net.Mime.MediaTypeNames;
+using Xamarin.Forms;
 [assembly: Xamarin.Forms.Dependency(typeof(SingleBrandViewModel))]
+ 
 namespace Boutiquei.ViewModels
 {
     public class SingleBrandViewModel : BaseViewModel
@@ -24,6 +27,29 @@ namespace Boutiquei.ViewModels
 
             ChickWifiOnStart();
             ChickWifiContinuously();
+        }
+
+        private Product previousSelected;
+        Product selectedProduct;
+        string TYPE_OF_STORE = "Brand";
+        public Product SelectedProduct
+        {
+            get => selectedProduct;
+            set
+            {
+                if (value != null)
+                {
+
+
+                    _ = Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value,TYPE_OF_STORE));
+                    previousSelected = value;
+
+                    value = null;
+                }
+                selectedProduct = value;
+                OnPropertyChanged();
+
+            }
         }
 
         private bool _imgIsVisible;
@@ -99,5 +125,7 @@ namespace Boutiquei.ViewModels
                 }
             };
         }
+
+       
     }
 }

@@ -19,7 +19,9 @@
                     BackgroundColor="#FBFBFC"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Favorite}"
-                    x:Name="ProductsCollection">
+                    x:Name="ProductsCollection"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                    SelectionMode="Single">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
                         <Label HorizontalOptions="Center" Text="There Is No Product In Favorite " />

@@ -5,8 +5,9 @@
     x:Class="Boutiquei.Views.SingleBoutiquePage"
     xmlns:views="clr-namespace:Boutiquei.Views"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+       
     Title="{Binding Boutique.Name}">
-
+   
     <ContentPage.Content>
         <StackLayout>
             <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>

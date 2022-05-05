@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Boutiquei.BoutiqueUserExceptions;
 using Boutiquei.Models;
 using Boutiquei.Services;
 using Boutiquei.Views;
@@ -199,6 +200,8 @@ namespace Boutiquei.ViewModels
 
             try
             {
+                Total = await Services.GetTotalProductsPrice();
+                Quantity = await Services.TotalProductsQuantity();
                 Address = await Services.GetTheDefultAddress();
                 OnPropertyChanged();
                 if (Address == null)
@@ -213,14 +216,20 @@ namespace Boutiquei.ViewModels
                     IsNull = false;
                     OnPropertyChanged();
                 }
-                Total = await Services.GetTotalProductsPrice();
-                Quantity = await Services.TotalProductsQuantity();
+               
+            }
+            catch (NotFoundException e)
+            {
+                Address=null;
+                Console.WriteLine("NotFoundException message : " + e.Message);
+               
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception message : " + e.Message);
             }
 
+           
         }
 
         
