@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Boutiquei.Models;
-using System.Collections.Generic;
 using Boutiquei.Services;
-using Boutiquei.Views;
 using MvvmHelpers;
-using MvvmHelpers.Commands;
 using Xamarin.Forms;
-using Command = MvvmHelpers.Commands.Command;
 using System.Windows.Input;
 using System.Collections.Specialized;
 using Plugin.Connectivity;
-using System.Threading;
 using Boutiquei.ViewModels;
 
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 [assembly: Xamarin.Forms.Dependency(typeof(ProductViewModel))]
 
@@ -106,10 +98,10 @@ namespace Boutiquei.ViewModels
             productsInFav.CollectionChanged += productsInFavListChanged;
             productsInCart.CollectionChanged += productsInCartListChanged;
 
-            IncreaseCommand = new Xamarin.Forms.Command(onIncreaseTapped);
-            DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
-            FavouriteCommand = new Xamarin.Forms.Command(onFavouriteTapped);
-            CartCommand = new Xamarin.Forms.Command(onCartTapped);
+            IncreaseCommand = new Xamarin.Forms.Command(OnIncreaseTapped);
+            DecreaseCommand = new Xamarin.Forms.Command(OnDecreaseTapped);
+            FavouriteCommand = new Xamarin.Forms.Command(OnFavouriteTapped);
+            CartCommand = new Xamarin.Forms.Command(OnCartTapped);
 
             ChickWifiOnStart();
             ChickWifiContinuously();
@@ -244,7 +236,7 @@ namespace Boutiquei.ViewModels
             }
         }
 
-        private async void onCartTapped(object obj)
+        private async void OnCartTapped(object obj)
         {
             if (isInCart)
             {
@@ -269,7 +261,7 @@ namespace Boutiquei.ViewModels
             await Application.Current.MainPage.DisplayAlert("Message", "Product added to the cart successfully", "Ok");
         }
 
-        private async void onFavouriteTapped()
+        private async void OnFavouriteTapped()
         {
 
             if (FavBtn == "FAR")
@@ -287,12 +279,12 @@ namespace Boutiquei.ViewModels
 
         }
 
-        private void onIncreaseTapped(object _product)
+        private void OnIncreaseTapped(object _product)
         {
             Quantity = (Convert.ToInt32(Quantity)+1).ToString();
         }
 
-        private async void onDecreaseTapped(object _product)
+        private async void OnDecreaseTapped(object _product)
         {
             if (Quantity.Equals("1"))
             {

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Boutiquei.Models;
 using Boutiquei.Services;
 using Boutiquei.Views;
 using MvvmHelpers;
 using Plugin.Connectivity;
-using static System.Net.Mime.MediaTypeNames;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using Boutiquei.ViewModels;
-using Xamarin.Forms;
 [assembly: Xamarin.Forms.Dependency(typeof(OrdersViewModel))]
 namespace Boutiquei.ViewModels
 {

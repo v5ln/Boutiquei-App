@@ -3,15 +3,10 @@ using Boutiquei.Services;
 using System.Collections.ObjectModel;
 using Boutiquei.Models;
 using MvvmHelpers;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections.Specialized;
 using Boutiquei.Views;
-using Xamarin.Essentials;
 using Plugin.Connectivity;
 
 namespace Boutiquei.ViewModels

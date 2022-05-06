@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Boutiquei.Models;
 using Boutiquei.Services;
 using Boutiquei.Views;
 using MvvmHelpers;
-using MvvmHelpers.Commands;
 using Plugin.Connectivity;
 using Xamarin.Forms;
 
