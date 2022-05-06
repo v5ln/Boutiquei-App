@@ -29,14 +29,14 @@ namespace Boutiquei.ViewModels
 
         }
 
-        public AppServices Services;
+        private readonly AppServices services;
 
         public ICommand DeleteCommand { get; }
         public FavoriteViewModel()
         {
-            Services = new AppServices();
+            services = new AppServices();
             Favorite = new ObservableCollection<Product>();
-            Favorite = Services.GetFavouriteProductsByUserID();
+            Favorite = services.GetFavouriteProductsByUserID();
             Favorite.CollectionChanged += Favorite_CollectionChanged;
 
 
@@ -139,7 +139,7 @@ namespace Boutiquei.ViewModels
         public async void onDeleteTapped(object _product)
         {
             var product = _product as Product;
-            await Services.DeleteFromFavourites(product.PID);
+            await services.DeleteFromFavourites(product.PID);
         }
 
 

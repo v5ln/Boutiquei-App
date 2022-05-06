@@ -16,14 +16,14 @@ namespace Boutiquei.ViewModels
     {
         public ObservableCollection<Product> Products { get; set; }
         public Store Brand { get; set; }
-        public AppServices Services { get; set; }
+        private readonly AppServices services;
         public SingleBrandViewModel(Store brand)
         {
             Products = new ObservableCollection<Product>();
             Brand = new Store();
             this.Brand = brand ?? throw new ArgumentNullException(nameof(brand));
-            Services = new AppServices();
-            Products = Services.GetAllBrandProducts(Brand.ID);
+            services = new AppServices();
+            Products = services.GetAllBrandProducts(Brand.ID);
 
             ChickWifiOnStart();
             ChickWifiContinuously();

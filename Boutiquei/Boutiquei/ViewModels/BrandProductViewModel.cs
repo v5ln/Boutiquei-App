@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Boutiquei.Models;
-using System.Collections.Generic;
 using Boutiquei.Services;
-using Boutiquei.Views;
 using MvvmHelpers;
-using MvvmHelpers.Commands;
 using Xamarin.Forms;
-using Command = MvvmHelpers.Commands.Command;
 using System.Windows.Input;
 using System.Collections.Specialized;
 using Plugin.Connectivity;
@@ -71,7 +63,7 @@ namespace Boutiquei.ViewModels
 
         private bool isInCart = false;
 
-        AppServices Services = new AppServices();
+        private readonly AppServices services = new AppServices();
 
         public ICommand IncreaseCommand { get; }
         public ICommand DecreaseCommand { get; }
@@ -89,13 +81,13 @@ namespace Boutiquei.ViewModels
             productsInFav = new ObservableCollection<Product>();
             Quantity = "1";
 
-            ProductImages = Services.GetAllBrandProductImgs(Product.BID, Product.PID);
-            ProductSizes = Services.GetAllBrandProductSizes(Product.BID, Product.PID);
-            ProductColores = Services.GetAllBrandProductColors(Product.BID, Product.PID);
+            ProductImages = services.GetAllBrandProductImgs(Product.BID, Product.PID);
+            ProductSizes = services.GetAllBrandProductSizes(Product.BID, Product.PID);
+            ProductColores = services.GetAllBrandProductColors(Product.BID, Product.PID);
             //FavBtn = "FAR";
 
-            productsInFav = Services.GetFavouriteProductsByUserID();
-            productsInCart = Services.GetCartProductsByUserID();
+            productsInFav = services.GetFavouriteProductsByUserID();
+            productsInCart = services.GetCartProductsByUserID();
             productsInFav.CollectionChanged += productsInFavListChanged;
             productsInCart.CollectionChanged += productsInCartListChanged;
 
@@ -257,7 +249,7 @@ namespace Boutiquei.ViewModels
                 PSize = selectedSize
             };
             isInCart = true;
-            await Services.AddToCart(cartProduct);
+            await services.AddToCart(cartProduct);
             await Application.Current.MainPage.DisplayAlert("Message", "Product added to the cart successfully", "Ok");
         }
 
@@ -267,14 +259,14 @@ namespace Boutiquei.ViewModels
             if (FavBtn == "FAR")
             {
                 FavBtn = "FAS";
-                await Services.AddToFavourites(Product);
+                await services.AddToFavourites(Product);
                 _ = Application.Current.MainPage.DisplayAlert("Message", "Prodact added to Favourites successfully", "Ok");
 
             }
             else
             {
                 FavBtn = "FAR";
-                await Services.DeleteFromFavourites(Product.PID);
+                await services.DeleteFromFavourites(Product.PID);
             }
 
         }

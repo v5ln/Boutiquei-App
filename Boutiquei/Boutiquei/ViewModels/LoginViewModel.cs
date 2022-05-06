@@ -37,7 +37,7 @@ namespace Boutiquei.ViewModels
         public Command LoginCommand { get; }
         public ICommand SignUpCommmand { get; }
 
-        IGoogleAuth auth;
+        private readonly IGoogleAuth auth;
         public LoginViewModel()
         {
             auth = DependencyService.Get<IGoogleAuth>();

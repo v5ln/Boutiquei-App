@@ -19,7 +19,7 @@ namespace Boutiquei.ViewModels
         private readonly Random _random = new Random();
 
 
-        private AppServices services;
+        private readonly AppServices services;
 
         public ICommand SaveCommand { get; set; }
 

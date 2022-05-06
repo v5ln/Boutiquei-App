@@ -32,15 +32,15 @@ namespace Boutiquei.ViewModels
             }
         }
 
-        public AppServices Services;
+        private readonly AppServices services;
         public OrderDetailsViewModel(string orderNumber)
         {
 
 
-            Services = new AppServices();
+            services = new AppServices();
             Order = new ObservableCollection<CartProduct>();
 
-            Order = Services.GetOrderProductsByUserID(orderNumber);
+            Order = services.GetOrderProductsByUserID(orderNumber);
 
           
             ChickWifiOnStart();

@@ -16,7 +16,7 @@ namespace Boutiquei.ViewModels
 {
     public class AddressListViewModel : BaseViewModel
     {
-        private AppServices services;
+        private readonly AppServices services;
         private ObservableCollection<Address> _addresses;
         public ObservableCollection<Address> Addresses
         {

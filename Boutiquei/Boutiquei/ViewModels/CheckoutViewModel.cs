@@ -20,7 +20,6 @@ namespace Boutiquei.ViewModels
         public bool IsNull { set; get; }
 
         private ObservableCollection<CartProduct> cartFromAPI { get; set; }
-        private CartProduct cartProduct { set; get; }
 
         private Address address;
         public Address Address
@@ -80,7 +79,7 @@ namespace Boutiquei.ViewModels
 
         private string date { set; get; }
         public string Delevry { set; get; }
-        public AppServices Services;
+        private readonly AppServices services;
 
         public ICommand OrderCommand { get; }
         public ICommand EditCommand { get; }
@@ -90,7 +89,7 @@ namespace Boutiquei.ViewModels
         public CheckoutViewModel()
         {
 
-            Services = new AppServices();
+            services = new AppServices();
             IsValid = false;
             IsNull = true;
             //Task.Run(async () => { await LoadData(); }).Wait();
@@ -104,7 +103,7 @@ namespace Boutiquei.ViewModels
             //Total = Services.GetTotalProductsPrice("User1").GetAwaiter().GetResult();
             cartFromAPI = new ObservableCollection<CartProduct>();
          
-            cartFromAPI = Services.GetCartProductsByUserID();
+            cartFromAPI = services.GetCartProductsByUserID();
             date = DateTime.Now.ToString("dd-MMM-yyyy");
             orderNumber = _random.Next(1, 100000).ToString();
             Delevry = "10";
@@ -205,9 +204,9 @@ namespace Boutiquei.ViewModels
 
             try
             {
-                Total = await Services.GetTotalProductsPrice();
-                Quantity = await Services.TotalProductsQuantity();
-                Address = await Services.GetTheDefultAddress();
+                Total = await services.GetTotalProductsPrice();
+                Quantity = await services.TotalProductsQuantity();
+                Address = await services.GetTheDefultAddress();
                 OnPropertyChanged();
                 if (Address == null)
                 {
@@ -260,14 +259,14 @@ namespace Boutiquei.ViewModels
                 }
                 else
                 {
-                    await Services.AddtoOrder(order);
+                    await services.AddtoOrder(order);
 
                     for (int i=0;i<cartFromAPI.Count;i++)
                     {
-                        await Services.AddCartToOrder(cartFromAPI[i], order.OrderNumber);
+                        await services.AddCartToOrder(cartFromAPI[i], order.OrderNumber);
                     }
-                    await Services.DeleteAllProductsInCart();
-                    await Services.UpdateUserTotal();
+                    await services.DeleteAllProductsInCart();
+                    await services.UpdateUserTotal();
                     Application.Current.MainPage = new NavigationPage(new SuccessPage());
                 }
                
