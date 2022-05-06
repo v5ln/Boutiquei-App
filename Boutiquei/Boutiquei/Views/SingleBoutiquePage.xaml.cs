@@ -14,7 +14,10 @@ namespace Boutiquei.Views
             InitializeComponent();
             SingleBoutiqueViewModel singleBoutiqueViewModel = new SingleBoutiqueViewModel(boutique);
             BindingContext = singleBoutiqueViewModel;
+
+            
         }
 
+       
     }
 }

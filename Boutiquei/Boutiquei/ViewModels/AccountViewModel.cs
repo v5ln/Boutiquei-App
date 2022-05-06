@@ -1,38 +1,55 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Boutiquei.Models;
-using System.Collections.Generic;
 using Boutiquei.Services;
 using Boutiquei.Views;
 using MvvmHelpers;
-using MvvmHelpers.Commands;
-using Xamarin.Forms;
-using Command = MvvmHelpers.Commands.Command;
-using System.Windows.Input;
 using Plugin.Connectivity;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Boutiquei.ViewModels
 {
-    public class BrandsViewModel : BaseViewModel
+    public class AccountViewModel : BaseViewModel
     {
+        private readonly AppServices services;
 
-        public ObservableCollection<Store> Brand { get; set; }
-        private AppServices services { get; set; }
-
-        public ICommand AccountCommand { get; }
-
-        public BrandsViewModel()
+        private AppUser user;
+        public AppUser User
         {
-            Brand = new ObservableCollection<Store>();
+            set
+            {
+                user = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return user;
+            }
+        }
+
+        private readonly IGoogleAuth auth;
+
+        public ICommand LogOutCommand { get; set; }
+        public ICommand OrdersCommand { get; set; }
+        public ICommand AddressesCommand { get; set; }
+
+
+
+        public AccountViewModel()
+        {
+            auth = DependencyService.Get<IGoogleAuth>();
             services = new AppServices();
+            User = new AppUser();
+            
+            _ = LoadData();
 
-            LoadMore();
-
-            AccountCommand = new Command(OnAccountTapped);
+            LogOutCommand = new Command(OnLogoutTapped);
+            OrdersCommand = new Command(OnOrdersTapped);
+            AddressesCommand = new Command(OnAddressesTapped);
             ChickWifiOnStart();
             ChickWifiContinuously();
-
 
         }
         private bool _imgIsVisible;
@@ -97,51 +114,36 @@ namespace Boutiquei.ViewModels
 
                     ContentIsVisible = true;
                     ImgIsVisible = false;
-                    Brand.Clear();
                 }
                 else
                 {
                     Connection = "Nointernetconnection.png";
                     ContentIsVisible = false;
                     ImgIsVisible = true;
-                    Brand.Clear();
                 }
             };
         }
-
-        private async void OnAccountTapped()
+        private async void OnAddressesTapped(object obj)
         {
-            await Shell.Current.Navigation.PushAsync(new AccountPage());
+            await Shell.Current.Navigation.PushAsync(new AddressListPage());
         }
 
-
-        private Store previousSelected;
-        Store selectedBrand;
-        public Store SelectedBrand
+        private async void OnOrdersTapped(object obj)
         {
-            get => selectedBrand;
-            set
-            {
-                if (value != null)
-                {
-                    Application.Current.MainPage.Navigation.PushAsync(new SingleBrandPage(value));
-                    previousSelected = value;
-
-                    value = null;
-                }
-
-                selectedBrand = value;
-                OnPropertyChanged();
-
-            }
+            await Shell.Current.Navigation.PushAsync(new OrdersPage());
         }
 
-        void LoadMore()
+        private void OnLogoutTapped(object obj)
         {
-
-          
-            Brand = services.GetAllPrands();
-
+            SecureStorage.RemoveAll();
+            auth.SignOut();
+            Application.Current.MainPage = new LoginPage();
         }
+
+        private async Task LoadData()
+        {
+            User = await services.GetUserDetails();
+        }
+
     }
 }

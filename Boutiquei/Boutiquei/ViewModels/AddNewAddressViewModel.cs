@@ -1,40 +1,37 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Boutiquei.Models;
-using System.Collections.Generic;
-using Boutiquei.Services;
-using Boutiquei.Views;
-using MvvmHelpers;
-using MvvmHelpers.Commands;
-using Xamarin.Forms;
-using Command = MvvmHelpers.Commands.Command;
 using System.Windows.Input;
+using Boutiquei.Models;
+using Boutiquei.Services;
+using MvvmHelpers;
 using Plugin.Connectivity;
+using Xamarin.Forms;
 
 namespace Boutiquei.ViewModels
 {
-    public class BrandsViewModel : BaseViewModel
+    public class AddNewAddressViewModel : BaseViewModel
     {
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string District { get; set; }
+        public string City { get; set; }
+        public string Phone { get; set; }
 
-        public ObservableCollection<Store> Brand { get; set; }
-        private AppServices services { get; set; }
+        private readonly Random _random = new Random();
 
-        public ICommand AccountCommand { get; }
 
-        public BrandsViewModel()
+        private readonly AppServices services;
+
+        public ICommand SaveCommand { get; set; }
+
+        public AddNewAddressViewModel()
         {
-            Brand = new ObservableCollection<Store>();
             services = new AppServices();
 
-            LoadMore();
-
-            AccountCommand = new Command(OnAccountTapped);
+            SaveCommand = new Command(OnSaveTapped);
             ChickWifiOnStart();
             ChickWifiContinuously();
-
-
         }
+
         private bool _imgIsVisible;
 
         public bool ImgIsVisible
@@ -97,50 +94,41 @@ namespace Boutiquei.ViewModels
 
                     ContentIsVisible = true;
                     ImgIsVisible = false;
-                    Brand.Clear();
                 }
                 else
                 {
                     Connection = "Nointernetconnection.png";
                     ContentIsVisible = false;
                     ImgIsVisible = true;
-                    Brand.Clear();
                 }
             };
         }
 
-        private async void OnAccountTapped()
+        private async void OnSaveTapped(object obj)
         {
-            await Shell.Current.Navigation.PushAsync(new AccountPage());
-        }
-
-
-        private Store previousSelected;
-        Store selectedBrand;
-        public Store SelectedBrand
-        {
-            get => selectedBrand;
-            set
+            if (Name == null ||
+                Address == null ||
+                City == null ||
+                District == null ||
+                Phone == null)
             {
-                if (value != null)
-                {
-                    Application.Current.MainPage.Navigation.PushAsync(new SingleBrandPage(value));
-                    previousSelected = value;
-
-                    value = null;
-                }
-
-                selectedBrand = value;
-                OnPropertyChanged();
-
+                await Application.Current.MainPage.DisplayAlert("Faild", "You must enter all field", "Ok");
+                return;
             }
-        }
-
-        void LoadMore()
-        {
-
-          
-            Brand = services.GetAllPrands();
+            Address address = new Address
+            {
+                Name = Name,
+                District = District,
+                AddressDetails = Address,
+                Phone = Phone,
+                AddressID = _random.Next(1, 1000000).ToString(),
+                City = City,
+                IsDefault = "0"
+            };
+            await services.AddNewAddress(address);
+            await services.UpdateDefultAddress(address.AddressID);
+            _ = Application.Current.MainPage.DisplayAlert("Message", "Address added successfully", "Ok");
+            await Shell.Current.Navigation.PopAsync();
 
         }
     }

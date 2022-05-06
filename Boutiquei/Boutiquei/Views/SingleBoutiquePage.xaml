@@ -5,36 +5,40 @@
     x:Class="Boutiquei.Views.SingleBoutiquePage"
     xmlns:views="clr-namespace:Boutiquei.Views"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+       
     Title="{Binding Boutique.Name}">
-
+   
     <ContentPage.Content>
         <StackLayout>
-            <Image Aspect="AspectFill" Source="{Binding Boutique.CoverImg}" WidthRequest="375" HeightRequest="119"/>
-            <RefreshView>
-                <CollectionView
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+                <Image Aspect="AspectFill" Source="{Binding Boutique.CoverImg}" WidthRequest="375" HeightRequest="119"/>
+                <RefreshView>
+                    <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Products}"
                     SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
                     SelectionMode="Single">
-                    <CollectionView.EmptyView>
-                        <StackLayout Padding="12">
-                            <Label HorizontalOptions="Center" Text="There Is No products" />
-                        </StackLayout>
-                    </CollectionView.EmptyView>
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical"
+                        <CollectionView.EmptyView>
+                            <StackLayout Padding="12">
+                                <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
+                            </StackLayout>
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
                                          Span="2"></GridItemsLayout>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>       
-                            <views:ProductCard></views:ProductCard>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <views:ProductCard></views:ProductCard>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-            </RefreshView>
+                </RefreshView>
 
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

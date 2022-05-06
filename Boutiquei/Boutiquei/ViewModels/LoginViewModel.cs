@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Boutiquei.Views;
+using MvvmHelpers;
+using Plugin.Connectivity;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Boutiquei.ViewModels
 {
-    public class LoginViewModel 
+    public class LoginViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private string email;
         public string Email
         {
@@ -20,7 +16,7 @@ namespace Boutiquei.ViewModels
             set
             {
                 email = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                OnPropertyChanged();
             }
         }
         private string password;
@@ -30,20 +26,93 @@ namespace Boutiquei.ViewModels
             set
             {
                 password = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+                OnPropertyChanged();
             }
         }
         public Command LoginCommand { get; }
         public ICommand SignUpCommmand { get; }
 
-        IGoogleAuth auth;
+        private readonly IGoogleAuth auth;
         public LoginViewModel()
         {
             auth = DependencyService.Get<IGoogleAuth>();
             LoginCommand = new Command(OnLoginTapped);
             SignUpCommmand = new Command(OnSignUpTapped);
+
+            ChickWifiOnStart();
+            ChickWifiContinuously();
+        }
+        private bool _imgIsVisible;
+
+        public bool ImgIsVisible
+        {
+            get => _imgIsVisible;
+            set
+            {
+                _imgIsVisible = value;
+                OnPropertyChanged();
+            }
         }
 
+        private bool _contentIsVisible;
+
+        public bool ContentIsVisible
+        {
+            get => _contentIsVisible;
+            set
+            {
+                _contentIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _connection;
+
+        public string Connection
+        {
+            get => _connection;
+            set
+            {
+                _connection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ChickWifiOnStart()
+        {
+
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                ContentIsVisible = true;
+                ImgIsVisible = false;
+            }
+            else
+            {
+                Connection = "Nointernetconnection.png";
+                ContentIsVisible = false;
+                ImgIsVisible = true;
+            }
+        }
+        public void ChickWifiContinuously()
+        {
+            CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+            {
+
+                if (args.IsConnected)
+                {
+
+                    ContentIsVisible = true;
+                    ImgIsVisible = false;
+                }
+                else
+                {
+                    Connection = "Nointernetconnection.png";
+                    ContentIsVisible = false;
+                    ImgIsVisible = true;
+                }
+            };
+        }
         private void OnSignUpTapped(object obj)
         {
             Application.Current.MainPage = new SignUpPage();
@@ -70,9 +139,10 @@ namespace Boutiquei.ViewModels
                     await SecureStorage.SetAsync("oauth_token", token);
                     Application.Current.MainPage = new AppShell();
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    Console.WriteLine(ex.Message);
+                    await Application.Current.MainPage.DisplayAlert("Faild", "Something went wrong, Please Try Again", "Ok");
+                    Application.Current.MainPage = new LoginPage();
                 }
 
             }

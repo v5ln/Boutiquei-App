@@ -1,39 +1,43 @@
-﻿using System;
+﻿using Boutiquei.Services;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Boutiquei.Models;
-using System.Collections.Generic;
-using Boutiquei.Services;
-using Boutiquei.Views;
 using MvvmHelpers;
-using MvvmHelpers.Commands;
 using Xamarin.Forms;
-using Command = MvvmHelpers.Commands.Command;
-using System.Windows.Input;
+using Boutiquei.Views;
 using Plugin.Connectivity;
 
 namespace Boutiquei.ViewModels
 {
-    public class BrandsViewModel : BaseViewModel
+    public class OrderDetailsViewModel : BaseViewModel
     {
 
-        public ObservableCollection<Store> Brand { get; set; }
-        private AppServices services { get; set; }
-
-        public ICommand AccountCommand { get; }
-
-        public BrandsViewModel()
+        private ObservableCollection<CartProduct> order;
+        public ObservableCollection<CartProduct> Order
         {
-            Brand = new ObservableCollection<Store>();
+            get
+            {
+                return order;
+            }
+            set
+            {
+                order = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly AppServices services;
+        public OrderDetailsViewModel(string orderNumber)
+        {
+
+
             services = new AppServices();
+            Order = new ObservableCollection<CartProduct>();
 
-            LoadMore();
+            Order = services.GetOrderProductsByUserID(orderNumber);
 
-            AccountCommand = new Command(OnAccountTapped);
+          
             ChickWifiOnStart();
             ChickWifiContinuously();
-
-
         }
         private bool _imgIsVisible;
 
@@ -97,51 +101,51 @@ namespace Boutiquei.ViewModels
 
                     ContentIsVisible = true;
                     ImgIsVisible = false;
-                    Brand.Clear();
+                    Order.Clear();
                 }
                 else
                 {
                     Connection = "Nointernetconnection.png";
                     ContentIsVisible = false;
                     ImgIsVisible = true;
-                    Brand.Clear();
+                    Order.Clear();
                 }
             };
         }
-
-        private async void OnAccountTapped()
+        private Product previousSelected;
+        Product selectedProduct;
+        string TYPE_OF_STORE { set; get; }
+        public Product SelectedProduct
         {
-            await Shell.Current.Navigation.PushAsync(new AccountPage());
-        }
-
-
-        private Store previousSelected;
-        Store selectedBrand;
-        public Store SelectedBrand
-        {
-            get => selectedBrand;
+            get => selectedProduct;
             set
             {
+
                 if (value != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new SingleBrandPage(value));
+
+                    if (value.BID[0] == 'B')
+                    {
+                        TYPE_OF_STORE = "Boutique";
+                    }
+                    else
+                    {
+                        TYPE_OF_STORE = "Brand";
+                    }
+
+                    Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value, TYPE_OF_STORE));
+
+
                     previousSelected = value;
 
                     value = null;
                 }
-
-                selectedBrand = value;
+                selectedProduct = value;
                 OnPropertyChanged();
+
 
             }
         }
 
-        void LoadMore()
-        {
-
-          
-            Brand = services.GetAllPrands();
-
-        }
     }
 }

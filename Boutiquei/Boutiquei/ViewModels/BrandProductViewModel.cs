@@ -7,17 +7,10 @@ using Xamarin.Forms;
 using System.Windows.Input;
 using System.Collections.Specialized;
 using Plugin.Connectivity;
-using Boutiquei.ViewModels;
-
-
-[assembly: Xamarin.Forms.Dependency(typeof(ProductViewModel))]
-
 namespace Boutiquei.ViewModels
 {
-    public class ProductViewModel : BaseViewModel
+    public class BrandProductViewModel : BaseViewModel
     {
-
-
         public Product Product { get; set; }
         public ObservableCollection<PImgs> ProductImages { get; set; }
         public ObservableCollection<Sizes> ProductSizes { get; set; }
@@ -78,7 +71,7 @@ namespace Boutiquei.ViewModels
         public ICommand CartCommand { get; }
 
 
-        public ProductViewModel(Product product)
+        public BrandProductViewModel(Product product)
         {
             Product = new Product();
             Product = product;
@@ -88,9 +81,9 @@ namespace Boutiquei.ViewModels
             productsInFav = new ObservableCollection<Product>();
             Quantity = "1";
 
-            ProductImages = services.GetAllBoutiqueProductImgs(Product.BID, Product.PID);
-            ProductSizes = services.GetAllBoutiqueProductSizes(Product.BID, Product.PID);
-            ProductColores = services.GetAllBoutiqueProductColors(Product.BID, Product.PID);
+            ProductImages = services.GetAllBrandProductImgs(Product.BID, Product.PID);
+            ProductSizes = services.GetAllBrandProductSizes(Product.BID, Product.PID);
+            ProductColores = services.GetAllBrandProductColors(Product.BID, Product.PID);
             //FavBtn = "FAR";
 
             productsInFav = services.GetFavouriteProductsByUserID();
@@ -98,10 +91,10 @@ namespace Boutiquei.ViewModels
             productsInFav.CollectionChanged += productsInFavListChanged;
             productsInCart.CollectionChanged += productsInCartListChanged;
 
-            IncreaseCommand = new Xamarin.Forms.Command(OnIncreaseTapped);
-            DecreaseCommand = new Xamarin.Forms.Command(OnDecreaseTapped);
-            FavouriteCommand = new Xamarin.Forms.Command(OnFavouriteTapped);
-            CartCommand = new Xamarin.Forms.Command(OnCartTapped);
+            IncreaseCommand = new Xamarin.Forms.Command(onIncreaseTapped);
+            DecreaseCommand = new Xamarin.Forms.Command(onDecreaseTapped);
+            FavouriteCommand = new Xamarin.Forms.Command(onFavouriteTapped);
+            CartCommand = new Xamarin.Forms.Command(onCartTapped);
 
             ChickWifiOnStart();
             ChickWifiContinuously();
@@ -182,7 +175,7 @@ namespace Boutiquei.ViewModels
                     ProductImages.Clear();
                     ProductSizes.Clear();
                     ProductColores.Clear();
-                   
+
                 }
             };
         }
@@ -213,9 +206,9 @@ namespace Boutiquei.ViewModels
         private void productsInFavListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             FavBtn = "FAR";
-            
+
             ObservableCollection<Product> products = (ObservableCollection<Product>)sender;
-            
+
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 if (e.NewItems[0].ToString() != "Boutiquei.Models.Product")
@@ -236,7 +229,7 @@ namespace Boutiquei.ViewModels
             }
         }
 
-        private async void OnCartTapped(object obj)
+        private async void onCartTapped(object obj)
         {
             if (isInCart)
             {
@@ -257,11 +250,10 @@ namespace Boutiquei.ViewModels
             };
             isInCart = true;
             await services.AddToCart(cartProduct);
-           
             await Application.Current.MainPage.DisplayAlert("Message", "Product added to the cart successfully", "Ok");
         }
 
-        private async void OnFavouriteTapped()
+        private async void onFavouriteTapped()
         {
 
             if (FavBtn == "FAR")
@@ -274,17 +266,17 @@ namespace Boutiquei.ViewModels
             else
             {
                 FavBtn = "FAR";
-                await services.DeleteFromFavourites( Product.PID);
+                await services.DeleteFromFavourites(Product.PID);
             }
 
         }
 
-        private void OnIncreaseTapped(object _product)
+        private void onIncreaseTapped(object _product)
         {
-            Quantity = (Convert.ToInt32(Quantity)+1).ToString();
+            Quantity = (Convert.ToInt32(Quantity) + 1).ToString();
         }
 
-        private async void OnDecreaseTapped(object _product)
+        private async void onDecreaseTapped(object _product)
         {
             if (Quantity.Equals("1"))
             {

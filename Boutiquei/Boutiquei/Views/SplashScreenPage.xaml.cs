@@ -7,9 +7,13 @@ namespace Boutiquei.Views
 {
     public partial class SplashScreenPage : ContentPage
     {
+        readonly IGoogleAuth auth;
         public SplashScreenPage()
         {
             InitializeComponent();
+            auth = DependencyService.Get<IGoogleAuth>();
+
+            
         }
 
         protected override async void OnAppearing()
@@ -19,7 +23,14 @@ namespace Boutiquei.Views
             //await SplashImage.ScaleTo(3, 250, Easing.Linear);
             await SplashImage.FadeTo(0, 300);
 
-            Application.Current.MainPage = new AppShell();
+            if (auth.IsSigIn())
+            {
+                Application.Current.MainPage = new AppShell();
+            }
+            else
+            {
+                Application.Current.MainPage = new LoginPage();
+            }
         }
     }
 }

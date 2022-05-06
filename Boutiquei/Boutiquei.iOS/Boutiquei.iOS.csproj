@@ -74,7 +74,6 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IOSAuth.cs" />
-    <Compile Include="BoutiquesRender.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -155,5 +154,8 @@
       <Project>{3944CCDA-CC8A-4B83-9047-CFEFC990F11F}</Project>
       <Name>Boutiquei</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Nointernetconnection.png" />
   </ItemGroup>
 </Project>

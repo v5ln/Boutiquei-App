@@ -3,20 +3,26 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    BackgroundColor="White"
     x:Class="Boutiquei.Views.SuccessPage">
     <ContentPage.BindingContext>
         <viewmodels:SuccessViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="SUCCSESS!" HorizontalOptions="CenterAndExpand" TextColor="#303030" FontSize="36" FontFamily="MWB"/>
-            <Image Source="{Binding ImageSource}" HeightRequest="200" WidthRequest="200"/>
-            <Label Text="Your order will be delivered soon." HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="NSR" TextColor="#606060"/>
-            <Label Text="Thank you for choosing our app!" HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="NSR" TextColor="#606060"/>
-            <Button Text="Track Your Orders" BackgroundColor="#242424" CornerRadius="8" Padding="0,17,0,17"  Margin="30,5,30,0"
-                    FontFamily="NSS" FontSize="16" TextColor="#ffffff"/>
-            <Button Text="Back To Home" BackgroundColor="#ffffff" CornerRadius="8" Padding="0,17,0,17"  Margin="30,10,30,0"
-                    FontFamily="NSS" FontSize="16" TextColor="Black" BorderColor="Black" BorderWidth="1"/>
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+                <Label Text="SUCCSESS!" HorizontalOptions="CenterAndExpand" TextColor="#303030" FontSize="36" FontFamily="MWB"/>
+                <Image Source="{Binding ImageSource}" HeightRequest="200" WidthRequest="200"/>
+                <Label Text="Your order will be delivered soon." HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="NSR" TextColor="#606060"/>
+                <Label Text="Thank you for choosing our app!" HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="NSR" TextColor="#606060"/>
+                <Button Text="Track Your Orders" BackgroundColor="#242424" CornerRadius="8" Padding="0,17,0,17"  Margin="30,5,30,0"
+                    FontFamily="NSS" FontSize="16" TextColor="#ffffff"
+                    Command="{Binding TrackCommand}"/>
+                <Button Text="Back To Home" BackgroundColor="#ffffff" CornerRadius="8" Padding="0,17,0,17"  Margin="30,10,30,0"
+                    FontFamily="NSS" FontSize="16" TextColor="Black" BorderColor="Black" BorderWidth="1"
+                    Command="{Binding GetBackCommand}"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

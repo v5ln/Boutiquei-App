@@ -7,6 +7,7 @@
     xmlns:views="clr-namespace:Boutiquei.Views"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
+    BackgroundColor="White"
     Title="Boutiquei">
     <ContentPage.BindingContext>
         <viewmodels:BotiquesViewModel/>
@@ -20,11 +21,15 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <RefreshView
-                Command="{Binding RefreshCommand}"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}">
-                <CollectionView
+        
+
+        <StackLayout >
+
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+
+            <CollectionView
+                   
+                    IsVisible="{Binding ContentIsVisible}"
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Boutique}"
@@ -32,7 +37,7 @@
                     SelectionMode="Single">
                     <CollectionView.EmptyView>
                         <StackLayout Padding="12">
-                            <Label HorizontalOptions="Center" Text="There Is No Boutiques" />
+                            <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
                         </StackLayout>
                     </CollectionView.EmptyView>
                     <CollectionView.ItemsLayout>
@@ -45,7 +50,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
+        
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

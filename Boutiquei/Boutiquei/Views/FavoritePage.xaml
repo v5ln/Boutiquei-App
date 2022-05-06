@@ -4,30 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.FavoritePage"
       xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
-    Shell.TabBarIsVisible="False"
     Title="Favorite"
-    xmlns:fontAwesome="clr-namespace:FontAwesome">
+    BackgroundColor="White"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true">
     <ContentPage.BindingContext>
         <viewmodels:FavoriteViewModel/>
     </ContentPage.BindingContext>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ToolbarItem_Clicked">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="FAS"
-                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShoppingCart}"/>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Orientation="Vertical">
-            <CollectionView
+
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+             
+                <CollectionView IsVisible="{Binding ContentIsVisible}"
                     BackgroundColor="#FBFBFC"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Favorite}"
-                    x:Name="ProductsCollection">
+                    x:Name="ProductsCollection"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                    SelectionMode="Single">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
-                        <Label HorizontalOptions="Center" Text="There Is No Product In Favorite " />
+                        <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
                     </StackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>

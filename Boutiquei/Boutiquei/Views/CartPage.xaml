@@ -4,21 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.CartPage" 
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    BackgroundColor="White"
     Title="Cart">
     <ContentPage.BindingContext>
         <viewmodels:CartViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" BackgroundColor="#FBFBFC">
-            <CollectionView
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+                <CollectionView
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Cart}"
                     x:Name="ProductsCollection">
-                <CollectionView.EmptyView>
+                    <CollectionView.EmptyView>
                     <StackLayout Padding="12">
-                        <Label HorizontalOptions="Center" Text="There Is No Product In Cart"/>
-                    </StackLayout>
+                            <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black"/>
+                        </StackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -85,7 +88,9 @@
                     <Label Text="{Binding Total}" FontSize="20" FontFamily="NSB" TextColor="#303030" ></Label>
                 </StackLayout>
             </StackLayout>
-            <Button Clicked="Button_Clicked"  BackgroundColor="#242424" Text="CHECKOUT" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
-        </StackLayout>
+            <Button Command="{Binding CheckoutCommand}"  BackgroundColor="#242424"  FontFamily="NSB"
+                    FontSize="18"
+                    TextColor="White" Text="CHECKOUT" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
+     </StackLayout>   </StackLayout>
     </ContentPage.Content>
 </ContentPage>

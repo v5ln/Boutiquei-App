@@ -2,8 +2,67 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Boutiquei.Views.AccountPage">
+    x:Class="Boutiquei.Views.AccountPage"
+    xmlns:viewmodel="clr-namespace:Boutiquei.ViewModels"
+    Title="Profile"
+    BackgroundColor="White"
+    Shell.TabBarIsVisible="False">
+    <ContentPage.BindingContext>
+        <viewmodel:AccountViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        
+        <StackLayout>
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+                
+                <StackLayout Margin="0,30,0,0"
+                         HorizontalOptions="Center"
+                         BindingContext="{Binding User}">
+                <Label HorizontalOptions="Center"
+                       FontFamily="NSB"
+                       FontSize="20"
+                       TextColor="#303030"
+                       Text="{Binding Name}"/>
+                <Label HorizontalOptions="Center"
+                       FontFamily="NSR"
+                       FontSize="14"
+                       TextColor="#808080"
+                       Text="{Binding Email} "/>
+            </StackLayout>
+
+            <StackLayout Margin="20,70,20,0"
+                         HorizontalOptions="FillAndExpand">
+                <Button Text="My Orders"
+                        FontFamily="NSB"
+                        FontSize="18"
+                        TextColor="#242424"
+                        CornerRadius="5"
+                        Padding="0,27"
+                        BackgroundColor="#F0F0F0"
+                        Command="{Binding OrdersCommand}"
+                        Margin="0,0,0,15"/>
+                <Button Text="My Addresses"
+                        FontFamily="NSB"
+                        FontSize="18"
+                        Padding="0,27"
+                        TextColor="#242424"
+                        HorizontalOptions="FillAndExpand"
+                        CornerRadius="5"
+                        BackgroundColor="#F0F0F0"
+                        Command="{Binding AddressesCommand}"/>
+            </StackLayout>
+            <StackLayout VerticalOptions="End"></StackLayout>
+            <Button Text="LOGOUT"
+                    FontFamily="NSB"
+                    FontSize="18"
+                    TextColor="White"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding LogOutCommand} "
+                    BackgroundColor="#242424"
+                    CornerRadius="8"
+                    Padding="0,17,0,17"
+                    Margin="20"
+                    VerticalOptions="EndAndExpand"/></StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
