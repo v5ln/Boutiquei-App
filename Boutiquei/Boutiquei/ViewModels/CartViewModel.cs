@@ -216,39 +216,6 @@ namespace Boutiquei.ViewModels
             Total = await Services.GetTotalProductsPrice();
         }
 
-        private Product previousSelected;
-        Product selectedProduct;
-        string TYPE_OF_STORE { set; get; }
-        public Product SelectedProduct
-        {
-            get => selectedProduct;
-            set
-            {
-
-                if (value != null)
-                {
-
-                    if (value.BID[0] == 'B')
-                    {
-                        TYPE_OF_STORE = "Boutique";
-                    }
-                    else
-                    {
-                        TYPE_OF_STORE = "Brand";
-                    }
-
-                    Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value, TYPE_OF_STORE));
-
-
-                    previousSelected = value;
-
-                    value = null;
-                }
-                selectedProduct = value;
-                OnPropertyChanged();
-
-
-            }
-        }
+       
     }
 }
