@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Boutiquei.Views.OrdersPage"
     xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
-    Shell.TabBarIsVisible="False"
+
     BackgroundColor="White"
     Title="My Orders">
     <ContentPage.BindingContext>
@@ -14,8 +14,9 @@
         <StackLayout BackgroundColor="#f9f9f9">
 
             <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
-          
-                <CollectionView ItemsSource="{Binding Orders}" IsVisible="{Binding ContentIsVisible}" ItemSizingStrategy="MeasureAllItems ">
+
+            <CollectionView ItemsSource="{Binding Orders}" IsVisible="{Binding ContentIsVisible}" ItemSizingStrategy="MeasureAllItems "     SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"
+                    SelectionMode="Single">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
                         <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
@@ -39,7 +40,8 @@
                                     <Label HorizontalOptions="End" Text="{Binding OrderTotal}" TextColor="#242424" FontFamily="NSB" FontSize="16"/>
                                 </StackLayout>
                                     <Label Text="{Binding OrderStatus}" TextColor="#242424" FontFamily="NSS" FontSize="16" Padding="0,15,0,0"/>
-                            </StackLayout>
+
+                                </StackLayout>
                         </Frame>
                         </StackLayout>
                     </DataTemplate>

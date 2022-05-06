@@ -17,7 +17,9 @@
                     BackgroundColor="Transparent"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Cart}"
-                    x:Name="ProductsCollection">
+                    x:Name="ProductsCollection"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                    SelectionMode="Single">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="12">
                             <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black"/>

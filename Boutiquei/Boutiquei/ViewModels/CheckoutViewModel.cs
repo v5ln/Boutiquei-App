@@ -19,6 +19,9 @@ namespace Boutiquei.ViewModels
         public bool IsValid { set; get; }
         public bool IsNull { set; get; }
 
+        private ObservableCollection<CartProduct> cartFromAPI { get; set; }
+        private CartProduct cartProduct { set; get; }
+
         private Address address;
         public Address Address
         {
@@ -97,9 +100,11 @@ namespace Boutiquei.ViewModels
             Task.Run(async () => { await LoadData(); }).Wait();
             //Address = new Address { AddressDetails = "Faisal Street", City = "Nablus", Name = "Omar", Phone = "065316372", District = "Downtown" };
             //GetData();
-             
-            //Total = Services.GetTotalProductsPrice("User1").GetAwaiter().GetResult();
 
+            //Total = Services.GetTotalProductsPrice("User1").GetAwaiter().GetResult();
+            cartFromAPI = new ObservableCollection<CartProduct>();
+         
+            cartFromAPI = Services.GetCartProductsByUserID();
             date = DateTime.Now.ToString("dd-MMM-yyyy");
             orderNumber = _random.Next(1, 100000).ToString();
             Delevry = "10";
@@ -256,6 +261,11 @@ namespace Boutiquei.ViewModels
                 else
                 {
                     await Services.AddtoOrder(order);
+
+                    for (int i=0;i<cartFromAPI.Count;i++)
+                    {
+                        await Services.AddCartToOrder(cartFromAPI[i], order.OrderNumber);
+                    }
                     await Services.DeleteAllProductsInCart();
                     await Services.UpdateUserTotal();
                     Application.Current.MainPage = new NavigationPage(new SuccessPage());

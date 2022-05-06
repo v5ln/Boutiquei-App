@@ -151,8 +151,7 @@ namespace Boutiquei.ViewModels
             get => selectedProduct;
             set
             {
-                try
-                {
+                 
                     if (value != null)
                     {
 
@@ -175,11 +174,7 @@ namespace Boutiquei.ViewModels
                     selectedProduct = value;
                     OnPropertyChanged();
 
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH " + e.Message);
-                }
+               
             }
         }
     }

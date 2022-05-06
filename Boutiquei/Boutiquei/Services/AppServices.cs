@@ -437,6 +437,21 @@ namespace Boutiquei.Services
 
         }
 
+        public async Task AddCartToOrder(CartProduct product,string orderNumber)
+        {
+            //split update total api from post product to cart :
+           var order =  firebaseClient.Child($"Users/{userID}/").Child("Orders").OnceAsync<Order>().GetAwaiter().GetResult().Where(orderItem => orderItem.Object.OrderNumber == orderNumber).FirstOrDefault();
+
+           await firebaseClient.Child($"Users/{userID}/").Child($"Orders/{order.Key}").Child("Products").PostAsync(JsonConvert.SerializeObject(product));
+
+        }
+
+        public ObservableCollection<CartProduct> GetOrderProductsByUserID(string orderNumber)
+        {
+            var order = firebaseClient.Child($"Users/{userID}/").Child("Orders").OnceAsync<Order>().GetAwaiter().GetResult().Where(orderItem => orderItem.Object.OrderNumber == orderNumber).FirstOrDefault();
+
+            return firebaseClient.Child($"Users/{userID}/").Child($"Orders/{order.Key}").Child("Products").AsObservable<CartProduct>().AsObservableCollection();
+        }
         public async Task DeleteAllProductsInCart()
         {
             await firebaseClient.Child($"Users/{userID}/Cart").Child("Products").DeleteAsync();

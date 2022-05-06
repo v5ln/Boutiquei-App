@@ -2,9 +2,16 @@
 using System.Collections.ObjectModel;
 using Boutiquei.Models;
 using Boutiquei.Services;
+using Boutiquei.Views;
 using MvvmHelpers;
 using Plugin.Connectivity;
-
+using static System.Net.Mime.MediaTypeNames;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Boutiquei.ViewModels;
+using Xamarin.Forms;
+[assembly: Xamarin.Forms.Dependency(typeof(OrdersViewModel))]
 namespace Boutiquei.ViewModels
 {
     public class OrdersViewModel : BaseViewModel
@@ -125,6 +132,30 @@ namespace Boutiquei.ViewModels
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
                 Orders.Remove((Order)e.OldItems[0]);
+            }
+        }
+
+
+        private Order previousSelected;
+        Order selectedProduct;
+       
+        public Order SelectedOrder
+        {
+            get => selectedProduct;
+            set
+            {
+                if (value != null)
+                {
+
+
+                    Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OrderDetailsPage(value.OrderNumber));
+                    previousSelected = value;
+
+                    value = null;
+                }
+                selectedProduct = value;
+                OnPropertyChanged();
+
             }
         }
     }

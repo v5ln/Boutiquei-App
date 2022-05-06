@@ -13,6 +13,12 @@ using System.Windows.Input;
 using System.Collections.Specialized;
 using Plugin.Connectivity;
 using System.Threading;
+using Boutiquei.ViewModels;
+
+using System.Linq;
+using System.Runtime.CompilerServices;
+
+[assembly: Xamarin.Forms.Dependency(typeof(ProductViewModel))]
 
 namespace Boutiquei.ViewModels
 {

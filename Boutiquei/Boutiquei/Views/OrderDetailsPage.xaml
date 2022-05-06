@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+             x:Class="Boutiquei.Views.OrderDetailsPage"
+             Title="Order Details">
+  
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" BackgroundColor="#FBFBFC">
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+                <CollectionView
+                    BackgroundColor="Transparent"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Order}"
+                    x:Name="ProductsCollection"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                    SelectionMode="Single">
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="12">
+                            <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+
+                            <StackLayout Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
+                                <Image Source="{Binding PImgCover} " WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0">
+                                </Image>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" Margin="20,10,0,0">
+                                    <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060">
+                                    </Label>
+                                    <StackLayout Orientation="Vertical">
+
+                                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                                            <Label  Text="₪" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
+                                            <Label  Text="{Binding Price}" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
+                                        </StackLayout>
+                                        <StackLayout  Orientation="Horizontal">
+                                            <Label  Text="Quantity" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
+                                            <Label  Text="{Binding Quantity}" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
