@@ -26,17 +26,6 @@ namespace Boutiquei.Views
           
         }
 
-        void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var previous = e.PreviousSelection;
-            var current = e.CurrentSelection;
-            Colors colors = current as Colors;
-            Console.WriteLine("ggggggggggggggggghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjjjjjjjffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"+ colors.PColor);
-        }
-        //private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    Picker picker = sender as Picker;
-        //    var selectedItem = picker.SelectedItem; // This is the model selected in the picker
-        //}
+       
     }
 }

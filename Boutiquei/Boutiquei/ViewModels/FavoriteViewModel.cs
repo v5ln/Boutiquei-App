@@ -145,7 +145,7 @@ namespace Boutiquei.ViewModels
 
         private Product previousSelected;
         Product selectedProduct;
-        string TYPE_OF_STORE { set; get; }
+        string typeOfStore { set; get; }
         public Product SelectedProduct
         {
             get => selectedProduct;
@@ -157,14 +157,14 @@ namespace Boutiquei.ViewModels
 
                         if (value.BID[0] == 'B')
                         {
-                            TYPE_OF_STORE = "Boutique";
+                            typeOfStore = "Boutique";
                         }
                         else
                         {
-                            TYPE_OF_STORE = "Brand";
+                            typeOfStore = "Brand";
                         }
 
-                        Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value, TYPE_OF_STORE));
+                        Application.Current.MainPage.Navigation.PushAsync(new ProductPage(value, typeOfStore));
 
 
                         previousSelected = value;

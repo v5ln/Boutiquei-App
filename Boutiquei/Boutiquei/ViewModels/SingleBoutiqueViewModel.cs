@@ -144,7 +144,7 @@ namespace Boutiquei.ViewModels
         }
         private Product previousSelected;
         Product selectedProduct;
-        string TYPE_OF_STORE = "Boutique";
+        const string TYPE_OF_STORE = "Boutique";
         public Product SelectedProduct
         {
             get => selectedProduct;
