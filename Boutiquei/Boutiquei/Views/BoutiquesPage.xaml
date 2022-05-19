@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Boutiquei.Views.BoutiquesPage"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    xmlns:views="clr-namespace:Boutiquei.Views"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:fontAwesome="clr-namespace:FontAwesome"
+    BackgroundColor="White"
+    Title="Boutiquei">
+    <ContentPage.BindingContext>
+        <viewmodels:BotiquesViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AccountCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAR"
+                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        
+
+        <StackLayout >
+
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+
+            <CollectionView
+                   
+                    IsVisible="{Binding ContentIsVisible}"
+                    BackgroundColor="Transparent"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Boutique}"
+                    SelectedItem="{Binding SelectedBoutique, Mode=TwoWay}"
+                    SelectionMode="Single">
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="12">
+                            <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <views:StoreCard/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+        
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

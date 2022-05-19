@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Boutiquei.Views.ProductCard"
+             xmlns:models="clr-namespace:Boutiquei.Models"
+             x:DataType="models:Product">
+        <Frame HasShadow="False"
+               BackgroundColor="Transparent">
+            <StackLayout>
+                <Frame  CornerRadius="10"
+                        HasShadow="False"
+                        Padding="0"
+                        IsClippedToBounds="True">
+                    <Image  WidthRequest="148"
+                            HeightRequest="195"
+                            Source="{Binding PImgCover}"
+                            Aspect="AspectFill"
+                            HorizontalOptions="Center"/>
+                </Frame>
+                <Label Text="{Binding PName}"
+                       HorizontalOptions="Start"
+                       FontFamily="NSR"
+                       FontSize="14"
+                       TextColor="#808080"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="₪"
+                           HorizontalOptions="Start"
+                           FontFamily="NSB"
+                           FontSize="14"
+                           TextColor="#303030"/>
+                    <Label Text="{Binding Price}"
+                           HorizontalOptions="Start"
+                           FontFamily="NSB"
+                           FontSize="14"
+                           TextColor="#303030"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+</Grid>

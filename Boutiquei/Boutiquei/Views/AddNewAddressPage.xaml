@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Boutiquei.Views.AddNewAddressPage"
+    Title="Add New Address Page"
+    Shell.TabBarIsVisible="False"
+    BackgroundColor="White"
+    xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels">
+    <ContentPage.BindingContext>
+        <viewmodels:AddNewAddressViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+
+            <StackLayout IsVisible="{Binding ContentIsVisible}">
+            <ScrollView>
+        
+            <StackLayout Orientation="Vertical">
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+                        <Label Text="Full Name" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Keyboard="Default" Text="{Binding Name}" Placeholder="EX:Omar Banna" FontSize="16" FontFamily="NSS" TextColor="black"/>
+
+                    </StackLayout>
+                </Frame >
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="Address" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Keyboard="Default" Text="{Binding Address}" Placeholder="EX:Yafa street" FontSize="16" />
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="District" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Keyboard="Default" Text="{Binding District}" Placeholder=" Select District" FontSize="16"/>
+                    </StackLayout>
+                    
+                </Frame>
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="City" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Keyboard="Default" Text="{Binding City}" Placeholder=" EX:Nablus" FontSize="16" />
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="#F5F5F5" Margin="20,27,20,20">
+                    <StackLayout>
+
+                        <Label Text="Phone Number" FontSize="12" TextColor="#808080" FontFamily="NSR"></Label>
+                        <Entry Keyboard="Numeric" Text="{Binding Phone}" Placeholder="EX:+9725588545" FontSize="16" />
+                    </StackLayout>
+                </Frame>
+                
+
+            </StackLayout>
+            </ScrollView>
+        <Button  BackgroundColor="#242424" Command="{Binding SaveCommand}" Text="SAVE ADDRESS" CornerRadius="8" Padding="0,17,0,17" Margin="20,0,5,20"/>
+           </StackLayout></StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,94 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="FirebaseDatabase.net" Version="4.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ViewModels\" />
+    <None Remove="Services\" />
+    <None Remove="Models\" />
+    <None Remove="Helpers\" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\Fonts\" />
+    <None Remove="Resources\Fonts\fa-brands-400.ttf" />
+    <None Remove="Resources\Fonts\fa-regular-400.ttf" />
+    <None Remove="Resources\Fonts\fa-solid-900.ttf" />
+    <None Remove="Resources\Fonts\Merriweather-Bold.ttf" />
+    <None Remove="Resources\Fonts\Merriweather-Light.ttf" />
+    <None Remove="Resources\Fonts\Merriweather-Regular.ttf" />
+    <None Remove="Resources\Fonts\NunitoSans-Bold.ttf" />
+    <None Remove="Resources\Fonts\NunitoSans-Regular.ttf" />
+    <None Remove="Resources\Fonts\NunitoSans-SemiBold.ttf" />
+    <None Remove="Refractored.MvvmHelpers" />
+    <None Remove="FirebaseDatabase.net" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Models\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Fonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\AccountPage.xaml.cs">
+      <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BoutiquesPage.xaml.cs">
+      <DependentUpon>BoutiquesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BrandsPage.xaml.cs">
+      <DependentUpon>BrandsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\FavoritePage.xaml.cs">
+      <DependentUpon>FavoritePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProductCard.xaml.cs">
+      <DependentUpon>ProductCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProductPage.xaml.cs">
+      <DependentUpon>ProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SingleBoutiquePage.xaml.cs">
+      <DependentUpon>SingleBoutiquePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SingleBrandPage.xaml.cs">
+      <DependentUpon>SingleBrandPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SplashScreenPage.xaml.cs">
+      <DependentUpon>SplashScreenPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StoreCard.xaml.cs">
+      <DependentUpon>StoreCard.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\fa-brands-400.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\fa-solid-900.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Merriweather-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Merriweather-Light.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Merriweather-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\NunitoSans-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\NunitoSans-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\NunitoSans-SemiBold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\OrderDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Boutiquei.Views.FavoritePage"
+      xmlns:viewmodels="clr-namespace:Boutiquei.ViewModels"
+    Title="Favorite"
+    BackgroundColor="White"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true">
+    <ContentPage.BindingContext>
+        <viewmodels:FavoriteViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" Orientation="Vertical">
+
+            <Image Source="{Binding Connection}" IsVisible="{Binding ImgIsVisible}"  HorizontalOptions="Center" VerticalOptions="Start"/>
+             
+                <CollectionView IsVisible="{Binding ContentIsVisible}"
+                    BackgroundColor="#FBFBFC"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Favorite}"
+                    x:Name="ProductsCollection"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                    SelectionMode="Single">
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="12">
+                        <ActivityIndicator IsVisible="true" IsRunning="true" Color="Black" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding Source={x:Reference ProductsCollection},Path=BindingContext.DeleteCommand}"
+                                    BackgroundColor="Red"
+                                    Text="Delete"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <StackLayout  Orientation="Horizontal" Margin="0,0,0,20" BackgroundColor="White">
+                                <Image Source="{Binding PImgCover}" WidthRequest="100" HeightRequest="100" Aspect="AspectFit" Margin="16,0,0,0" >
+                                </Image>
+                                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" Margin="20,10,0,0">
+                                    <Label Text="{Binding PName}" FontSize="14" FontFamily="NSS" TextColor="#606060" Margin="0,0,0,5">
+                                    </Label>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="₪" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
+                                        <Label Text="{Binding Price}" FontSize="16" FontFamily="NSB" TextColor="#303030" ></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
